@@ -1,23 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import RatteLiaInitView from "./RatteLiaInitView";
 import SelectPayWay from "./SelectPayWay";
+import {playAudio} from "../../../utils/playAudio";
+import {useHistory} from "react-router";
 
 const RatteLiadContainer = () => {
-  const [isInit, setIsInit] = useState(false);
-  useEffect(() => {
-    setIsInit(true);
-  }, []);
+  const history = useHistory();
+  const {pathname} = history.location;
+  const [step, setStep] = useState(1);
+  const onClickNextStep = useCallback((step) => {
+    history.replace(`${pathname}?step=${step}`);
+    playAudio().then(() => setStep(step))
+  }, [step]);
 
-  return (
-    <div>
-      {isInit && <RatteLiaInitView setIsInit={setIsInit} />}
+  switch (step) {
+    case 1:
+      return <RatteLiaInitView onClickNextStep={onClickNextStep} />
+
+    case 2:
+      return <SelectPayWay onClickNextStep={onClickNextStep} />
+
+    default:
+      break;
+
+  }
+
       {/* init true 시 step2 화면 */}
       {/* 원하시는 결제 방법 */}
       {/*<SelectPayWay />*/}
       {/* step3 메뉴 화면 */}
 
-    </div>
-  );
 };
 
 export default RatteLiadContainer;
