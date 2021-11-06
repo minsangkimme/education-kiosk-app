@@ -7,7 +7,7 @@ const MainRoutes = lazy(() => import('./router/mainRoutes'));
 const Routes = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <AppLayout>

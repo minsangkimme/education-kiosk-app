@@ -1,5 +1,6 @@
 {
   "name": "education-kiosk-app",
+  "homepage": "https://minsangkimme.github.io/education-kiosk-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "cp build/index.html build/404.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
