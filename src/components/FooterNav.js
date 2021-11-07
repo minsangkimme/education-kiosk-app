@@ -2,7 +2,9 @@ import React from 'react';
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import styled from "styled-components";
+import {useHistory} from "react-router";
 
 
 const Nav = styled.div`
@@ -33,6 +35,7 @@ const ListItem = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const ItemWrap = styled.div`
@@ -41,8 +44,10 @@ const ItemWrap = styled.div`
     margin: 2px;
   }
 `;
+const language = ['한국어', 'English', '日本語', '中國語'];
 
-const FooterNav = () => {
+const FooterNav = ({goBackFunc, showInfo}) => {
+
   return (
     <Nav>
       <ItemWrap>
@@ -60,28 +65,31 @@ const FooterNav = () => {
             </div>
           </ListItem>
           <ListItem>
-            <VolumeUpIcon style={{border: '1px solid', borderRadius: '50%', marginBottom: 3}} />
+            <VolumeUpIcon style={{border: '1px solid', borderRadius: '50%', marginBottom: 3}}/>
             <div style={{width: 'max-content'}}>
               <strong>직원호출</strong>
             </div>
           </ListItem>
+          {goBackFunc &&
+          <ListItem onClick={goBackFunc}>
+            <ArrowBackIcon style={{border: '1px solid', borderRadius: '50%', marginBottom: 3}}/>
+            <div style={{width: 'max-content'}}>
+              <strong>이전</strong>
+            </div>
+          </ListItem>
+          }
         </Ul>
       </ItemWrap>
       <ItemWrap>
-        <Ul>
-          <li>
-            <strong>한국어</strong>
-          </li>
-          <li>
-            <strong>English</strong>
-          </li>
-          <li>
-            <strong>日本語</strong>
-          </li>
-          <li>
-            <strong>中國語</strong>
-          </li>
-        </Ul>
+        { showInfo === 'language' &&
+          <Ul>
+            {language.map((lang, i) => (
+              <li key={i}>
+                <strong>{lang}</strong>
+              </li>
+            ))}
+          </Ul>
+        }
       </ItemWrap>
     </Nav>
   );

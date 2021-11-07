@@ -9,7 +9,7 @@ const RatteLiadContainer = () => {
   const {pathname} = history.location;
   const [step, setStep] = useState(1);
   const onClickNextStep = useCallback((step) => {
-    history.replace(`${pathname}?step=${step}`);
+    history.push(`${pathname}?step=${step}`);
     playAudio().then(() => setStep(step))
   }, [step]);
 

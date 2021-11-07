@@ -26,12 +26,14 @@ const TopView = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 `;
 
 const BottomView = styled.div`
   border-top: 3px solid #000;  
   text-align: center;  
   background-color: #fff;
+  cursor: pointer;
 `;
 
 const HereOrderText = styled.p`
@@ -121,7 +123,7 @@ const RatteLiaInitView = ({onClickNextStep}) => {
           <img src={hamburgerSet} alt="햄버거 셋트" style={{width: 150, paddingBottom: 30}}/>
         </BottomView>
       </ScreenWrap>
-      <FooterNav />
+      <FooterNav showInfo="language" />
     </Wrap>
   );
 };
