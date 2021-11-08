@@ -13,13 +13,14 @@ const Wrap = styled.div`
 
 const ScreenWrap = styled.div`
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;    
+  overflow-y: auto;
 `;
 
 const TopView = styled.div`
   background-color: #fff;
   padding: 30px 0 0;
-  height: 50%;
+  min-height: 421px;
   border-bottom: 3px solid #000;
   text-align: center;
   display: flex;
@@ -34,6 +35,7 @@ const BottomView = styled.div`
   text-align: center;  
   background-color: #fff;
   cursor: pointer;
+  min-height: 421px;
 `;
 
 const HereOrderText = styled.p`

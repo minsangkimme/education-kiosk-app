@@ -13,6 +13,7 @@ const Wrap = styled.div`
 
 const AdWrap = styled.div`
   width: 100%;
+  min-height: 122.75px;
   & img {
     width: 100%;    
   }
@@ -28,10 +29,11 @@ const NotiText = styled.div`
 
 const CardWrap = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   border-bottom: 1px solid;
   padding: 15px;
   cursor: pointer;
+  height: 421px;
   &:hover {
     background-color: #ff937f5c;
     color: #fff;
@@ -62,6 +64,7 @@ const CouponCashWrap = styled.div`
 `;
 const BottomView = styled.div`
   width: 50%;
+  min-height: 257px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,7 +86,7 @@ const BottomView = styled.div`
 
 const CouponTitle = styled.div`
   font-size: 17px;
-  margin: 25px 0 0;
+  //margin: 25px 0 0;
   font-weight: bold;
   color: #6a8;
 `;
@@ -95,13 +98,18 @@ const CashTitle = styled.div`
   color: #47a;  
 `;
 
+const ContentLayout = styled.div`
+  min-height: 842px;
+  overflow-y: auto;
+`;
+
 const SelectPayWay = ({onClickNextStep}) => {
   return (
     <Wrap>
-      <AdWrap>
-        <img src={adSense} alt="배너광고" />
-      </AdWrap>
-      <div>
+      <ContentLayout>
+        <AdWrap>
+          <img src={adSense} alt="배너광고" />
+        </AdWrap>
         <NotiText>원하시는 결제방법을 선택해주세요</NotiText>
         <CardWrap>
           <ImgWrap>
@@ -139,7 +147,7 @@ const SelectPayWay = ({onClickNextStep}) => {
             </div>
           </BottomView>
         </CouponCashWrap>
-      </div>
+      </ContentLayout>
       <FooterNav goBackFunc={() => onClickNextStep(1)} />
     </Wrap>
   );
