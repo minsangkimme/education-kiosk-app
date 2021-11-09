@@ -19,7 +19,7 @@ const ItemWrap = styled.div`
   display: flex;
   padding: 30px 0;
   & img {
-    width: 85px;
+    width: 65px;
     height: 100%;
   }
 `;
@@ -34,7 +34,7 @@ const MenuInfoWrap = styled.div`
 
 const CustomSlider = styled(Slider)`
   .slick-dots {
-      bottom: 75px;
+      bottom: 125px;
   }
 `
 

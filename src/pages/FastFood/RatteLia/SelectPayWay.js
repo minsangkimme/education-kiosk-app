@@ -99,7 +99,7 @@ const CashTitle = styled.div`
 `;
 
 const ContentLayout = styled.div`
-  min-height: 842px;
+  height: calc(100vh - 95px);
   overflow-y: auto;
 `;
 
