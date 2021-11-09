@@ -1,11 +1,9 @@
 import React from 'react';
-import RatteLiadContainer from "./RatteLia/RatteLiadContainer";
+import RatteLiaContainer from "./RatteLia/RatteLiaContainer";
 
 const BrandContainer = () => {
   return (
-    <>
-     <RatteLiadContainer />
-    </>
+   <RatteLiaContainer />
   );
 };
 

@@ -20,7 +20,7 @@ const AdWrap = styled.div`
 `;
 
 const NotiText = styled.div`
-  background-color: #ffdfd0;
+  background-color: #ffecdb;
   text-align: center;
   padding: 6px;
   font-size: 19px;
@@ -33,7 +33,7 @@ const CardWrap = styled.div`
   border-bottom: 1px solid;
   padding: 15px;
   cursor: pointer;
-  height: 421px;
+  height: 262px;
   &:hover {
     background-color: #ff937f5c;
     color: #fff;
@@ -106,7 +106,7 @@ const ContentLayout = styled.div`
 const SelectPayWay = ({onClickNextStep}) => {
   return (
     <Wrap>
-      <ContentLayout>
+      <ContentLayout onClick={() => onClickNextStep(3)}>
         <AdWrap>
           <img src={adSense} alt="배너광고" />
         </AdWrap>

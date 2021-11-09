@@ -2,6 +2,8 @@ import React, {Suspense, lazy} from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import 'antd/dist/antd.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MainRoutes = lazy(() => import('./router/mainRoutes'));
 const Routes = () => {

@@ -14,7 +14,6 @@ const Wrap = styled.div`
 const ScreenWrap = styled.div`
   display: flex;
   flex-direction: column;    
-  overflow-y: auto;
 `;
 
 const TopView = styled.div`

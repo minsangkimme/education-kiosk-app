@@ -3,8 +3,9 @@ import RatteLiaInitView from "./RatteLiaInitView";
 import SelectPayWay from "./SelectPayWay";
 import {playAudio} from "../../../utils/playAudio";
 import {useHistory} from "react-router";
+import SelectMenuView from "./SelectMenuView";
 
-const RatteLiadContainer = () => {
+const RatteLiaContainer = () => {
   const history = useHistory();
   const {pathname} = history.location;
   const [step, setStep] = useState(1);
@@ -20,16 +21,12 @@ const RatteLiadContainer = () => {
     case 2:
       return <SelectPayWay onClickNextStep={onClickNextStep} />
 
+    case 3:
+      return <SelectMenuView onClickNextStep={onClickNextStep}/>
     default:
       break;
 
   }
-
-      {/* init true 시 step2 화면 */}
-      {/* 원하시는 결제 방법 */}
-      {/*<SelectPayWay />*/}
-      {/* step3 메뉴 화면 */}
-
 };
 
-export default RatteLiadContainer;
+export default RatteLiaContainer;
