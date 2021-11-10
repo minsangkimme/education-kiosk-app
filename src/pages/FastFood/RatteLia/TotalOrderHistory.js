@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {convertCommaNumber} from "../../../utils/comma";
+import UpButton from '@mui/icons-material/AddCircleOutline';
+import DownButton from '@mui/icons-material/RemoveCircleOutline';
 
 const Wrap = styled.div`
   width: 100%;
@@ -20,15 +22,32 @@ const OrderPriceWrap = styled.div`
 
 const MenuOrderHistoryWrap = styled.div`
   overflow-y: scroll;
+  height: calc(100% - 34px);
+  padding: 5px 0;
+`;
+
+const OrderInfo = styled.div`
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px dashed #eee;
 `;
 
 const Price = styled.strong`
    color: #e22137;
    font-size: 22px;
 `;
+
+const RemoveButton = styled.button`
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 5px;
+`;
+
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
-  const totalCount = orderList.length;
-  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => (acc + curr.price), 0));
+  const totalCount = orderList.reduce((acc, curr) => (acc + curr.orderCount), 0)
+  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => (acc + (curr.price * curr.orderCount)), 0));
   return (
     <Wrap>
       <OrderPriceWrap>
@@ -41,18 +60,16 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
         {orderList.map((order) => (
-          <div>
-            <strong>{order.name}</strong>
-            <div>
-              <span>{order.orderCount}</span>
-              <div>
-                <button onClick={() => onClickAddOrder(order)}>+</button>
-                <button onClick={() => onClickDecreaseOrder(order)}>-</button>
-              </div>
+          <OrderInfo key={order.id}>
+            <strong style={{maxWidth: 90, width: 90}}>{order.name}</strong>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <DownButton onClick={() => onClickDecreaseOrder(order)} />
+              <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>
+              <UpButton onClick={() => onClickAddOrder(order)} />
             </div>
-            <div>{convertCommaNumber(order.price)} </div>
-            <button onClick={() => onClickRemoveOrder(order)}>삭제</button>
-          </div>
+            <strong>{convertCommaNumber(order.price)} </strong>
+            <RemoveButton onClick={() => onClickRemoveOrder(order)}>삭제</RemoveButton>
+          </OrderInfo>
         ))}
       </MenuOrderHistoryWrap>
     </Wrap>

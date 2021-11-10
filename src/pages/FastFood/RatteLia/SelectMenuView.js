@@ -52,15 +52,31 @@ const SelectMenuView = ({onClickNextStep}) => {
 
   // 오더 추가
   const onClickAddOrder = useCallback((menu) => {
-    menu.orderCount += 1;
-    const orders = [...orderList, menu];
+    // orderList에 order 메뉴가 있는지 확인
+    const isOrderInclude = orderList.findIndex((v) => v.id === menu.id) > -1;
+    let orders;
+
+    if (isOrderInclude) {
+      // 있으면 추가 x & 카운트 증가
+      orders = orderList.map((v) => {
+        if (v.id === menu.id) {
+          v.orderCount += 1;
+        }
+        return v;
+      });
+    } else {
+      // 없으면 추가 & 카운트 증가
+      menu.orderCount += 1;
+      orders = [...orderList, menu];
+    }
+
     setOrderList(orders);
   }, [orderList]);
 
   // 카운트 감소
   const onClickDecreaseOrder = useCallback((menu) => {
     const orders = orderList.filter((v) => {
-      if (v.id === menu.id) {
+      if (v.id === menu.id && menu.orderCount > 1) {
         menu.orderCount -= 1;
       }
 
@@ -72,6 +88,7 @@ const SelectMenuView = ({onClickNextStep}) => {
 
   // 오더 삭제
   const onClickRemoveOrder = useCallback((menu) => {
+    menu.orderCount = 0;
     const orders = orderList.filter((v) => v.id !== menu.id);
     setOrderList(orders);
   }, [orderList]);
