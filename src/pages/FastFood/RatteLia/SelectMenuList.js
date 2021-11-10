@@ -2,6 +2,7 @@ import React from 'react';
 import {CategoryInformation} from "./MenuInfo";
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import {convertCommaNumber} from "../../../utils/comma";
 
 const Wrap = styled.div`
   padding: 0 10px;
@@ -38,12 +39,36 @@ const CustomSlider = styled(Slider)`
   }
 `
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+}
+
 const SelectMenuList = ({value, selectCategory}) => {
   const settings = {
     dots: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
   };
 
   const pageSize = 8;
@@ -63,7 +88,7 @@ const SelectMenuList = ({value, selectCategory}) => {
                   <img src={v.src} alt={v.name}/>
                   <MenuInfoWrap>
                     <strong>{v.name}</strong>
-                    <span>{v.price}</span>
+                    <span style={{color: '#e22137'}}>{convertCommaNumber(v.price)}</span>
                   </MenuInfoWrap>
                 </ItemWrap>
               </MenuWrap>
