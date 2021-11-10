@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/education-kiosk-app/static/css/main.1111cdb9.chunk.css",
-    "main.js": "/education-kiosk-app/static/js/main.e22efbae.chunk.js",
-    "main.js.map": "/education-kiosk-app/static/js/main.e22efbae.chunk.js.map",
-    "runtime-main.js": "/education-kiosk-app/static/js/runtime-main.5e6629f9.js",
-    "runtime-main.js.map": "/education-kiosk-app/static/js/runtime-main.5e6629f9.js.map",
-    "static/js/2.63ae345b.chunk.js": "/education-kiosk-app/static/js/2.63ae345b.chunk.js",
-    "static/js/2.63ae345b.chunk.js.map": "/education-kiosk-app/static/js/2.63ae345b.chunk.js.map",
+    "main.js": "/education-kiosk-app/static/js/main.21df73e3.chunk.js",
+    "main.js.map": "/education-kiosk-app/static/js/main.21df73e3.chunk.js.map",
+    "runtime-main.js": "/education-kiosk-app/static/js/runtime-main.b3690b09.js",
+    "runtime-main.js.map": "/education-kiosk-app/static/js/runtime-main.b3690b09.js.map",
+    "static/js/2.f576f96c.chunk.js": "/education-kiosk-app/static/js/2.f576f96c.chunk.js",
+    "static/js/2.f576f96c.chunk.js.map": "/education-kiosk-app/static/js/2.f576f96c.chunk.js.map",
     "static/css/3.0d338804.chunk.css": "/education-kiosk-app/static/css/3.0d338804.chunk.css",
     "static/js/3.a8e2f2b2.chunk.js": "/education-kiosk-app/static/js/3.a8e2f2b2.chunk.js",
     "static/js/3.a8e2f2b2.chunk.js.map": "/education-kiosk-app/static/js/3.a8e2f2b2.chunk.js.map",
-    "static/js/4.847c4b75.chunk.js": "/education-kiosk-app/static/js/4.847c4b75.chunk.js",
-    "static/js/4.847c4b75.chunk.js.map": "/education-kiosk-app/static/js/4.847c4b75.chunk.js.map",
-    "static/js/5.0282a951.chunk.js": "/education-kiosk-app/static/js/5.0282a951.chunk.js",
-    "static/js/5.0282a951.chunk.js.map": "/education-kiosk-app/static/js/5.0282a951.chunk.js.map",
+    "static/js/4.0f7542bd.chunk.js": "/education-kiosk-app/static/js/4.0f7542bd.chunk.js",
+    "static/js/4.0f7542bd.chunk.js.map": "/education-kiosk-app/static/js/4.0f7542bd.chunk.js.map",
+    "static/js/5.d4f7f9d1.chunk.js": "/education-kiosk-app/static/js/5.d4f7f9d1.chunk.js",
+    "static/js/5.d4f7f9d1.chunk.js.map": "/education-kiosk-app/static/js/5.d4f7f9d1.chunk.js.map",
     "index.html": "/education-kiosk-app/index.html",
     "static/css/3.0d338804.chunk.css.map": "/education-kiosk-app/static/css/3.0d338804.chunk.css.map",
     "static/css/main.1111cdb9.chunk.css.map": "/education-kiosk-app/static/css/main.1111cdb9.chunk.css.map",
-    "static/js/2.63ae345b.chunk.js.LICENSE.txt": "/education-kiosk-app/static/js/2.63ae345b.chunk.js.LICENSE.txt",
+    "static/js/2.f576f96c.chunk.js.LICENSE.txt": "/education-kiosk-app/static/js/2.f576f96c.chunk.js.LICENSE.txt",
     "static/js/3.a8e2f2b2.chunk.js.LICENSE.txt": "/education-kiosk-app/static/js/3.a8e2f2b2.chunk.js.LICENSE.txt",
     "static/media/index.css": "/education-kiosk-app/static/media/BlackHanSans-Regular.9d66f2b3.ttf",
     "static/media/beef-burger.5961598e.jpg": "/education-kiosk-app/static/media/beef-burger.5961598e.jpg",
@@ -29,10 +29,10 @@
     "static/media/slick-theme.css": "/education-kiosk-app/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.5e6629f9.js",
+    "static/js/runtime-main.b3690b09.js",
     "static/css/3.0d338804.chunk.css",
     "static/js/3.a8e2f2b2.chunk.js",
     "static/css/main.1111cdb9.chunk.css",
-    "static/js/main.e22efbae.chunk.js"
+    "static/js/main.21df73e3.chunk.js"
   ]
 }
