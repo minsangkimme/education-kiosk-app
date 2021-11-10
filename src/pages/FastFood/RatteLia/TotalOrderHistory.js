@@ -24,6 +24,22 @@ const MenuOrderHistoryWrap = styled.div`
   overflow-y: scroll;
   height: calc(100% - 34px);
   padding: 5px 0;
+ 
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+  }
+
 `;
 
 const OrderInfo = styled.div`
@@ -63,9 +79,9 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
           <OrderInfo key={order.id}>
             <strong style={{maxWidth: 90, width: 90}}>{order.name}</strong>
             <div style={{display: 'flex', alignItems: 'center'}}>
-              <DownButton onClick={() => onClickDecreaseOrder(order)} />
+              <DownButton onClick={() => onClickDecreaseOrder(order)}/>
               <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>
-              <UpButton onClick={() => onClickAddOrder(order)} />
+              <UpButton onClick={() => onClickAddOrder(order)}/>
             </div>
             <strong>{convertCommaNumber(order.price)} </strong>
             <RemoveButton onClick={() => onClickRemoveOrder(order)}>삭제</RemoveButton>
