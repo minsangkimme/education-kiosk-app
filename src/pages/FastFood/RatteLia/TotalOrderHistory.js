@@ -2,10 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import {convertCommaNumber} from "../../../utils/comma";
 
+const Wrap = styled.div`
+  width: 100%;
+  max-width: 28rem;
+  position: fixed;
+  bottom: 95px;
+  height: 120px;
+  background-color: #fff;
+`;
+
 const OrderPriceWrap = styled.div`
   background-color: #eee;
   display: flex;
-  align-items: center;  
+  align-items: center;   
+  justify-content: space-around;   
 `;
 
 const MenuOrderHistoryWrap = styled.div`
@@ -14,15 +24,19 @@ const MenuOrderHistoryWrap = styled.div`
 
 const Price = styled.strong`
    color: #e22137;
+   font-size: 22px;
 `;
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
   const totalCount = orderList.length;
   const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => (acc + curr.price), 0));
   return (
-    <div>
+    <Wrap>
       <OrderPriceWrap>
         <strong>총주문내역</strong>
-        <strong>{totalCount} <span>개</span></strong>
+        <strong>
+          <span style={{fontSize: 18, marginRight: 5}}>{totalCount}</span>
+          <span>개</span>
+        </strong>
         <Price>{totalPrice}</Price>
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
@@ -41,7 +55,7 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
           </div>
         ))}
       </MenuOrderHistoryWrap>
-    </div>
+    </Wrap>
   );
 };
 

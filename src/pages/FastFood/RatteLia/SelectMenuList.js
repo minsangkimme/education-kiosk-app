@@ -6,19 +6,20 @@ import {convertCommaNumber} from "../../../utils/comma";
 
 const Wrap = styled.div`
   padding: 0 10px;
-  min-height: 668.25px;
+  //min-height: 668.25px;
+  min-height: 585px;
 `;
 
 const MenuWrap = styled.div`
   display: inline-block;
   width: 50%;  
-  height: 130px;
+  height: 100px;
   padding: 12px;
 `;
 
 const ItemWrap = styled.div`
   display: flex;
-  padding: 30px 0;
+  padding: 10px 0;
   & img {
     width: 65px;
     height: 100%;
@@ -35,7 +36,13 @@ const MenuInfoWrap = styled.div`
 
 const CustomSlider = styled(Slider)`
   .slick-dots {
-      bottom: 125px;
+      bottom: 150px;
+  }
+  .slick-dots li button:before {
+    font-size: 12px;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #e22137;
   }
 `
 
@@ -61,7 +68,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-const SelectMenuList = ({value, selectCategory}) => {
+const SelectMenuList = ({selectCategory, onClickAddOrder}) => {
   const settings = {
     dots: true,
     speed: 500,
@@ -78,17 +85,17 @@ const SelectMenuList = ({value, selectCategory}) => {
   const pageNumberList = '*'.repeat(totalPage).split("");
 
   return (
-    <CustomSlider {...settings} style={{overflowX: 'hidden'}}>
+    <CustomSlider {...settings} style={{overflow: 'hidden'}}>
       {pageNumberList.map((_, i) => (
         <Wrap key={i}>
-          {CategoryInformation[selectCategory][i].map((v) => {
+          {CategoryInformation[selectCategory][i].map((order) => {
             return (
-              <MenuWrap key={v.id}>
+              <MenuWrap key={order.id} onClick={() => onClickAddOrder(order)}>
                 <ItemWrap>
-                  <img src={v.src} alt={v.name}/>
+                  <img src={order.src} alt={order.name}/>
                   <MenuInfoWrap>
-                    <strong>{v.name}</strong>
-                    <span style={{color: '#e22137'}}>{convertCommaNumber(v.price)}</span>
+                    <strong>{order.name}</strong>
+                    <strong style={{color: '#e22137'}}>{convertCommaNumber(order.price)}</strong>
                   </MenuInfoWrap>
                 </ItemWrap>
               </MenuWrap>

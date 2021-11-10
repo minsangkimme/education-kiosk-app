@@ -120,9 +120,13 @@ const SelectMenuView = ({onClickNextStep}) => {
             ))}
           </Tabs>
         </Box>
-        <SelectMenuList value={value} selectCategory={selectCategory} />
+        <SelectMenuList
+          selectCategory={selectCategory}
+          onClickAddOrder={onClickAddOrder}
+        />
         {/* 총 주문내역 */}
         <TotalOrderHistory
+          orderList={orderList}
           onClickAddOrder={onClickAddOrder}
           onClickDecreaseOrder={onClickDecreaseOrder}
           onClickRemoveOrder={onClickRemoveOrder}
