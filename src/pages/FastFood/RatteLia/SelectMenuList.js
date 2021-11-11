@@ -121,13 +121,17 @@ const SelectMenuList = ({selectCategory, onClickAddOrder}) => {
       {pageNumberList.map((_, i) => (
         <Wrap key={i}>
           {CategoryInformation[selectCategory][i].map((order) => {
+            const price = order.type === 'single' ? order.price : order.setPrice;
             return (
               <MenuWrap key={order.id}>
                 <ItemWrap onClick={() => onClickAddOrder(order)}>
                   <img src={order.src} alt={order.name}/>
                   <MenuInfoWrap>
                     <strong>{order.name}</strong>
-                    <strong style={{color: '#e22137'}}>{convertCommaNumber(order.price)}</strong>
+                    <strong style={{color: '#e22137'}}>
+                      {convertCommaNumber(price)}
+                      {order.type === 'single' && <span style={{marginLeft: 5}}>~</span>}
+                    </strong>
                   </MenuInfoWrap>
                 </ItemWrap>
               </MenuWrap>

@@ -63,7 +63,10 @@ const RemoveButton = styled.button`
 
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
   const totalCount = orderList.reduce((acc, curr) => (acc + curr.orderCount), 0)
-  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => (acc + (curr.price * curr.orderCount)), 0));
+  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => {
+    const price = curr.type === 'single' ? curr.price : curr.setPrice;
+    return (acc + (price * curr.orderCount));
+  }, 0));
   return (
     <Wrap>
       <OrderPriceWrap>
@@ -75,18 +78,21 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
         <Price>{totalPrice}</Price>
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
-        {orderList.map((order) => (
-          <OrderInfo key={order.id}>
-            <strong style={{maxWidth: 90, width: 90}}>{order.name}</strong>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <DownButton onClick={() => onClickDecreaseOrder(order)}/>
-              <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>
-              <UpButton onClick={() => onClickAddOrder(order)}/>
-            </div>
-            <strong>{convertCommaNumber(order.price)} </strong>
-            <RemoveButton onClick={() => onClickRemoveOrder(order)}>삭제</RemoveButton>
-          </OrderInfo>
-        ))}
+        {orderList.map((order) => {
+          const price = order.type === 'single' ? order.price : order.setPrice;
+          return (
+            <OrderInfo key={order.id}>
+              <strong style={{maxWidth: 90, width: 90}}>{order.name}</strong>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <DownButton onClick={() => onClickDecreaseOrder(order)}/>
+                <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>
+                <UpButton onClick={() => onClickAddOrder(order)}/>
+              </div>
+              <strong>{convertCommaNumber(price)} </strong>
+              <RemoveButton onClick={() => onClickRemoveOrder(order)}>삭제</RemoveButton>
+            </OrderInfo>
+          )
+        })}
       </MenuOrderHistoryWrap>
     </Wrap>
   );
