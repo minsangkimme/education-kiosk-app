@@ -99,7 +99,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-const SelectMenuList = ({selectCategory, onClickAddOrder}) => {
+const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
   const settings = {
     dots: true,
     infinite: false,
@@ -124,7 +124,7 @@ const SelectMenuList = ({selectCategory, onClickAddOrder}) => {
             const price = order.type === 'single' ? order.price : order.setPrice;
             return (
               <MenuWrap key={order.id}>
-                <ItemWrap onClick={() => onClickAddOrder(order)}>
+                <ItemWrap onClick={() => onClickInspectMenuType(order)}>
                   <img src={order.src} alt={order.name}/>
                   <MenuInfoWrap>
                     <strong>{order.name}</strong>

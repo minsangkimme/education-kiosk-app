@@ -1,44 +1,101 @@
 import React from 'react';
-import sytled from 'styled-components';
+import styled from 'styled-components';
+import single from '../../../../assets/images/single.png';
+import setBurger from '../../../../assets/images/setburger.png';
+import ClearIcon from '@mui/icons-material/Clear';
+import {convertCommaNumber} from "../../../../utils/comma";
+
+const Wrap = styled.div`
+  display: ${({open}) => open ? 'block' : 'none'};
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: #fff;
+  width: 90%;
+`;
+
+const ModalBackDrop = styled.div`
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: ${({open}) => open ? 'block' : 'none'};
+`;
 
 const TitleWrap = styled.div`
-  padding: 10px 30px;
   background-color: #bae7ff;
   text-align: center;
+  padding: 10px;
 `;
-const Title = styled.h1`
-  font-size: 25px;
+const Title = styled.h3`
+  display: inline-block;
   font-weight: bold;  
+  margin: 0;
 `;
 const SelectWrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   margin: 0 auto;
+  background: #fff;
+  padding: 20px;
 `;
-const SingleOrSetMenuModal = ({menu}) => {
+const CloseButton = styled(ClearIcon)`
+  vertical-align: bottom;
+  position: relative;
+  left: 50px;
+  color: #339dd6;
+  font-weight: bold;
+  border: 1px solid #339dd6;
+  border-radius: 3px;
+`;
+
+const TypeWrap = styled.div`
+  border: 1px solid #fa1;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px;
+`;
+
+const Price = styled.strong`
+  display: block;
+  text-align: center;
+  color: #e22137;
+  margin-top: 10px;
+`;
+
+const SingleOrSetMenuModal = ({menu, open, onClickMenuType,  setOpenChoiceModal}) => {
   return (
-    <div>
-      <TitleWrap>
-        <Title>세트로 드시겠어요?</Title>
-      </TitleWrap>
-      <SelectWrap>
-        <div>
+    <>
+      <Wrap open={open}>
+        <TitleWrap>
+          <Title>세트로 드시겠어요?</Title>
+          <CloseButton onClick={() => setOpenChoiceModal(false)} />
+        </TitleWrap>
+        <SelectWrap>
           <div>
-            <img src={''} alt="버거만"/>
-            <strong>버거만</strong>
+            <TypeWrap onClick={() => onClickMenuType('single')}>
+              <img src={single} alt="버거만"/>
+              <strong>버거만</strong>
+            </TypeWrap>
+            <Price>{convertCommaNumber(menu.price)}</Price>
           </div>
-          <div>{menu.price}</div>
-        </div>
-        <div>
           <div>
-            <img src={''} alt="세트"/>
-            <strong>세트</strong>
+            <TypeWrap onClick={() => onClickMenuType('set')}>
+              <img src={setBurger} alt="세트"/>
+              <strong>세트</strong>
+            </TypeWrap>
+            <Price>{convertCommaNumber(menu.setPrice)}</Price>
           </div>
-          <div>{menu.price}</div>
-        </div>
-      </SelectWrap>
-    </div>
+        </SelectWrap>
+      </Wrap>
+      <ModalBackDrop open={open} />
+    </>
   );
 };
 
