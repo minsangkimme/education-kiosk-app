@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import single from '../../../../assets/images/single.png';
-import setBurger from '../../../../assets/images/setburger.png';
-import ClearIcon from '@mui/icons-material/Clear';
+import styled from "styled-components";
+import ClearIcon from "@mui/icons-material/Clear";
+import single from "../../../../assets/images/single.png";
 import {convertCommaNumber} from "../../../../utils/comma";
+import setBurger from "../../../../assets/images/setburger.png";
 
 const Wrap = styled.div`
   display: ${({open}) => open ? 'block' : 'none'};
@@ -69,34 +69,34 @@ const Price = styled.strong`
   margin-top: 10px;
 `;
 
-const SingleOrSetMenuModal = ({menu, open, onClickMenuType,  setOpenMenuType}) => {
+const ChoiceDesertModal = ({open, setOpen}) => {
   return (
     <>
       <Wrap open={open}>
         <TitleWrap>
           <Title>세트로 드시겠어요?</Title>
-          <CloseButton onClick={() => setOpenMenuType(false)} />
+          <CloseButton onClick={() => setOpen(false)} />
         </TitleWrap>
-        <SelectWrap>
-          <div>
-            <TypeWrap onClick={() => onClickMenuType('single')}>
-              <img src={single} alt="버거만"/>
-              <strong>버거만</strong>
-            </TypeWrap>
-            <Price>{convertCommaNumber(menu.price)}</Price>
-          </div>
-          <div>
-            <TypeWrap onClick={() => onClickMenuType('set')}>
-              <img src={setBurger} alt="세트"/>
-              <strong>세트</strong>
-            </TypeWrap>
-            <Price>{convertCommaNumber(menu.setPrice)}</Price>
-          </div>
-        </SelectWrap>
+        {/*<SelectWrap>*/}
+        {/*  <div>*/}
+        {/*    <TypeWrap onClick={() => onClickMenuType('single')}>*/}
+        {/*      <img src={single} alt="버거만"/>*/}
+        {/*      <strong>버거만</strong>*/}
+        {/*    </TypeWrap>*/}
+        {/*    <Price>{convertCommaNumber(menu.price)}</Price>*/}
+        {/*  </div>*/}
+        {/*  <div>*/}
+        {/*    <TypeWrap onClick={() => onClickMenuType('set')}>*/}
+        {/*      <img src={setBurger} alt="세트"/>*/}
+        {/*      <strong>세트</strong>*/}
+        {/*    </TypeWrap>*/}
+        {/*    <Price>{convertCommaNumber(menu.setPrice)}</Price>*/}
+        {/*  </div>*/}
+        {/*</SelectWrap>*/}
       </Wrap>
       <ModalBackDrop open={open} />
     </>
   );
 };
 
-export default SingleOrSetMenuModal;
+export default ChoiceDesertModal;

@@ -19,6 +19,7 @@ const MenuWrap = styled.div`
 const ItemWrap = styled.div`
   display: flex;
   padding: 10px 0;
+  cursor: pointer;
   & img {
     width: 65px;
     height: 100%;

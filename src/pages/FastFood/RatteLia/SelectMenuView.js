@@ -8,6 +8,7 @@ import Tab, { tabClasses } from '@mui/material/Tab';
 import SelectMenuList from "./SelectMenuList";
 import TotalOrderHistory from "./TotalOrderHistory";
 import SingleOrSetMenuModal from "./modal/SingleOrSetMenuModal";
+import ChoiceDesertModal from "./modal/ChoiceDesertModal";
 
 const Wrap = styled.div`
    height: 100%;
@@ -33,7 +34,10 @@ const SelectMenuView = ({onClickNextStep}) => {
   const [orderList, setOrderList] = useState([]);
   const [selectedMenu, setSelectedMenu] = useState({});
   const [choiceMenuType, setChoiceMenuType] = useState('');
-  const [openChoiceModal, setOpenChoiceModal] = useState(false);
+  const [openMenuType, setOpenMenuType] = useState(false);
+  const [openDesert, setOpenDesert] = useState(false);
+  // TODO menuInfo 에 single 메뉴에 desertList 추가
+  // TODO set메뉴 선택 다 하면 최종 보이는 부분만 단품 -> 셋트로 변경
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const handleChange = useCallback((event, newValue) => {
     setValue(newValue);
@@ -54,16 +58,17 @@ const SelectMenuView = ({onClickNextStep}) => {
     }
   }, [value, selectCategory]);
 
-  const onClickInspectMenuType = (menu) => {
+  const onClickInspectMenuType = useCallback((menu) => {
+    const burgerCategory = ['recommended', 'hamburger', 'event'];
     setSelectedMenu(menu);
-    // 선택한 메뉴가 단품이면 팝업 오픈
-    if (menu.type === 'single') {
-      setOpenChoiceModal(true);
+    // 선택한 메뉴가 햄버거류 && 단품이면 팝업 오픈
+    if (menu.type === 'single' && burgerCategory.includes(selectCategory)) {
+      setOpenMenuType(true);
     } else {
-      // 셋트이면 오더에 바로 추가
+      // 셋트 || 디저트류는 오더에 바로 추가
       onClickAddOrder(menu);
     }
-  }
+  }, [selectCategory, orderList]);
 
   // 오더 추가
   const onClickAddOrder = useCallback((menu) => {
@@ -108,17 +113,20 @@ const SelectMenuView = ({onClickNextStep}) => {
     setOrderList(orders);
   }, [orderList]);
 
-  // 단품 셋트 선택
+  // 버거류 단품 셋트 선택
   const onClickMenuType = useCallback((type) => {
-    if (type === 'set') {
-      // 이름에 셋트 붙이기
-      // 디저트 모달 띄우기
-      // 선택 다 하고 내역에 추가하기
+    // 단품
+    if (type === 'single') {
+      setOpenMenuType(false);
+      onClickAddOrder(selectedMenu);
     }
 
-    if (type === 'single') {
-      setOpenChoiceModal(false);
-      onClickAddOrder(selectedMenu);
+    // 셋트
+    if (type === 'set') {
+      // 디저트 모달 띄우기
+      setOpenMenuType(false);
+      setOpenDesert(true);
+      // 선택 다 하고 내역에 추가하기
     }
 
     setChoiceMenuType(type);
@@ -181,12 +189,17 @@ const SelectMenuView = ({onClickNextStep}) => {
         />
       </ContentLayout>
       <FooterNav goBackFunc={() => onClickNextStep(2)} />
-      {/* 모달 */}
+      {/* 메뉴 타입 모달 */}
       <SingleOrSetMenuModal
         menu={selectedMenu}
-        open={openChoiceModal}
+        open={openMenuType}
         onClickMenuType={onClickMenuType}
-        setOpenChoiceModal={setOpenChoiceModal}
+        setOpenMenuType={setOpenMenuType}
+      />
+      {/* 디저트 선택 모달 */}
+      <ChoiceDesertModal
+        open={openDesert}
+        setOpen={setOpenDesert}
       />
     </Wrap>
   );
