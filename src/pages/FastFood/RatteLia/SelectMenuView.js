@@ -9,6 +9,8 @@ import SelectMenuList from "./SelectMenuList";
 import TotalOrderHistory from "./TotalOrderHistory";
 import SingleOrSetMenuModal from "./modal/SingleOrSetMenuModal";
 import ChoiceDesertModal from "./modal/ChoiceDesertModal";
+import CustomModal from "./modal/CustomModal";
+import SingleOrSetMenu from "./modal/SingleOrSetMenu";
 
 const Wrap = styled.div`
    height: 100%;
@@ -190,12 +192,20 @@ const SelectMenuView = ({onClickNextStep}) => {
       </ContentLayout>
       <FooterNav goBackFunc={() => onClickNextStep(2)} />
       {/* 메뉴 타입 모달 */}
-      <SingleOrSetMenuModal
-        menu={selectedMenu}
+      <CustomModal
+        title='세트로 드시겠어요?'
+        tBgColor='#bae7ff'
         open={openMenuType}
-        onClickMenuType={onClickMenuType}
-        setOpenMenuType={setOpenMenuType}
+        backDrop={true}
+        bodyData={<SingleOrSetMenu menu={selectedMenu} onClickMenuType={onClickMenuType}/>}
+        setOpen={setOpenMenuType}
       />
+      {/*<SingleOrSetMenuModal*/}
+      {/*  menu={selectedMenu}*/}
+      {/*  open={openMenuType}*/}
+      {/*  onClickMenuType={onClickMenuType}*/}
+      {/*  setOpenMenuType={setOpenMenuType}*/}
+      {/*/>*/}
       {/* 디저트 선택 모달 */}
       <ChoiceDesertModal
         open={openDesert}

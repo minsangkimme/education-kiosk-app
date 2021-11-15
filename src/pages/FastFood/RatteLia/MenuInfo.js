@@ -10,6 +10,8 @@ export const CategoryInformation = {
       setPrice: 5900,
       type: 'set',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 1,
@@ -19,6 +21,8 @@ export const CategoryInformation = {
       setPrice: 10000,
       type: 'set',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 2,
@@ -28,6 +32,8 @@ export const CategoryInformation = {
       setPrice: 5800,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 3,
@@ -37,6 +43,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     }]
   ],
   hamburger: [
@@ -48,6 +56,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 5,
@@ -57,6 +67,8 @@ export const CategoryInformation = {
       setPrice: 7500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 6,
@@ -66,6 +78,8 @@ export const CategoryInformation = {
       setPrice: 9500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 7,
@@ -75,6 +89,8 @@ export const CategoryInformation = {
       setPrice: 8500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 8,
@@ -84,6 +100,8 @@ export const CategoryInformation = {
       setPrice: 9500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 9,
@@ -93,6 +111,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 10,
@@ -102,6 +122,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 11,
@@ -111,6 +133,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     }],
     [{
       id: 12,
@@ -120,6 +144,8 @@ export const CategoryInformation = {
       setPrice: 5500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 13,
@@ -129,6 +155,8 @@ export const CategoryInformation = {
       setPrice: 5500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 14,
@@ -138,6 +166,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 15,
@@ -147,6 +177,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 16,
@@ -156,6 +188,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 17,
@@ -165,6 +199,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 18,
@@ -174,6 +210,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 19,
@@ -183,6 +221,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     }],
     [{
       id: 20,
@@ -192,6 +232,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 21,
@@ -201,6 +243,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 22,
@@ -210,6 +254,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 23,
@@ -219,6 +265,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 24,
@@ -228,6 +276,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 25,
@@ -237,6 +287,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 26,
@@ -246,6 +298,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     },
     {
       id: 27,
@@ -255,6 +309,8 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      sideMenuList: [],
+      sideMenuPrice: 0,
     }],
   ],
   desert: [
