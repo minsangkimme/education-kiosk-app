@@ -35,7 +35,7 @@ const MenuInfoWrap = styled.div`
   width: 85px;
 `;
 
-const CustomSlider = styled(Slider)`
+export const CustomSlider = styled(Slider)`
   .slick-dots {
       bottom: 150px;
   }
@@ -100,17 +100,17 @@ function SamplePrevArrow(props) {
   );
 }
 
-const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
-  };
+export const settings = {
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
+};
 
+const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
   const pageSize = 8;
   const selectedCategory = CategoryInformation[selectCategory].flat();
   const totalCount = selectedCategory.length;

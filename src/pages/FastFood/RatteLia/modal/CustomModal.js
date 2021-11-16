@@ -35,7 +35,7 @@ const Title = styled.h3`
 const CloseButton = styled(ClearIcon)`
   vertical-align: bottom;
   position: relative;
-  left: 50px;
+  left: 9px;
   color: #339dd6;
   font-weight: bold;
   border: 1px solid #339dd6;

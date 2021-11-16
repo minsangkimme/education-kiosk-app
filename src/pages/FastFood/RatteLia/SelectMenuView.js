@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styled from "styled-components";
 import adSense from "../../../assets/images/adSense.png";
 import FooterNav from "../../../components/FooterNav";
@@ -11,6 +11,7 @@ import SingleOrSetMenuModal from "./modal/SingleOrSetMenuModal";
 import ChoiceDesertModal from "./modal/ChoiceDesertModal";
 import CustomModal from "./modal/CustomModal";
 import SingleOrSetMenu from "./modal/SingleOrSetMenu";
+import DesertAndDrinkMenu from "./modal/DesertAndDrinkMenu";
 
 const Wrap = styled.div`
    height: 100%;
@@ -33,13 +34,13 @@ const AdWrap = styled.div`
 const SelectMenuView = ({onClickNextStep}) => {
   const [value, setValue] = React.useState(0);
   const [selectCategory, setSelectCategory] = React.useState('recommended'); // recommended | hamburger | desert | drink | event
-  const [orderList, setOrderList] = useState([]);
-  const [selectedMenu, setSelectedMenu] = useState({});
-  const [choiceMenuType, setChoiceMenuType] = useState('');
-  const [openMenuType, setOpenMenuType] = useState(false);
-  const [openDesert, setOpenDesert] = useState(false);
-  // TODO menuInfo 에 single 메뉴에 desertList 추가
-  // TODO set메뉴 선택 다 하면 최종 보이는 부분만 단품 -> 셋트로 변경
+  const [orderList, setOrderList] = useState([]); // 주문 내역
+  const [selectedMenu, setSelectedMenu] = useState({}); // 선택한 메뉴
+  const [choiceMenuType, setChoiceMenuType] = useState(''); // 버거 단품, 셋트 타입
+  const [openMenuType, setOpenMenuType] = useState(false); // 단품,세트 모달
+  const [openDesert, setOpenDesert] = useState(false); // 사이드 메뉴 모달
+  const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
+  const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const handleChange = useCallback((event, newValue) => {
     setValue(newValue);
@@ -132,7 +133,24 @@ const SelectMenuView = ({onClickNextStep}) => {
     }
 
     setChoiceMenuType(type);
-  }, [choiceMenuType, selectedMenu])
+  }, [choiceMenuType, selectedMenu]);
+
+  // 버거셋트 선택시 사이드메뉴 선택 리스너
+  const onClickAddSideMenu = useCallback((sideMenu) => {
+    // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
+    // 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
+    // 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
+    // sideMenu가 담겼다면 채워지지 않은 type의 화면탭으로 이동 시킨다.
+    // sideMenuList가 다채워졌다면 orderList에 추가 시킨 후 오더 창을 닫는다.
+
+  }, [selectedMenu]);
+
+  // 버거셋트 선택시 사이드메뉴 삭제 리스너
+  const onClickRemoveSideMenu = useCallback((sideMenu) => {
+    // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu를 찾아 삭제한다.
+  }, [selectedMenu]);
+
+
 
   return (
     <Wrap>
@@ -196,19 +214,22 @@ const SelectMenuView = ({onClickNextStep}) => {
         title='세트로 드시겠어요?'
         tBgColor='#bae7ff'
         open={openMenuType}
-        backDrop={true}
+        backDrop={openMenuType}
         bodyData={<SingleOrSetMenu menu={selectedMenu} onClickMenuType={onClickMenuType}/>}
         setOpen={setOpenMenuType}
       />
-      {/*<SingleOrSetMenuModal*/}
-      {/*  menu={selectedMenu}*/}
-      {/*  open={openMenuType}*/}
-      {/*  onClickMenuType={onClickMenuType}*/}
-      {/*  setOpenMenuType={setOpenMenuType}*/}
-      {/*/>*/}
       {/* 디저트 선택 모달 */}
-      <ChoiceDesertModal
+      <CustomModal
+        title={`세트${sideMenuCategory} 1 개를 선택해 주세요`}
+        tBgColor='#bae7ff'
         open={openDesert}
+        backDrop={openDesert}
+        bodyData={
+          <DesertAndDrinkMenu
+            setSideMenuTab={setSideMenuTab}
+            sideMenuTab={sideMenuTab}
+            menu={selectedMenu} />
+        }
         setOpen={setOpenDesert}
       />
     </Wrap>

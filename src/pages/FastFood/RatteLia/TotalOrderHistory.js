@@ -65,7 +65,7 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
   const totalCount = orderList.reduce((acc, curr) => (acc + curr.orderCount), 0)
   const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => {
     const price = curr.type === 'single' ? curr.price : curr.setPrice;
-    return (acc + (price * curr.orderCount));
+    return (acc + curr.sideMenuPrice + (price * curr.orderCount));
   }, 0));
   return (
     <Wrap>
