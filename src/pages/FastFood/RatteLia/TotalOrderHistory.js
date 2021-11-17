@@ -82,7 +82,10 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
           const price = order.type === 'single' ? order.price : order.setPrice;
           return (
             <OrderInfo key={order.id}>
-              <strong style={{maxWidth: 90, width: 90}}>{order.name}</strong>
+              <strong style={{maxWidth: 90, width: 90}}>
+                {order.name}
+                {order.type === 'set' && <strong> 세트</strong>}
+              </strong>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <DownButton onClick={() => onClickDecreaseOrder(order)}/>
                 <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>

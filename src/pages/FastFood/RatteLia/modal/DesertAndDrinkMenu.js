@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -6,7 +6,7 @@ import {CustomSlider, settings} from "../SelectMenuList";
 import {CategoryInformation, sideMenuInformation} from "../MenuInfo";
 import styled from 'styled-components';
 import {convertCommaNumber} from "../../../../utils/comma";
-
+import ClearIcon from "@mui/icons-material/Clear";
 
 const BottomWrap = styled.div`
   display: flex;
@@ -54,6 +54,7 @@ const Wrap = styled.div`
   display: flex !important;
   flex-wrap: wrap;
   overflow-y: auto;
+  justify-content: center;
 `;
 
 const MenuWrap = styled.div`
@@ -65,7 +66,7 @@ const MenuWrap = styled.div`
   width: 25%;
   word-break: break-all;
   text-align: center;
-  margin: 10px;
+  margin: 10px;  
   
   & img {
     width: 65px;
@@ -81,7 +82,14 @@ const Slider = styled(CustomSlider)`
   }
 `;
 
-const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
+const RemoveButton = styled(ClearIcon)`
+  border: 1px solid #339dd6;
+  border-radius: 50%;
+  padding: 5px;
+`;
+
+const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMenu, onClickRemoveSideMenu,
+                              renderSideMenu, setRenderSideMenu}) => {
   const [value, setValue] = React.useState(0);
   const sliderRef = useRef(null);
   const wrapRef = useRef(null);
@@ -98,13 +106,22 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
     }
   }, [value, sideMenuTab]);
   const sideMenuCategory = ['세트_디저트', '세트_드링크'];
-  const renderSideMenu = sideMenuTab === 'desert' ? sideMenuInformation.desert : sideMenuInformation.drink;
   const pageSize = 16;
   const selectedCategory = renderSideMenu.flat();
+  console.log(renderSideMenu)
   const totalCount = selectedCategory.length;
   const totalPage = Math.ceil(totalCount / pageSize);
   const pageNumberList = '*'.repeat(totalPage).split("");
 
+  useEffect(() => {
+    if (sideMenuTab === 'desert') {
+      setRenderSideMenu(sideMenuInformation.desert);
+    } else {
+      setRenderSideMenu(sideMenuInformation.drink);
+    }
+  }, [sideMenuTab]);
+
+  console.log('pageNumberList', pageNumberList)
   return (
     <div>
       <Box sx={{ flexGrow: 1, background: '#f6f6f6' }}>
@@ -150,13 +167,22 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
       <Slider ref={sliderRef} {...settings} style={{overflow: 'hidden'}}>
         {pageNumberList.map((_, i) => (
           <Wrap key={i} ref={wrapRef}>
-            {renderSideMenu[i].map((menu) => {
+            {renderSideMenu[i].map((sideMenu) => {
               return (
-                <MenuWrap key={menu.id}>
-                  <img src={menu.src} alt={menu.name} />
-                  <strong>{menu.name}</strong>
+                <MenuWrap key={sideMenu.id} onClick={() => onClickAddSideMenu(sideMenu)}>
+                  {/* 사이드 메뉴 추가 시 번호 및 삭제 버튼 추가 */}
+                  <div>
+                    {sideMenu.isSelected &&
+                      <>
+                        <RemoveButton onClick={() => onClickRemoveSideMenu(sideMenu)} />
+                        <div>{i + 1}</div>
+                      </>
+                    }
+                    <img src={sideMenu.src} alt={sideMenu.name} />
+                  </div>
+                  <strong>{sideMenu.name}</strong>
                   <strong style={{color: '#e22137'}}>
-                    {convertCommaNumber(menu.price)}
+                    {convertCommaNumber(sideMenu.price)}
                   </strong>
                 </MenuWrap>
               )
@@ -167,7 +193,7 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
       <BottomWrap>
         <ul>
           <li>선택수량 : 2</li>
-          <li>잔여수량 : 0</li>
+          <li>잔여수량 : {menu.sideMenuList?.length}</li>
         </ul>
         <CancleButton>취소하기</CancleButton>
         <CompleteButton>선택완료</CompleteButton>

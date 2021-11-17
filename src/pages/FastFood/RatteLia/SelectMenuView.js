@@ -3,8 +3,8 @@ import styled from "styled-components";
 import adSense from "../../../assets/images/adSense.png";
 import FooterNav from "../../../components/FooterNav";
 import Box from '@mui/material/Box';
-import Tabs, { tabsClasses } from '@mui/material/Tabs';
-import Tab, { tabClasses } from '@mui/material/Tab';
+import Tabs, {tabsClasses} from '@mui/material/Tabs';
+import Tab, {tabClasses} from '@mui/material/Tab';
 import SelectMenuList from "./SelectMenuList";
 import TotalOrderHistory from "./TotalOrderHistory";
 import SingleOrSetMenuModal from "./modal/SingleOrSetMenuModal";
@@ -12,10 +12,12 @@ import ChoiceDesertModal from "./modal/ChoiceDesertModal";
 import CustomModal from "./modal/CustomModal";
 import SingleOrSetMenu from "./modal/SingleOrSetMenu";
 import DesertAndDrinkMenu from "./modal/DesertAndDrinkMenu";
+import AlreadySelectedTypeAlarm from "./modal/AlreadySelectedTypeAlarm";
+import ModalContainer from "./modal/ModalContainer";
+import {modalData} from "./modal/CustomModalData";
 
 const Wrap = styled.div`
-   height: 100%;
-   overflow-y: auto;
+   height: 100%;   
 `;
 
 const ContentLayout = styled.div`
@@ -39,7 +41,9 @@ const SelectMenuView = ({onClickNextStep}) => {
   const [choiceMenuType, setChoiceMenuType] = useState(''); // 버거 단품, 셋트 타입
   const [openMenuType, setOpenMenuType] = useState(false); // 단품,세트 모달
   const [openDesert, setOpenDesert] = useState(false); // 사이드 메뉴 모달
+  const [openAlreadyAlarm, setOpenAlreadyAlarm] = useState(false); // 이미 선택된 메뉴타입
   const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
+  const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
   const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const handleChange = useCallback((event, newValue) => {
@@ -138,28 +142,89 @@ const SelectMenuView = ({onClickNextStep}) => {
 
   // 버거셋트 선택시 사이드메뉴 선택 리스너
   const onClickAddSideMenu = useCallback((sideMenu) => {
-    // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
-    // 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
-    // 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
-    // sideMenu가 담겼다면 채워지지 않은 type의 화면탭으로 이동 시킨다.
+    console.log(sideMenu)
     // sideMenuList가 다채워졌다면 orderList에 추가 시킨 후 오더 창을 닫는다.
+    if (selectedMenu.sideMenuList.length >= 2) {
+      onClickAddOrder(selectedMenu);
+      setChoiceMenuType('');
+      setSideMenuTab('desert');
+      setOpenDesert(false);
+      return null;
+    }
 
-  }, [selectedMenu]);
+    // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
+    const isAlreadySelectType = selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
+
+    // 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
+    if (isAlreadySelectType) {
+      return setOpenAlreadyAlarm(true);
+    }
+
+    const sideMenus = renderSideMenu.map((v) => {
+      if (v.id === sideMenu.id) {
+        v.isSelected = true;
+      }
+    });
+
+    setRenderSideMenu(sideMenus);
+    // 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
+    selectedMenu.sideMenuList.push(sideMenu);
+  }, [orderList, selectedMenu, renderSideMenu]);
 
   // 버거셋트 선택시 사이드메뉴 삭제 리스너
   const onClickRemoveSideMenu = useCallback((sideMenu) => {
+    if (!sideMenu) return null;
     // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu를 찾아 삭제한다.
+    const removeItemIdx = selectedMenu.sideMenuList.findIndex((v) => v.id === sideMenu.id);
+    selectedMenu.sideMenuList.splice(removeItemIdx, 1);
   }, [selectedMenu]);
 
+  const menuTypeChoiceProps = {
+    ...modalData.menuTypeChoiceInfo,
+    open: openMenuType,
+    setOpen: setOpenMenuType,
+    bodyData: <SingleOrSetMenu menu={selectedMenu} onClickMenuType={onClickMenuType}/>,
+    backDrop: openMenuType,
+  };
 
+  const sideMenuChoiceProps = {
+    ...modalData.sideMenuChoiceInfo,
+    title: `세트${sideMenuCategory} 1 개를 선택해 주세요`,
+    open: openDesert,
+    setOpen: setOpenDesert,
+    bodyData: <DesertAndDrinkMenu
+                setSideMenuTab={setSideMenuTab}
+                sideMenuTab={sideMenuTab}
+                menu={selectedMenu}
+                onClickAddSideMenu={onClickAddSideMenu}
+                onClickRemoveSideMenu={onClickRemoveSideMenu}
+                renderSideMenu={renderSideMenu}
+                setRenderSideMenu={setRenderSideMenu}
+              />,
+    backDrop: openDesert,
+  };
+
+  const alreadySelectedTypeAlarmProps = {
+    ...modalData.alarmInfo,
+    open: openAlreadyAlarm,
+    setOpen: setOpenAlreadyAlarm,
+    bodyData: <AlreadySelectedTypeAlarm setOpenAlreadyAlarm={setOpenAlreadyAlarm} />,
+    backDrop: openAlreadyAlarm,
+  };
+
+  const modalContainerProps = {
+    menuTypeChoiceProps,
+    sideMenuChoiceProps,
+    alreadySelectedTypeAlarmProps,
+  };
 
   return (
     <Wrap>
       <ContentLayout>
         <AdWrap>
-          <img src={adSense} alt="배너광고" />
+          <img src={adSense} alt="배너광고"/>
         </AdWrap>
-        <Box sx={{ flexGrow: 1, background: '#ffecdb' }}>
+        <Box sx={{flexGrow: 1, background: '#ffecdb'}}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -169,14 +234,14 @@ const SelectMenuView = ({onClickNextStep}) => {
             sx={{
               [`& .${tabsClasses.scrollButtons}`]: {
                 display: 'inline-flex',
-                '&.Mui-disabled': { opacity: 0.3 },
+                '&.Mui-disabled': {opacity: 0.3},
               },
               [`& .${tabsClasses.indicator}`]: {
                 background: 'none'
               }
             }}
           >
-            {menuCategory.map((v, i) =>  (
+            {menuCategory.map((v, i) => (
               <Tab
                 key={i}
                 label={v}
@@ -209,30 +274,8 @@ const SelectMenuView = ({onClickNextStep}) => {
           onClickRemoveOrder={onClickRemoveOrder}
         />
       </ContentLayout>
-      <FooterNav goBackFunc={() => onClickNextStep(2)} />
-      {/* 메뉴 타입 모달 */}
-      <CustomModal
-        title='세트로 드시겠어요?'
-        tBgColor='#bae7ff'
-        open={openMenuType}
-        backDrop={openMenuType}
-        bodyData={<SingleOrSetMenu menu={selectedMenu} onClickMenuType={onClickMenuType}/>}
-        setOpen={setOpenMenuType}
-      />
-      {/* 디저트 선택 모달 */}
-      <CustomModal
-        title={`세트${sideMenuCategory} 1 개를 선택해 주세요`}
-        tBgColor='#bae7ff'
-        open={openDesert}
-        backDrop={openDesert}
-        bodyData={
-          <DesertAndDrinkMenu
-            setSideMenuTab={setSideMenuTab}
-            sideMenuTab={sideMenuTab}
-            menu={selectedMenu} />
-        }
-        setOpen={setOpenDesert}
-      />
+      <FooterNav goBackFunc={() => onClickNextStep(2)}/>
+      <ModalContainer {...modalContainerProps} />
     </Wrap>
   );
 };

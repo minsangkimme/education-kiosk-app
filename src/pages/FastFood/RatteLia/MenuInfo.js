@@ -343,6 +343,7 @@ export const sideMenuInformation = {
       {
         id: 0,
         type: 'desert',
+        isSelected: false,
         name: "포테이토",
         price: 0,
         src: beefBurger,
@@ -350,6 +351,7 @@ export const sideMenuInformation = {
       {
         id: 1,
         type: 'desert',
+        isSelected: false,
         name: '모짜크림치즈볼',
         price: 400,
         src: beefBurger,
@@ -357,6 +359,7 @@ export const sideMenuInformation = {
       {
         id: 2,
         type: 'desert',
+        isSelected: false,
         name: '치즈스틱',
         price: 500,
         src: beefBurger,
@@ -364,6 +367,7 @@ export const sideMenuInformation = {
       {
         id: 3,
         type: 'desert',
+        isSelected: false,
         name: '양념감자',
         price: 500,
         src: beefBurger,
@@ -371,6 +375,7 @@ export const sideMenuInformation = {
       {
         id: 4,
         type: 'desert',
+        isSelected: false,
         name: '오징어링',
         price: 700,
         src: beefBurger,
@@ -378,6 +383,7 @@ export const sideMenuInformation = {
       {
         id: 5,
         type: 'desert',
+        isSelected: false,
         name: '치킨너겟',
         price: 1000,
         src: beefBurger,
@@ -385,6 +391,7 @@ export const sideMenuInformation = {
       {
         id: 6,
         type: 'desert',
+        isSelected: false,
         name: '포테이토(L)',
         price: 400,
         src: beefBurger,
@@ -392,6 +399,7 @@ export const sideMenuInformation = {
       {
         id: 7,
         type: 'desert',
+        isSelected: false,
         name: '초코초코',
         price: 0,
         src: beefBurger,
@@ -399,6 +407,7 @@ export const sideMenuInformation = {
       {
         id: 8,
         type: 'desert',
+        isSelected: false,
         name: '딸기딸기',
         price: 0,
         src: beefBurger,
@@ -406,6 +415,7 @@ export const sideMenuInformation = {
       {
         id: 9,
         type: 'desert',
+        isSelected: false,
         name: '토네이도 딸기',
         price: 1000,
         src: beefBurger,
@@ -413,6 +423,7 @@ export const sideMenuInformation = {
       {
         id: 10,
         type: 'desert',
+        isSelected: false,
         name: '토네이도 쿠키',
         price: 1000,
         src: beefBurger,
@@ -420,6 +431,7 @@ export const sideMenuInformation = {
       {
         id: 11,
         type: 'desert',
+        isSelected: false,
         name: '치킨1조각',
         price: 800,
         src: beefBurger,
@@ -427,6 +439,7 @@ export const sideMenuInformation = {
       {
         id: 12,
         type: 'desert',
+        isSelected: false,
         name: '화이어링',
         price: 1000,
         src: beefBurger,
@@ -434,6 +447,7 @@ export const sideMenuInformation = {
       {
         id: 13,
         type: 'desert',
+        isSelected: false,
         name: 'F파이',
         price: 1000,
         src: beefBurger,
@@ -441,6 +455,7 @@ export const sideMenuInformation = {
       {
         id: 14,
         type: 'desert',
+        isSelected: false,
         name: '핫F파이',
         price: 1500,
         src: beefBurger,
@@ -450,6 +465,7 @@ export const sideMenuInformation = {
       {
         id: 15,
         type: 'desert',
+        isSelected: false,
         name: '휠렛치킨',
         price: 1500,
         src: beefBurger,
@@ -457,6 +473,7 @@ export const sideMenuInformation = {
       {
         id: 16,
         type: 'desert',
+        isSelected: false,
         name: '바닐라아이스크림',
         price: 300,
         src: beefBurger,
@@ -464,6 +481,7 @@ export const sideMenuInformation = {
       {
         id: 17,
         type: 'desert',
+        isSelected: false,
         name: '수박아이스크림',
         price: 300,
         src: beefBurger,
@@ -476,6 +494,7 @@ export const sideMenuInformation = {
       {
         id: 15,
         type: 'drink',
+        isSelected: false,
         name: "콜라",
         price: 0,
         src: beefBurger,
@@ -483,6 +502,7 @@ export const sideMenuInformation = {
       {
         id: 16,
         type: 'drink',
+        isSelected: false,
         name: "사이다",
         price: 0,
         src: beefBurger,
@@ -490,6 +510,7 @@ export const sideMenuInformation = {
       {
         id: 17,
         type: 'drink',
+        isSelected: false,
         name: "제로슈가콜라",
         price: 0,
         src: beefBurger,
@@ -497,6 +518,7 @@ export const sideMenuInformation = {
       {
         id: 18,
         type: 'drink',
+        isSelected: false,
         name: "콜라(L.라지)",
         price: 200,
         src: beefBurger,
@@ -504,6 +526,7 @@ export const sideMenuInformation = {
       {
         id: 19,
         type: 'drink',
+        isSelected: false,
         name: "사이다(L.라지)",
         price: 200,
         src: beefBurger,
@@ -511,6 +534,7 @@ export const sideMenuInformation = {
       {
         id: 20,
         type: 'drink',
+        isSelected: false,
         name: "제로슈가콜라(L.라지)",
         price: 200,
         src: beefBurger,
@@ -518,6 +542,7 @@ export const sideMenuInformation = {
       {
         id: 21,
         type: 'drink',
+        isSelected: false,
         name: "아메리카노",
         price: 300,
         src: beefBurger,
@@ -525,6 +550,7 @@ export const sideMenuInformation = {
       {
         id: 22,
         type: 'drink',
+        isSelected: false,
         name: "아이스아메리카노",
         price: 300,
         src: beefBurger,
@@ -532,6 +558,7 @@ export const sideMenuInformation = {
       {
         id: 23,
         type: 'drink',
+        isSelected: false,
         name: "아이스아메리카노(L.라지)",
         price: 800,
         src: beefBurger,
@@ -539,6 +566,7 @@ export const sideMenuInformation = {
       {
         id: 24,
         type: 'drink',
+        isSelected: false,
         name: "카페라떼",
         price: 800,
         src: beefBurger,
@@ -546,6 +574,7 @@ export const sideMenuInformation = {
       {
         id: 25,
         type: 'drink',
+        isSelected: false,
         name: "우유",
         price: 0,
         src: beefBurger,
@@ -553,6 +582,7 @@ export const sideMenuInformation = {
       {
         id: 26,
         type: 'drink',
+        isSelected: false,
         name: "핫초코",
         price: 300,
         src: beefBurger,
@@ -560,6 +590,7 @@ export const sideMenuInformation = {
       {
         id: 27,
         type: 'drink',
+        isSelected: false,
         name: "오렌지쥬스",
         price: 800,
         src: beefBurger,
@@ -567,6 +598,7 @@ export const sideMenuInformation = {
       {
         id: 28,
         type: 'drink',
+        isSelected: false,
         name: "레몬에이드",
         price: 800,
         src: beefBurger,
@@ -574,6 +606,7 @@ export const sideMenuInformation = {
       {
         id: 29,
         type: 'drink',
+        isSelected: false,
         name: "레몬에이드(L)",
         price: 1000,
         src: beefBurger,
@@ -583,6 +616,7 @@ export const sideMenuInformation = {
       {
         id: 30,
         type: 'drink',
+        isSelected: false,
         name: "딸기라떼",
         price: 0,
         src: beefBurger,
@@ -590,6 +624,7 @@ export const sideMenuInformation = {
       {
         id: 31,
         type: 'drink',
+        isSelected: false,
         name: "아이시스",
         price: 0,
         src: beefBurger,
@@ -597,6 +632,7 @@ export const sideMenuInformation = {
       {
         id: 32,
         type: 'drink',
+        isSelected: false,
         name: "아이스티",
         price: 0,
         src: beefBurger,
