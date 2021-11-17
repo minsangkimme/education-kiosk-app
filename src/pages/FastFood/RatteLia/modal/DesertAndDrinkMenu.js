@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useRef} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -83,7 +83,11 @@ const Slider = styled(CustomSlider)`
 
 const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
   const [value, setValue] = React.useState(0);
+  const sliderRef = useRef(null);
+  const wrapRef = useRef(null);
   const handleChange = useCallback((event, newValue) => {
+    sliderRef.current.slickGoTo(0);
+
     setValue(newValue);
 
     switch (newValue) {
@@ -143,9 +147,9 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab}) => {
         </Tabs>
       </Box>
       {/* 슬라이더 */}
-      <Slider {...settings} style={{overflow: 'hidden'}}>
+      <Slider ref={sliderRef} {...settings} style={{overflow: 'hidden'}}>
         {pageNumberList.map((_, i) => (
-          <Wrap key={i}>
+          <Wrap key={i} ref={wrapRef}>
             {renderSideMenu[i].map((menu) => {
               return (
                 <MenuWrap key={menu.id}>

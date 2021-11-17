@@ -61,6 +61,7 @@ const SelectMenuView = ({onClickNextStep}) => {
     }
   }, [value, selectCategory]);
 
+  // 제품 타입 검사
   const onClickInspectMenuType = useCallback((menu) => {
     const burgerCategory = ['recommended', 'hamburger', 'event'];
     setSelectedMenu(menu);
