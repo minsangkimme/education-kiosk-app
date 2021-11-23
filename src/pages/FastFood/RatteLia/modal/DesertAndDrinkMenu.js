@@ -86,6 +86,22 @@ const RemoveButton = styled(ClearIcon)`
   border: 1px solid #339dd6;
   border-radius: 50%;
   padding: 5px;
+  position: absolute;
+  left: 100%;
+  bottom: 30px;
+`;
+
+const OrderNumber = styled.div`
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 13px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMenu, onClickRemoveSideMenu,
@@ -121,7 +137,6 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
     }
   }, [sideMenuTab]);
 
-  console.log('pageNumberList', pageNumberList)
   return (
     <div>
       <Box sx={{ flexGrow: 1, background: '#f6f6f6' }}>
@@ -171,11 +186,11 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
               return (
                 <MenuWrap key={sideMenu.id} onClick={() => onClickAddSideMenu(sideMenu)}>
                   {/* 사이드 메뉴 추가 시 번호 및 삭제 버튼 추가 */}
-                  <div>
+                  <div style={{position: 'relative'}}>
                     {sideMenu.isSelected &&
                       <>
                         <RemoveButton onClick={() => onClickRemoveSideMenu(sideMenu)} />
-                        <div>{i + 1}</div>
+                        <OrderNumber>{i + 1}</OrderNumber>
                       </>
                     }
                     <img src={sideMenu.src} alt={sideMenu.name} />

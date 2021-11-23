@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styled from "styled-components";
 import adSense from "../../../assets/images/adSense.png";
 import FooterNav from "../../../components/FooterNav";
@@ -64,6 +64,7 @@ const SelectMenuView = ({onClickNextStep}) => {
         return setSelectCategory('recommended');
     }
   }, [value, selectCategory]);
+  useEffect(() => console.log(selectedMenu), [selectedMenu])
 
   // 제품 타입 검사
   const onClickInspectMenuType = useCallback((menu) => {
@@ -160,15 +161,13 @@ const SelectMenuView = ({onClickNextStep}) => {
       return setOpenAlreadyAlarm(true);
     }
 
-    const sideMenus = renderSideMenu.map((v) => {
-      if (v.id === sideMenu.id) {
-        v.isSelected = true;
-      }
-    });
-
-    setRenderSideMenu(sideMenus);
+    // TODO 선택한 메뉴 selected 상태 변경해서 화면 업데이트 하기
+    sideMenu.isSelected = true;
     // 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
-    selectedMenu.sideMenuList.push(sideMenu);
+    setSelectedMenu(prevState => ({
+      ...prevState,
+      sideMenuList: [...prevState.sideMenuList, sideMenu]
+    }))
   }, [orderList, selectedMenu, renderSideMenu]);
 
   // 버거셋트 선택시 사이드메뉴 삭제 리스너
