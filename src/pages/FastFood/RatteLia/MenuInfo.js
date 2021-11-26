@@ -10,6 +10,7 @@ export const CategoryInformation = {
       setPrice: 5900,
       type: 'set',
       orderCount: 0,
+      setOrderCount: 0,
       sideMenuList: [],
       sideMenuPrice: 0,
     },
@@ -21,6 +22,7 @@ export const CategoryInformation = {
         setPrice: 10000,
         type: 'set',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -32,6 +34,7 @@ export const CategoryInformation = {
         setPrice: 5800,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -43,6 +46,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       }]
@@ -56,6 +60,7 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      setOrderCount: 0,
       sideMenuList: [],
       sideMenuPrice: 0,
     },
@@ -67,6 +72,7 @@ export const CategoryInformation = {
         setPrice: 7500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -78,6 +84,7 @@ export const CategoryInformation = {
         setPrice: 9500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -89,6 +96,7 @@ export const CategoryInformation = {
         setPrice: 8500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -100,6 +108,7 @@ export const CategoryInformation = {
         setPrice: 9500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -111,6 +120,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -122,6 +132,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -133,6 +144,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       }],
@@ -144,6 +156,7 @@ export const CategoryInformation = {
       setPrice: 5500,
       type: 'single',
       orderCount: 0,
+      setOrderCount: 0,
       sideMenuList: [],
       sideMenuPrice: 0,
     },
@@ -155,6 +168,7 @@ export const CategoryInformation = {
         setPrice: 5500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -166,6 +180,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -177,6 +192,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -188,6 +204,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -199,6 +216,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -210,6 +228,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -221,6 +240,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       }],
@@ -232,6 +252,7 @@ export const CategoryInformation = {
       setPrice: 6500,
       type: 'single',
       orderCount: 0,
+      setOrderCount: 0,
       sideMenuList: [],
       sideMenuPrice: 0,
     },
@@ -243,6 +264,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -254,6 +276,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -265,6 +288,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -276,6 +300,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -287,6 +312,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -298,6 +324,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       },
@@ -309,6 +336,7 @@ export const CategoryInformation = {
         setPrice: 6500,
         type: 'single',
         orderCount: 0,
+        setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
       }],
@@ -639,4 +667,18 @@ export const sideMenuInformation = {
       }
     ]
   ]
+}
+
+export const initSideMenuState = () => {
+  const {desert, drink} = sideMenuInformation;
+  desert.forEach((menus) => {
+    menus.forEach((menu) => {
+      menu.isSelected = false;
+    });
+  });
+  drink.forEach((menus) => {
+    menus.forEach((menu) => {
+      menu.isSelected = false;
+    });
+  });
 }

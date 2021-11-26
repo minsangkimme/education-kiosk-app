@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -89,6 +89,7 @@ const RemoveButton = styled(ClearIcon)`
   position: absolute;
   left: 100%;
   bottom: 30px;
+  z-index: 1;
 `;
 
 const OrderNumber = styled.div`
@@ -105,7 +106,8 @@ const OrderNumber = styled.div`
 `;
 
 const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMenu, onClickRemoveSideMenu,
-                              renderSideMenu, setRenderSideMenu}) => {
+                              renderSideMenu, setRenderSideMenu, onClickSubmitMenu, onClickCancleMenu,
+                            openDesert}) => {
   const [value, setValue] = React.useState(0);
   const sliderRef = useRef(null);
   const wrapRef = useRef(null);
@@ -124,11 +126,17 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
   const sideMenuCategory = ['세트_디저트', '세트_드링크'];
   const pageSize = 16;
   const selectedCategory = renderSideMenu.flat();
-  console.log(renderSideMenu)
+  const remainingQuantity = useMemo(() => menu.sideMenuList?.length || 0, [menu]);
   const totalCount = selectedCategory.length;
   const totalPage = Math.ceil(totalCount / pageSize);
   const pageNumberList = '*'.repeat(totalPage).split("");
+  const getSideMenuIdx = useCallback((type) => (menu.sideMenuList?.findIndex((v) => v.type === type)), [menu]);
 
+  useEffect(() => {
+    if (!openDesert) {
+      setValue(0);
+    }
+  }, [openDesert]);
   useEffect(() => {
     if (sideMenuTab === 'desert') {
       setRenderSideMenu(sideMenuInformation.desert);
@@ -184,18 +192,18 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
           <Wrap key={i} ref={wrapRef}>
             {renderSideMenu[i].map((sideMenu) => {
               return (
-                <MenuWrap key={sideMenu.id} onClick={() => onClickAddSideMenu(sideMenu)}>
+                <MenuWrap key={sideMenu.id}>
                   {/* 사이드 메뉴 추가 시 번호 및 삭제 버튼 추가 */}
                   <div style={{position: 'relative'}}>
                     {sideMenu.isSelected &&
                       <>
                         <RemoveButton onClick={() => onClickRemoveSideMenu(sideMenu)} />
-                        <OrderNumber>{i + 1}</OrderNumber>
+                        <OrderNumber>{getSideMenuIdx(sideMenu.type) + 1}</OrderNumber>
                       </>
                     }
-                    <img src={sideMenu.src} alt={sideMenu.name} />
+                    <img src={sideMenu.src} alt={sideMenu.name} onClick={() => onClickAddSideMenu(sideMenu)} />
                   </div>
-                  <strong>{sideMenu.name}</strong>
+                  <strong onClick={() => onClickAddSideMenu(sideMenu)}>{sideMenu.name}</strong>
                   <strong style={{color: '#e22137'}}>
                     {convertCommaNumber(sideMenu.price)}
                   </strong>
@@ -208,10 +216,10 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
       <BottomWrap>
         <ul>
           <li>선택수량 : 2</li>
-          <li>잔여수량 : {menu.sideMenuList?.length}</li>
+          <li>잔여수량 : {remainingQuantity}</li>
         </ul>
-        <CancleButton>취소하기</CancleButton>
-        <CompleteButton>선택완료</CompleteButton>
+        <CancleButton onClick={onClickCancleMenu}>취소하기</CancleButton>
+        <CompleteButton onClick={onClickSubmitMenu}>선택완료</CompleteButton>
       </BottomWrap>
     </div>
   );

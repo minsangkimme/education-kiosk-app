@@ -11,6 +11,7 @@ const Wrap = styled.div`
   z-index: 1;
   background: #fff;
   width: 90%;
+  text-align: center;
 `;
 
 const ModalBackDrop = styled.div`

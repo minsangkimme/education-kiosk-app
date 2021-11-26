@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 import styled from 'styled-components';
 import {convertCommaNumber} from "../../../utils/comma";
 import UpButton from '@mui/icons-material/AddCircleOutline';
@@ -62,11 +62,16 @@ const RemoveButton = styled.button`
 `;
 
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
-  const totalCount = orderList.reduce((acc, curr) => (acc + curr.orderCount), 0)
-  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => {
+  const totalCount = useMemo(() => orderList.reduce((acc, curr) => {
+    const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
+    return acc + orderQuantity;
+  }, 0), [orderList]);
+  const totalPrice = useMemo(() => convertCommaNumber(orderList.reduce((acc, curr) => {
     const price = curr.type === 'single' ? curr.price : curr.setPrice;
-    return (acc + curr.sideMenuPrice + (price * curr.orderCount));
-  }, 0));
+    const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
+    return (acc + curr.sideMenuPrice + (price * orderQuantity));
+  }, 0)), [orderList]);
+
   return (
     <Wrap>
       <OrderPriceWrap>
@@ -79,7 +84,9 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
         {orderList.map((order) => {
+          console.log(order.name)
           const price = order.type === 'single' ? order.price : order.setPrice;
+          const orderQuantity = order.type === 'single' ? order.orderCount : order.setOrderCount;
           return (
             <OrderInfo key={order.id}>
               <strong style={{maxWidth: 90, width: 90}}>
@@ -88,7 +95,7 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
               </strong>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <DownButton onClick={() => onClickDecreaseOrder(order)}/>
-                <strong style={{margin: '0 5px'}}>{order.orderCount}</strong>
+                <strong style={{margin: '0 5px'}}>{orderQuantity}</strong>
                 <UpButton onClick={() => onClickAddOrder(order)}/>
               </div>
               <strong>{convertCommaNumber(price)} </strong>

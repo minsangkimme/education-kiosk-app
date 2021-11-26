@@ -15,6 +15,8 @@ import DesertAndDrinkMenu from "./modal/DesertAndDrinkMenu";
 import AlreadySelectedTypeAlarm from "./modal/AlreadySelectedTypeAlarm";
 import ModalContainer from "./modal/ModalContainer";
 import {modalData} from "./modal/CustomModalData";
+import SelectSideMenuAlarm from "./modal/SelectSideMenuAlarm";
+import {initSideMenuState, sideMenuInformation} from "./MenuInfo";
 
 const Wrap = styled.div`
    height: 100%;   
@@ -44,11 +46,12 @@ const SelectMenuView = ({onClickNextStep}) => {
   const [openAlreadyAlarm, setOpenAlreadyAlarm] = useState(false); // 이미 선택된 메뉴타입
   const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
   const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
+  const [openSelectAlarm, setOpenSelectAlarm] = useState(false); // 사이드 메뉴 선택 안하고 추가하기 누른 경우
   const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const handleChange = useCallback((event, newValue) => {
     setValue(newValue);
-
+    console.log(newValue);
     switch (newValue) {
       case 0:
         return setSelectCategory('recommended');
@@ -64,7 +67,7 @@ const SelectMenuView = ({onClickNextStep}) => {
         return setSelectCategory('recommended');
     }
   }, [value, selectCategory]);
-  useEffect(() => console.log(selectedMenu), [selectedMenu])
+  useEffect(() => console.log(sideMenuTab), [sideMenuTab])
 
   // 제품 타입 검사
   const onClickInspectMenuType = useCallback((menu) => {
@@ -82,20 +85,30 @@ const SelectMenuView = ({onClickNextStep}) => {
   // 오더 추가
   const onClickAddOrder = useCallback((menu) => {
     // orderList에 order 메뉴가 있는지 확인
-    const isOrderInclude = orderList.findIndex((v) => v.id === menu.id) > -1;
+    const isOrderInclude = orderList.findIndex((v) => (v.id === menu.id && v.type === menu.type)) > -1;
     let orders;
 
     if (isOrderInclude) {
       // 있으면 추가 x & 카운트 증가
       orders = orderList.map((v) => {
-        if (v.id === menu.id) {
-          v.orderCount += 1;
+        if (v.id === menu.id && v.type === menu.type) {
+          if (menu.type === 'single') {
+            v.orderCount += 1;
+          }
+          if (menu.type === 'set') {
+            v.setOrderCount += 1;
+          }
         }
         return v;
       });
     } else {
       // 없으면 추가 & 카운트 증가
-      menu.orderCount += 1;
+      if (menu.type === 'single') {
+        menu.orderCount += 1;
+      }
+      if (menu.type === 'set') {
+        menu.setOrderCount += 1;
+      }
       orders = [...orderList, menu];
     }
 
@@ -105,11 +118,17 @@ const SelectMenuView = ({onClickNextStep}) => {
   // 카운트 감소
   const onClickDecreaseOrder = useCallback((menu) => {
     const orders = orderList.filter((v) => {
-      if (v.id === menu.id && menu.orderCount > 1) {
-        menu.orderCount -= 1;
+      if (v.id === menu.id && v.type === menu.type && (menu.orderCount > 1 || menu.setOrderCount > 1 )) {
+        if (menu.type === 'single') {
+          v.orderCount -= 1;
+        }
+
+        if (menu.type === 'set') {
+          v.setOrderCount -= 1;
+        }
       }
 
-      return v.orderCount >= 1;
+      return v;
     });
 
     setOrderList(orders);
@@ -117,15 +136,19 @@ const SelectMenuView = ({onClickNextStep}) => {
 
   // 오더 삭제
   const onClickRemoveOrder = useCallback((menu) => {
+    const removeIdx = orderList.findIndex((v) => v.id === menu.id && v.type === menu.type);
+    const copiedOrderList = orderList.slice();
+    copiedOrderList.splice(removeIdx, 1);
+    setOrderList(copiedOrderList);
     menu.orderCount = 0;
-    const orders = orderList.filter((v) => v.id !== menu.id);
-    setOrderList(orders);
+    menu.setOrderCount = 0;
   }, [orderList]);
 
   // 버거류 단품 셋트 선택
   const onClickMenuType = useCallback((type) => {
     // 단품
     if (type === 'single') {
+      setSelectedMenu(prevState => ({...prevState, type: 'single'}));
       setOpenMenuType(false);
       onClickAddOrder(selectedMenu);
     }
@@ -133,25 +156,18 @@ const SelectMenuView = ({onClickNextStep}) => {
     // 셋트
     if (type === 'set') {
       // 디저트 모달 띄우기
+      setSelectedMenu(prevState => ({...prevState, type: 'set'}));
       setOpenMenuType(false);
       setOpenDesert(true);
       // 선택 다 하고 내역에 추가하기
     }
 
     setChoiceMenuType(type);
-  }, [choiceMenuType, selectedMenu]);
+  }, [choiceMenuType, selectedMenu, orderList]);
 
   // 버거셋트 선택시 사이드메뉴 선택 리스너
   const onClickAddSideMenu = useCallback((sideMenu) => {
-    console.log(sideMenu)
-    // sideMenuList가 다채워졌다면 orderList에 추가 시킨 후 오더 창을 닫는다.
-    if (selectedMenu.sideMenuList.length >= 2) {
-      onClickAddOrder(selectedMenu);
-      setChoiceMenuType('');
-      setSideMenuTab('desert');
-      setOpenDesert(false);
-      return null;
-    }
+    console.log('add', sideMenu)
 
     // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
     const isAlreadySelectType = selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
@@ -161,22 +177,41 @@ const SelectMenuView = ({onClickNextStep}) => {
       return setOpenAlreadyAlarm(true);
     }
 
-    // TODO 선택한 메뉴 selected 상태 변경해서 화면 업데이트 하기
     sideMenu.isSelected = true;
     // 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
     setSelectedMenu(prevState => ({
       ...prevState,
       sideMenuList: [...prevState.sideMenuList, sideMenu]
-    }))
+    }));
   }, [orderList, selectedMenu, renderSideMenu]);
 
   // 버거셋트 선택시 사이드메뉴 삭제 리스너
   const onClickRemoveSideMenu = useCallback((sideMenu) => {
     if (!sideMenu) return null;
+    sideMenu.isSelected = false;
     // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu를 찾아 삭제한다.
-    const removeItemIdx = selectedMenu.sideMenuList.findIndex((v) => v.id === sideMenu.id);
-    selectedMenu.sideMenuList.splice(removeItemIdx, 1);
+    const copiedSideMenuList = selectedMenu.sideMenuList.slice();
+    const removeItemIdx = copiedSideMenuList.findIndex((v) => v.id === sideMenu.id);
+    copiedSideMenuList.splice(removeItemIdx, 1);
+
+    setSelectedMenu(prevState => ({
+      ...prevState,
+      sideMenuList: [...copiedSideMenuList]
+    }));
   }, [selectedMenu]);
+
+  // 사이드 메뉴 선택 완료하기 리스너
+  const onClickSubmitMenu = useCallback(() => {
+    if (selectedMenu.sideMenuList.length < 2) {
+      setOpenSelectAlarm(true);
+      return;
+    }
+    onClickAddOrder(selectedMenu);
+    initSelectMenu();
+  }, [selectedMenu, orderList]);
+
+  // 사이드 메뉴 취소하기
+  const onClickCancleMenu = useCallback(() => initSelectMenu(), []);
 
   const menuTypeChoiceProps = {
     ...modalData.menuTypeChoiceInfo,
@@ -190,16 +225,22 @@ const SelectMenuView = ({onClickNextStep}) => {
     ...modalData.sideMenuChoiceInfo,
     title: `세트${sideMenuCategory} 1 개를 선택해 주세요`,
     open: openDesert,
-    setOpen: setOpenDesert,
+    setOpen: (close) => {
+      initSelectMenu();
+      setOpenDesert(close);
+    },
     bodyData: <DesertAndDrinkMenu
-                setSideMenuTab={setSideMenuTab}
-                sideMenuTab={sideMenuTab}
-                menu={selectedMenu}
-                onClickAddSideMenu={onClickAddSideMenu}
-                onClickRemoveSideMenu={onClickRemoveSideMenu}
-                renderSideMenu={renderSideMenu}
-                setRenderSideMenu={setRenderSideMenu}
-              />,
+      setSideMenuTab={setSideMenuTab}
+      sideMenuTab={sideMenuTab}
+      menu={selectedMenu}
+      openDesert={openDesert}
+      onClickAddSideMenu={onClickAddSideMenu}
+      onClickRemoveSideMenu={onClickRemoveSideMenu}
+      renderSideMenu={renderSideMenu}
+      setRenderSideMenu={setRenderSideMenu}
+      onClickSubmitMenu={onClickSubmitMenu}
+      onClickCancleMenu={onClickCancleMenu}
+    />,
     backDrop: openDesert,
   };
 
@@ -207,15 +248,32 @@ const SelectMenuView = ({onClickNextStep}) => {
     ...modalData.alarmInfo,
     open: openAlreadyAlarm,
     setOpen: setOpenAlreadyAlarm,
-    bodyData: <AlreadySelectedTypeAlarm setOpenAlreadyAlarm={setOpenAlreadyAlarm} />,
+    bodyData: <AlreadySelectedTypeAlarm setOpenAlreadyAlarm={setOpenAlreadyAlarm}/>,
     backDrop: openAlreadyAlarm,
   };
+
+  const selectSideMenuAlarmProps = {
+    ...modalData.alarmInfo,
+    open: openSelectAlarm,
+    setOpen: setOpenSelectAlarm,
+    bodyData: <SelectSideMenuAlarm setOpenSelectAlarm={setOpenSelectAlarm}/>,
+    backDrop: openAlreadyAlarm,
+  }
 
   const modalContainerProps = {
     menuTypeChoiceProps,
     sideMenuChoiceProps,
     alreadySelectedTypeAlarmProps,
+    selectSideMenuAlarmProps,
   };
+
+  const initSelectMenu = () => {
+    setChoiceMenuType('');
+    setSideMenuTab('desert');
+    initSideMenuState();
+    setSelectedMenu({});
+    setOpenDesert(false);
+  }
 
   return (
     <Wrap>
@@ -244,6 +302,7 @@ const SelectMenuView = ({onClickNextStep}) => {
               <Tab
                 key={i}
                 label={v}
+                value={i}
                 sx={{
                   [`&.${tabClasses.selected}`]: {
                     background: '#fff',

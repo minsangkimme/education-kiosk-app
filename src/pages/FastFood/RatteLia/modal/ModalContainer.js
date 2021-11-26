@@ -6,6 +6,7 @@ const ModalContainer = (modalContainerProps) => {
     menuTypeChoiceProps,
     sideMenuChoiceProps,
     alreadySelectedTypeAlarmProps,
+    selectSideMenuAlarmProps,
   } = modalContainerProps;
 
   return (
@@ -36,6 +37,15 @@ const ModalContainer = (modalContainerProps) => {
         backDrop={alreadySelectedTypeAlarmProps.backDrop}
         bodyData={alreadySelectedTypeAlarmProps.bodyData}
         setOpen={alreadySelectedTypeAlarmProps.setOpen}
+      />
+      {/* 사이드 메뉴의 잔량이 남아있을 때 추가하기 버튼을 누른 경우 */}
+      <CustomModal
+        title={selectSideMenuAlarmProps.title}
+        tBgColor={selectSideMenuAlarmProps.tBgColor}
+        open={selectSideMenuAlarmProps.open}
+        backDrop={selectSideMenuAlarmProps.backDrop}
+        bodyData={selectSideMenuAlarmProps.bodyData}
+        setOpen={selectSideMenuAlarmProps.setOpen}
       />
     </>
   );
