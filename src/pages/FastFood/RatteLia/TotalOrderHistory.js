@@ -84,14 +84,16 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
         {orderList.map((order) => {
-          console.log(order.name)
+          console.log(order.name, order.type)
           const price = order.type === 'single' ? order.price : order.setPrice;
           const orderQuantity = order.type === 'single' ? order.orderCount : order.setOrderCount;
           return (
             <OrderInfo key={order.id}>
               <strong style={{maxWidth: 90, width: 90}}>
-                {order.name}
-                {order.type === 'set' && <strong> 세트</strong>}
+
+                {order.type === 'single'
+                  ? <span>{order.name}</span>
+                  : <strong>{order.name} 세트</strong>}
               </strong>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <DownButton onClick={() => onClickDecreaseOrder(order)}/>
