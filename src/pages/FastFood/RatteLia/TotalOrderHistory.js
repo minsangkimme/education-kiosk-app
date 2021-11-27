@@ -62,15 +62,15 @@ const RemoveButton = styled.button`
 `;
 
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
-  const totalCount = useMemo(() => orderList.reduce((acc, curr) => {
+  const totalCount = orderList.reduce((acc, curr) => {
     const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
     return acc + orderQuantity;
-  }, 0), [orderList]);
-  const totalPrice = useMemo(() => convertCommaNumber(orderList.reduce((acc, curr) => {
+  }, 0);
+  const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => {
     const price = curr.type === 'single' ? curr.price : curr.setPrice;
     const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
     return (acc + curr.sideMenuPrice + (price * orderQuantity));
-  }, 0)), [orderList]);
+  }, 0))
 
   return (
     <Wrap>
@@ -83,12 +83,11 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
         <Price>{totalPrice}</Price>
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
-        {orderList.map((order) => {
-          console.log(order.name, order.type)
+        {orderList.map((order, i) => {
           const price = order.type === 'single' ? order.price : order.setPrice;
           const orderQuantity = order.type === 'single' ? order.orderCount : order.setOrderCount;
           return (
-            <OrderInfo key={order.id}>
+            <OrderInfo key={i}>
               <strong style={{maxWidth: 90, width: 90}}>
 
                 {order.type === 'single'

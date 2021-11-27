@@ -67,7 +67,6 @@ const SelectMenuView = ({onClickNextStep}) => {
         return setSelectCategory('recommended');
     }
   }, [value, selectCategory]);
-  useEffect(() => console.log(sideMenuTab), [sideMenuTab])
 
   // 제품 타입 검사
   const onClickInspectMenuType = useCallback((menu) => {
@@ -167,8 +166,6 @@ const SelectMenuView = ({onClickNextStep}) => {
 
   // 버거셋트 선택시 사이드메뉴 선택 리스너
   const onClickAddSideMenu = useCallback((sideMenu) => {
-    console.log('add', sideMenu)
-
     // 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
     const isAlreadySelectType = selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
 
