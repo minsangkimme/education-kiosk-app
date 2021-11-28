@@ -1,4 +1,20 @@
 import beefBurger from '../../../assets/images/beef-burger.jpg';
+import frenchFry from '../../../assets/images/french-fries.svg';
+import cheezeball from '../../../assets/images/cheezeball.jpg';
+import cheezestick from '../../../assets/images/cheezestick.jpg';
+import chickennuget from '../../../assets/images/chickennugeets.png';
+import ring from '../../../assets/images/ring.jpg';
+import strawberryIceCream from '../../../assets/images/strawberryIceCream.jpg';
+import chocoIceCream from '../../../assets/images/choco-ice-cream.jpg';
+import chickenPie from '../../../assets/images/chicken-pie.jpg';
+import friedChecken from '../../../assets/images/fried-chicken.jpg';
+import coke from '../../../assets/images/coke.png';
+import cider from '../../../assets/images/cider.jpg';
+import hotchoco from '../../../assets/images/hotchoco.jpg';
+import milk from '../../../assets/images/milk.jpg';
+import lemonade from '../../../assets/images/lemonade.jpg';
+import orangeJuice from '../../../assets/images/orange-juice-67556_640.jpg';
+
 
 export const CategoryInformation = {
   recommended: [
@@ -374,15 +390,15 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "포테이토",
         price: 0,
-        src: beefBurger,
+        src: frenchFry,
       },
       {
         id: 1,
         type: 'desert',
         isSelected: false,
-        name: '모짜크림치즈볼',
+        name: '크림치즈볼',
         price: 400,
-        src: beefBurger,
+        src: cheezeball,
       },
       {
         id: 2,
@@ -390,7 +406,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '치즈스틱',
         price: 500,
-        src: beefBurger,
+        src: cheezestick,
       },
       {
         id: 3,
@@ -398,7 +414,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '양념감자',
         price: 500,
-        src: beefBurger,
+        src: frenchFry,
       },
       {
         id: 4,
@@ -406,7 +422,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '오징어링',
         price: 700,
-        src: beefBurger,
+        src: ring,
       },
       {
         id: 5,
@@ -414,7 +430,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '치킨너겟',
         price: 1000,
-        src: beefBurger,
+        src: chickennuget,
       },
       {
         id: 6,
@@ -422,7 +438,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '포테이토(L)',
         price: 400,
-        src: beefBurger,
+        src: frenchFry,
       },
       {
         id: 7,
@@ -430,7 +446,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '초코초코',
         price: 0,
-        src: beefBurger,
+        src: chocoIceCream,
       },
       {
         id: 8,
@@ -438,23 +454,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '딸기딸기',
         price: 0,
-        src: beefBurger,
-      },
-      {
-        id: 9,
-        type: 'desert',
-        isSelected: false,
-        name: '토네이도 딸기',
-        price: 1000,
-        src: beefBurger,
-      },
-      {
-        id: 10,
-        type: 'desert',
-        isSelected: false,
-        name: '토네이도 쿠키',
-        price: 1000,
-        src: beefBurger,
+        src: strawberryIceCream,
       },
       {
         id: 11,
@@ -462,15 +462,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '치킨1조각',
         price: 800,
-        src: beefBurger,
-      },
-      {
-        id: 12,
-        type: 'desert',
-        isSelected: false,
-        name: '화이어링',
-        price: 1000,
-        src: beefBurger,
+        src: friedChecken,
       },
       {
         id: 13,
@@ -478,7 +470,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: 'F파이',
         price: 1000,
-        src: beefBurger,
+        src: chickenPie,
       },
       {
         id: 14,
@@ -486,35 +478,9 @@ export const sideMenuInformation = {
         isSelected: false,
         name: '핫F파이',
         price: 1500,
-        src: beefBurger,
-      }
+        src: chickenPie,
+      },
     ],
-    [
-      {
-        id: 15,
-        type: 'desert',
-        isSelected: false,
-        name: '휠렛치킨',
-        price: 1500,
-        src: beefBurger,
-      },
-      {
-        id: 16,
-        type: 'desert',
-        isSelected: false,
-        name: '바닐라아이스크림',
-        price: 300,
-        src: beefBurger,
-      },
-      {
-        id: 17,
-        type: 'desert',
-        isSelected: false,
-        name: '수박아이스크림',
-        price: 300,
-        src: beefBurger,
-      }
-    ]
   ],
 
   drink: [
@@ -525,7 +491,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "콜라",
         price: 0,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 16,
@@ -533,7 +499,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "사이다",
         price: 0,
-        src: beefBurger,
+        src: cider,
       },
       {
         id: 17,
@@ -541,7 +507,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "제로슈가콜라",
         price: 0,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 18,
@@ -549,7 +515,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "콜라(L.라지)",
         price: 200,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 19,
@@ -557,7 +523,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "사이다(L.라지)",
         price: 200,
-        src: beefBurger,
+        src: cider,
       },
       {
         id: 20,
@@ -565,7 +531,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "제로슈가콜라(L.라지)",
         price: 200,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 21,
@@ -573,7 +539,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "아메리카노",
         price: 300,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 22,
@@ -581,7 +547,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "아이스아메리카노",
         price: 300,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 23,
@@ -589,7 +555,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "아이스아메리카노(L.라지)",
         price: 800,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 24,
@@ -597,7 +563,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "카페라떼",
         price: 800,
-        src: beefBurger,
+        src: coke,
       },
       {
         id: 25,
@@ -605,7 +571,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "우유",
         price: 0,
-        src: beefBurger,
+        src: milk,
       },
       {
         id: 26,
@@ -613,7 +579,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "핫초코",
         price: 300,
-        src: beefBurger,
+        src: hotchoco,
       },
       {
         id: 27,
@@ -621,7 +587,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "오렌지쥬스",
         price: 800,
-        src: beefBurger,
+        src: orangeJuice,
       },
       {
         id: 28,
@@ -629,7 +595,7 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "레몬에이드",
         price: 800,
-        src: beefBurger,
+        src: lemonade,
       },
       {
         id: 29,
@@ -637,35 +603,9 @@ export const sideMenuInformation = {
         isSelected: false,
         name: "레몬에이드(L)",
         price: 1000,
-        src: beefBurger,
+        src: lemonade,
       }
     ],
-    [
-      {
-        id: 30,
-        type: 'drink',
-        isSelected: false,
-        name: "딸기라떼",
-        price: 0,
-        src: beefBurger,
-      },
-      {
-        id: 31,
-        type: 'drink',
-        isSelected: false,
-        name: "아이시스",
-        price: 0,
-        src: beefBurger,
-      },
-      {
-        id: 32,
-        type: 'drink',
-        isSelected: false,
-        name: "아이스티",
-        price: 0,
-        src: beefBurger,
-      }
-    ]
   ]
 }
 

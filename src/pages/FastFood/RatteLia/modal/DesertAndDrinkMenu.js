@@ -70,6 +70,7 @@ const MenuWrap = styled.div`
   
   & img {
     width: 65px;
+    height: 45px;
   }
 `;
 
