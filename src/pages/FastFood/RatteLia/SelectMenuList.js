@@ -22,7 +22,7 @@ const ItemWrap = styled.div`
   cursor: pointer;
   & img {
     width: 65px;
-    height: 100%;
+    height: 45px;
     margin-left: 5px;
   }
 `;
@@ -117,6 +117,7 @@ const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
   const totalPage = Math.ceil(totalCount / pageSize);
   const pageNumberList = '*'.repeat(totalPage).split("");
 
+  console.log('selectCategory', selectCategory)
   return (
     <CustomSlider {...settings} style={{overflow: 'hidden'}}>
       {pageNumberList.map((_, i) => (
