@@ -63,14 +63,14 @@ const RemoveButton = styled.button`
 
 const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
   const totalCount = orderList.reduce((acc, curr) => {
-    const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
+    const orderQuantity = curr.type === 'set' ? curr.setOrderCount : curr.orderCount;
     return acc + orderQuantity;
   }, 0);
   const totalPrice = convertCommaNumber(orderList.reduce((acc, curr) => {
-    const price = curr.type === 'single' ? curr.price : curr.setPrice;
-    const orderQuantity = curr.type === 'single' ? curr.orderCount : curr.setOrderCount;
-    return (acc + curr.sideMenuPrice + (price * orderQuantity));
-  }, 0))
+    const price = curr.type === 'set' ? curr.setPrice : curr.price;
+    const orderQuantity = curr.type === 'set' ? curr.setOrderCount : curr.orderCount;
+    return (acc + (price * orderQuantity));
+  }, 0));
 
   return (
     <Wrap>
@@ -84,15 +84,15 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
       </OrderPriceWrap>
       <MenuOrderHistoryWrap>
         {orderList.map((order, i) => {
-          const price = order.type === 'single' ? order.price : order.setPrice;
-          const orderQuantity = order.type === 'single' ? order.orderCount : order.setOrderCount;
+          const price = order.type === 'set' ? order.setPrice : order.price;
+          const orderQuantity = order.type === 'set' ? order.setOrderCount : order.orderCount;
           return (
             <OrderInfo key={i}>
               <strong style={{maxWidth: 90, width: 90}}>
-
-                {order.type === 'single'
-                  ? <span>{order.name}</span>
-                  : <strong>{order.name} 세트</strong>}
+                {order.type === 'set'
+                  ? <strong>{order.name} 세트</strong>
+                  : <span>{order.name}</span>
+                }
               </strong>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <DownButton onClick={() => onClickDecreaseOrder(order)}/>
