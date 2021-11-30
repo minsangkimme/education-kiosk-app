@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {CategoryInformation} from "./MenuInfo";
 import styled from 'styled-components';
 import Slider from 'react-slick';
@@ -110,16 +110,15 @@ export const settings = {
   prevArrow: <SamplePrevArrow />
 };
 
-const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
+const SelectMenuList = forwardRef(({selectCategory, onClickInspectMenuType}, ref) => {
   const pageSize = 8;
   const selectedCategory = CategoryInformation[selectCategory].flat();
   const totalCount = selectedCategory.length;
   const totalPage = Math.ceil(totalCount / pageSize);
   const pageNumberList = '*'.repeat(totalPage).split("");
 
-  console.log('selectCategory', selectCategory)
   return (
-    <CustomSlider {...settings} style={{overflow: 'hidden'}}>
+    <CustomSlider ref={ref} {...settings} style={{overflow: 'hidden'}}>
       {pageNumberList.map((_, i) => (
         <Wrap key={i}>
           {CategoryInformation[selectCategory][i].map((order) => {
@@ -143,6 +142,6 @@ const SelectMenuList = ({selectCategory, onClickInspectMenuType}) => {
       ))}
     </CustomSlider>
   )
-};
+});
 
 export default SelectMenuList;

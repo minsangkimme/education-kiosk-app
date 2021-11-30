@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import styled from "styled-components";
 import adSense from "../../../assets/images/adSense.png";
 import FooterNav from "../../../components/FooterNav";
@@ -49,9 +49,12 @@ const SelectMenuView = ({onClickNextStep}) => {
   const [openSelectAlarm, setOpenSelectAlarm] = useState(false); // 사이드 메뉴 선택 안하고 추가하기 누른 경우
   const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
+  const sliderRef = useRef(null);
   const handleChange = useCallback((event, newValue) => {
+    sliderRef.current.slickGoTo(0);
     setValue(newValue);
-    console.log(newValue);
+    console.log(sliderRef);
+
     switch (newValue) {
       case 0:
         return setSelectCategory('recommended');
@@ -320,6 +323,7 @@ const SelectMenuView = ({onClickNextStep}) => {
         <SelectMenuList
           selectCategory={selectCategory}
           onClickInspectMenuType={onClickInspectMenuType}
+          ref={sliderRef}
         />
         {/* 총 주문내역 */}
         <TotalOrderHistory
