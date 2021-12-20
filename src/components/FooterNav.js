@@ -44,8 +44,39 @@ const ItemWrap = styled.div`
     margin: 2px;
   }
 `;
+const OrderButton = styled.button`
+  margin: 5px;
+  padding: 7px;
+  background: ${(props) => props.color};
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 0px #c2c2c2;
+`
 const language = ['한국어', 'English', '日本語', '中國語'];
 
+const getShowButton = (showInfo) => {
+  switch (showInfo) {
+    case 'language' :
+      return (
+        <Ul>
+          {language.map((lang, i) => (
+            <li key={i}>
+              <strong>{lang}</strong>
+            </li>
+          ))}
+        </Ul>
+      );
+    case 'order' :
+      return (
+        <div>
+          <OrderButton color={'#f4f4f4'}>취소하기</OrderButton>
+          <OrderButton color={'#ffe7e7'}>결제하기</OrderButton>
+        </div>
+      )
+    default:
+      return null;
+  }
+}
 const FooterNav = ({goBackFunc, showInfo}) => {
 
   return (
@@ -81,15 +112,7 @@ const FooterNav = ({goBackFunc, showInfo}) => {
         </Ul>
       </ItemWrap>
       <ItemWrap>
-        { showInfo === 'language' &&
-          <Ul>
-            {language.map((lang, i) => (
-              <li key={i}>
-                <strong>{lang}</strong>
-              </li>
-            ))}
-          </Ul>
-        }
+        {/*{getShowButton(showInfo)}*/}
       </ItemWrap>
     </Nav>
   );

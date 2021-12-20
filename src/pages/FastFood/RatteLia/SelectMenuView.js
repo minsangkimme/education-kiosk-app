@@ -95,23 +95,24 @@ const SelectMenuView = ({onClickNextStep}) => {
       orders = orderList.map((v) => {
         if (v.id === menu.id && v.type === menu.type) {
           if (menu.type === 'single') {
-            v.orderCount += 1;
+            return {...v, orderCount: v.orderCount + 1};
           }
           if (menu.type === 'set') {
-            v.setOrderCount += 1;
+            return {...v, setOrderCount: v.setOrderCount + 1};
           }
         }
         return v;
       });
     } else {
+      const selectedItem = {...menu};
       // 없으면 추가 & 카운트 증가
-      if (menu.type === 'single') {
-        menu.orderCount += 1;
+      if (selectedItem.type === 'single') {
+        selectedItem.orderCount += 1;
       }
-      if (menu.type === 'set') {
-        menu.setOrderCount += 1;
+      if (selectedItem.type === 'set') {
+        selectedItem.setOrderCount += 1;
       }
-      orders = [...orderList, menu];
+      orders = [...orderList, selectedItem];
     }
 
     setOrderList(orders);
@@ -333,7 +334,7 @@ const SelectMenuView = ({onClickNextStep}) => {
           onClickRemoveOrder={onClickRemoveOrder}
         />
       </ContentLayout>
-      <FooterNav goBackFunc={() => onClickNextStep(2)}/>
+      <FooterNav showInfo="order" goBackFunc={() => onClickNextStep(2)}/>
       <ModalContainer {...modalContainerProps} />
     </Wrap>
   );
