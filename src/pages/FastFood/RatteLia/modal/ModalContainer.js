@@ -7,6 +7,7 @@ const ModalContainer = (modalContainerProps) => {
     sideMenuChoiceProps,
     alreadySelectedTypeAlarmProps,
     selectSideMenuAlarmProps,
+    orderCancelAlarmProps,
   } = modalContainerProps;
 
   return (
@@ -46,6 +47,15 @@ const ModalContainer = (modalContainerProps) => {
         backDrop={selectSideMenuAlarmProps.backDrop}
         bodyData={selectSideMenuAlarmProps.bodyData}
         setOpen={selectSideMenuAlarmProps.setOpen}
+      />
+      {/* 주문 취소 경우 */}
+      <CustomModal
+        title={orderCancelAlarmProps.title}
+        tBgColor={orderCancelAlarmProps.tBgColor}
+        open={orderCancelAlarmProps.open}
+        backDrop={orderCancelAlarmProps.backDrop}
+        bodyData={orderCancelAlarmProps.bodyData}
+        setOpen={orderCancelAlarmProps.setOpen}
       />
     </>
   );

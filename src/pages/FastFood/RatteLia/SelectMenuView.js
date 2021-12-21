@@ -17,6 +17,7 @@ import ModalContainer from "./modal/ModalContainer";
 import {modalData} from "./modal/CustomModalData";
 import SelectSideMenuAlarm from "./modal/SelectSideMenuAlarm";
 import {initSideMenuState, sideMenuInformation} from "./MenuInfo";
+import OrderCancel from "./modal/OrderCancel";
 
 const Wrap = styled.div`
    height: 100%;   
@@ -47,6 +48,7 @@ const SelectMenuView = ({onClickNextStep}) => {
   const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
   const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
   const [openSelectAlarm, setOpenSelectAlarm] = useState(false); // 사이드 메뉴 선택 안하고 추가하기 누른 경우
+  const [orderCancelAlarm, setOrderCancelAlarm] = useState(false); // 주문 취소하기
   const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const sliderRef = useRef(null);
@@ -214,6 +216,11 @@ const SelectMenuView = ({onClickNextStep}) => {
   // 사이드 메뉴 취소하기
   const onClickCancleMenu = useCallback(() => initSelectMenu(), []);
 
+  const handleCancel = () => {
+    setOrderCancelAlarm(false);
+    onClickNextStep(1);
+  }
+
   const menuTypeChoiceProps = {
     ...modalData.menuTypeChoiceInfo,
     open: openMenuType,
@@ -261,11 +268,23 @@ const SelectMenuView = ({onClickNextStep}) => {
     backDrop: openAlreadyAlarm,
   }
 
+  const orderCancelAlarmProps = {
+    ...modalData.alarmInfo,
+    open: orderCancelAlarm,
+    setOpen: setOrderCancelAlarm,
+    bodyData: <OrderCancel
+      setOrderCancelAlarm={setOrderCancelAlarm}
+      onClickCancle={handleCancel}
+    />,
+    backDrop: orderCancelAlarm,
+  }
+
   const modalContainerProps = {
     menuTypeChoiceProps,
     sideMenuChoiceProps,
     alreadySelectedTypeAlarmProps,
     selectSideMenuAlarmProps,
+    orderCancelAlarmProps,
   };
 
   const initSelectMenu = () => {
@@ -334,7 +353,11 @@ const SelectMenuView = ({onClickNextStep}) => {
           onClickRemoveOrder={onClickRemoveOrder}
         />
       </ContentLayout>
-      <FooterNav showInfo="order" goBackFunc={() => onClickNextStep(2)}/>
+      <FooterNav
+        showInfo="order"
+        goBackFunc={() => onClickNextStep(2)}
+        onClickCancle={() => setOrderCancelAlarm(true)}
+      />
       <ModalContainer {...modalContainerProps} />
     </Wrap>
   );

@@ -54,30 +54,30 @@ const OrderButton = styled.button`
 `
 const language = ['한국어', 'English', '日本語', '中國語'];
 
-const getShowButton = (showInfo) => {
-  switch (showInfo) {
-    case 'language' :
-      return (
-        <Ul>
-          {language.map((lang, i) => (
-            <li key={i}>
-              <strong>{lang}</strong>
-            </li>
-          ))}
-        </Ul>
-      );
-    case 'order' :
-      return (
-        <div>
-          <OrderButton color={'#f4f4f4'}>취소하기</OrderButton>
-          <OrderButton color={'#ffe7e7'}>결제하기</OrderButton>
-        </div>
-      )
-    default:
-      return null;
+const FooterNav = ({goBackFunc, showInfo, onClickCancle}) => {
+  const getShowButton = (showInfo) => {
+    switch (showInfo) {
+      case 'language' :
+        return (
+          <Ul>
+            {language.map((lang, i) => (
+              <li key={i}>
+                <strong>{lang}</strong>
+              </li>
+            ))}
+          </Ul>
+        );
+      case 'order' :
+        return (
+          <div>
+            <OrderButton color={'#f4f4f4'} onClick={onClickCancle}>취소하기</OrderButton>
+            <OrderButton color={'#ffe7e7'}>결제하기</OrderButton>
+          </div>
+        )
+      default:
+        return null;
+    }
   }
-}
-const FooterNav = ({goBackFunc, showInfo}) => {
 
   return (
     <Nav>
@@ -112,7 +112,7 @@ const FooterNav = ({goBackFunc, showInfo}) => {
         </Ul>
       </ItemWrap>
       <ItemWrap>
-        {/*{getShowButton(showInfo)}*/}
+        {getShowButton(showInfo)}
       </ItemWrap>
     </Nav>
   );
