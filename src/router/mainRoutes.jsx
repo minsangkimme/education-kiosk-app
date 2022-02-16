@@ -1,0 +1,20 @@
+import React from 'react';
+import {Redirect, Route, Switch} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import BrandContainer from "../pages/fastFood/brand/brandContainer";
+import MainMenuType from "../pages/main/mainMenuType";
+
+const MainRoutes = () => {
+  useLocation();
+
+  return (
+    <Switch>
+      <Redirect exact from="/main" to="/main/menuType"/>
+      <Route exact path="/main/menuType" component={MainMenuType} />
+      <Route exact path="/main/menuType/:id" component={MainMenuType} />
+      <Route exact path="/main/menuType/:id/:brand" component={BrandContainer} />
+    </Switch>
+  );
+};
+
+export default MainRoutes;
