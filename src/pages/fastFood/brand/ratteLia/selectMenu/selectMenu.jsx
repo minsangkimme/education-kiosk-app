@@ -105,7 +105,7 @@ const SelectMenu = ({onClickNextStep}) => {
   // 카운트 감소
   const onClickDecreaseOrder = useCallback((menu) => {
     const orders = orderList.filter((v) => {
-      if (v.id === menu.id && v.type === menu.type && (menu.orderCount > 1 || menu.setOrderCount > 1 )) {
+      if (v.id === menu.id && v.type === menu.type && (menu.orderCount > 1 || menu.setOrderCount > 1)) {
         if (menu.type === 'single') {
           v.orderCount -= 1;
         }
@@ -219,18 +219,19 @@ const SelectMenu = ({onClickNextStep}) => {
       initSelectMenu();
       setOpenDesert(close);
     },
-    bodyData: <DesertAndDrinkMenu
-      setSideMenuTab={setSideMenuTab}
-      sideMenuTab={sideMenuTab}
-      menu={selectedMenu}
-      openDesert={openDesert}
-      onClickAddSideMenu={onClickAddSideMenu}
-      onClickRemoveSideMenu={onClickRemoveSideMenu}
-      renderSideMenu={renderSideMenu}
-      setRenderSideMenu={setRenderSideMenu}
-      onClickSubmitMenu={onClickSubmitMenu}
-      onClickCancleMenu={onClickCancleMenu}
-    />,
+    bodyData:
+      <DesertAndDrinkMenu
+        setSideMenuTab={setSideMenuTab}
+        sideMenuTab={sideMenuTab}
+        menu={selectedMenu}
+        openDesert={openDesert}
+        onClickAddSideMenu={onClickAddSideMenu}
+        onClickRemoveSideMenu={onClickRemoveSideMenu}
+        renderSideMenu={renderSideMenu}
+        setRenderSideMenu={setRenderSideMenu}
+        onClickSubmitMenu={onClickSubmitMenu}
+        onClickCancleMenu={onClickCancleMenu}
+      />,
     backDrop: openDesert,
   };
 
@@ -246,18 +247,19 @@ const SelectMenu = ({onClickNextStep}) => {
     ...modalData.alarmInfo,
     open: openSelectAlarm,
     setOpen: setOpenSelectAlarm,
-    bodyData: <SelectSideMenuAlarm setOpenSelectAlarm={setOpenSelectAlarm}/>,
-    backDrop: openAlreadyAlarm,
+    bodyData: <SelectSideMenuAlarm setOpenSelectAlarm={setOpenSelectAlarm} />,
+    backDrop: openSelectAlarm,
   }
 
   const orderCancelAlarmProps = {
     ...modalData.alarmInfo,
     open: orderCancelAlarm,
     setOpen: setOrderCancelAlarm,
-    bodyData: <OrderCancel
-      setOrderCancelAlarm={setOrderCancelAlarm}
-      onClickCancle={handleCancel}
-    />,
+    bodyData:
+      <OrderCancel
+        setOrderCancelAlarm={setOrderCancelAlarm}
+        onClickCancle={handleCancel}
+      />,
     backDrop: orderCancelAlarm,
   }
 
