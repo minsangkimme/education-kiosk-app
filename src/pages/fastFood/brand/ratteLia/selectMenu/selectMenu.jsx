@@ -15,6 +15,7 @@ import SelectSideMenuAlarm from "../modal/selectSideMenuAlarm/selectSideMenuAlar
 import {initSideMenuState} from "../menuInfo";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import * as Styled from './styled';
+import MenuCategory from "../ratteLiaContainer/menuCategory";
 
 
 const SelectMenu = ({onClickNextStep}) => {
@@ -282,45 +283,13 @@ const SelectMenu = ({onClickNextStep}) => {
         <Styled.AdWrap>
           <img src={adSense} alt="배너광고"/>
         </Styled.AdWrap>
-        <Box sx={{flexGrow: 1, background: '#ffecdb'}}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons
-            aria-label="visible arrows tabs example"
-            sx={{
-              [`& .${tabsClasses.scrollButtons}`]: {
-                display: 'inline-flex',
-                '&.Mui-disabled': {opacity: 0.3},
-              },
-              [`& .${tabsClasses.indicator}`]: {
-                background: 'none'
-              }
-            }}
-          >
-            {menuCategory.map((v, i) => (
-              <Tab
-                key={i}
-                label={v}
-                value={i}
-                sx={{
-                  [`&.${tabClasses.selected}`]: {
-                    background: '#fff',
-                    mt: '3px',
-                    borderRadius: '5px 5px 0 0',
-                    color: '#000',
-                  },
-                  [`&.${tabClasses.root}`]: {
-                    minWidth: 75,
-                    padding: '12px 5px'
-                  },
-                  fontWeight: 'bold',
-                }}
-              />
-            ))}
-          </Tabs>
-        </Box>
+        {/* 메뉴 카테고리 */}
+        <MenuCategory
+          value={value}
+          handleChange={handleChange}
+          menuCategory={menuCategory}
+        />
+        {/* 메뉴 리스트 */}
         <SelectMenuList
           selectCategory={selectCategory}
           onClickInspectMenuType={onClickInspectMenuType}
