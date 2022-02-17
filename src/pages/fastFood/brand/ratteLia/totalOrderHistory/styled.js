@@ -5,7 +5,7 @@ export const Wrap = styled.div`
   max-width: 28rem;
   position: fixed;
   bottom: 95px;
-  height: 120px;
+  height: 170px;
   background-color: #fff;
 `;
 
