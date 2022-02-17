@@ -7,7 +7,7 @@ import * as Styled from './styled';
 
 const language = ['한국어', 'English', '日本語', '中國語'];
 
-const FooterNav = ({goBackFunc, showInfo, onClickCancle}) => {
+const FooterNav = ({goBackFunc, showInfo, onClickCancle, goToNext}) => {
   const getShowButton = (showInfo) => {
     switch (showInfo) {
       case 'language' :
@@ -24,7 +24,14 @@ const FooterNav = ({goBackFunc, showInfo, onClickCancle}) => {
         return (
           <div>
             <Styled.OrderButton color={'#f4f4f4'} onClick={onClickCancle}>취소하기</Styled.OrderButton>
-            <Styled.OrderButton color={'#ffe7e7'}>결제하기</Styled.OrderButton>
+            <Styled.OrderButton color={'#ffe7e7'} onClick={goToNext}>결제하기</Styled.OrderButton>
+          </div>
+        )
+      case 'payment' :
+        return (
+          <div>
+            <Styled.OrderButton color={'#f4f4f4'} onClick={onClickCancle}>결제취소</Styled.OrderButton>
+            <Styled.OrderButton color={'#ffe7e7'} onClick={goToNext}>추가주문</Styled.OrderButton>
           </div>
         )
       default:

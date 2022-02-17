@@ -309,6 +309,7 @@ const SelectMenu = ({onClickNextStep}) => {
         showInfo="order"
         goBackFunc={() => onClickNextStep(2)}
         onClickCancle={() => setOrderCancelAlarm(true)}
+        goToNext={() => onClickNextStep(4)}
       />
       <ModalContainer {...modalContainerProps} />
     </Styled.Wrap>
