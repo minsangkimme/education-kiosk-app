@@ -12,22 +12,69 @@ const OrderPayment = ({onClickNextStep}) => {
       <Styled.ContentWrap>
         {/* 주문 내역 */}
         <Styled.OrderList>
-          <Styled.Table>
-            <thead>
+          <Styled.TableWrap>
+            <Styled.Table>
+              <thead>
               <Styled.Tr>
                 <Styled.Th>제품</Styled.Th>
                 <Styled.Th>수량</Styled.Th>
                 <Styled.Th>금액</Styled.Th>
               </Styled.Tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               <Styled.Tr>
                 <Styled.Td>사이다 (S.스몰)</Styled.Td>
                 <Styled.Td>1</Styled.Td>
                 <Styled.Td>1,000</Styled.Td>
               </Styled.Tr>
-            </tbody>
-          </Styled.Table>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              <Styled.Tr>
+                <Styled.Td>사이다 (S.스몰)</Styled.Td>
+                <Styled.Td>1</Styled.Td>
+                <Styled.Td>1,000</Styled.Td>
+              </Styled.Tr>
+              </tbody>
+            </Styled.Table>
+          </Styled.TableWrap>
         </Styled.OrderList>
 
         {/* 결제 옵션 */}
@@ -37,7 +84,8 @@ const OrderPayment = ({onClickNextStep}) => {
       <FooterNav
         showInfo="payment"
         goBackFunc={() => onClickNextStep(3)}
-        onClickCancle={() => {}}
+        onClickCancle={() => {
+        }}
         goToNext={() => onClickNextStep(4)}
       />
     </Styled.Wrap>
