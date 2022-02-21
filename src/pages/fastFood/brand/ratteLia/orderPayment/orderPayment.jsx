@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import * as Styled from './styled';
 import adSense from "../../../../../assets/images/adSense.png";
 import FooterNav from "../../../../../components/footer/footerNav";
+import {convertCommaNumber} from "../../../../../utils/comma";
 
-const OrderPayment = ({onClickNextStep}) => {
+const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
+  const sliderRef = useRef(null);
+  console.log(orderList)
   return (
     <Styled.Wrap>
       <Styled.AdWrap>
@@ -12,7 +15,6 @@ const OrderPayment = ({onClickNextStep}) => {
       <Styled.ContentWrap>
         {/* 주문 내역 */}
         <Styled.OrderList>
-          <Styled.TableWrap>
             <Styled.Table>
               <thead>
               <Styled.Tr>
@@ -22,59 +24,24 @@ const OrderPayment = ({onClickNextStep}) => {
               </Styled.Tr>
               </thead>
               <tbody>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
-              <Styled.Tr>
-                <Styled.Td>사이다 (S.스몰)</Styled.Td>
-                <Styled.Td>1</Styled.Td>
-                <Styled.Td>1,000</Styled.Td>
-              </Styled.Tr>
+              {orderList.map(order => (
+                <Styled.Tr key={order.id}>
+                  <Styled.Td>
+                    {order.name}
+                  </Styled.Td>
+                  <Styled.Td>
+                    {order.orderCount || order.setOrderCount}
+                  </Styled.Td>
+                  <Styled.Td>
+                    {order.type === 'single'
+                      ? convertCommaNumber(order.price)
+                      : convertCommaNumber(order.setPrice)
+                    }
+                  </Styled.Td>
+                </Styled.Tr>
+              ))}
               </tbody>
             </Styled.Table>
-          </Styled.TableWrap>
         </Styled.OrderList>
 
         {/* 결제 옵션 */}

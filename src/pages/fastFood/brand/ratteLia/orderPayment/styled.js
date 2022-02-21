@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Slider from "react-slick";
+import React from "react";
 
 export const Wrap = styled.div`
    height: 100%;   
@@ -30,10 +32,6 @@ export const PaymentOption = styled.div`
   height: 100%;
   box-shadow: 0 0 3px 1px rgb(255 0 0);
   background: rebeccapurple;
-`
-export const TableWrap = styled.div`
-  height: 50%;
-  overflow-y: auto;
 `;
 
 export const Table = styled.table`
@@ -53,5 +51,79 @@ export const Th = styled.th`
 export const Td = styled.td`
   font-size: 12px;
   font-weight: bold;
-  padding: 10px 0;
 `;
+
+export const CustomSlider = styled(Slider)`
+  .slick-dots {
+      bottom: 180px;
+  }
+  .slick-dots li button:before {
+    font-size: 12px;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #e22137;
+  }
+  .slick-prev {
+    left: 0;
+    top: 25%;
+    z-index: 1;
+    display: flex;
+    background: #aaa;
+    font-size: 16px;
+    width: 25px;
+    height: 100px;
+    align-items: center;
+    text-align: center;
+    border-radius: 0 15px 15px 0;
+  }
+  .slick-next {
+    right: 0;
+    top: 25%;
+    display: flex;
+    background: #aaa;
+    font-size: 16px;
+    width: 25px;
+    height: 100px;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px 0 0 15px;
+  }
+  .slick-prev:before {
+    content: '이전';
+    font-size: 16px; 
+  }
+  .slick-next:before {
+    content: '다음';
+    font-size: 16px; 
+  }
+`;
+
+function SampleNextArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <div
+      className={className}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <div
+      className={className}
+      onClick={onClick}
+    />
+  );
+}
+
+export const settings = {
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />
+};

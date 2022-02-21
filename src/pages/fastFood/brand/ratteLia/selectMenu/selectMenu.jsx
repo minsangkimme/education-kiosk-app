@@ -18,10 +18,9 @@ import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
 
 
-const SelectMenu = ({onClickNextStep}) => {
+const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
   const [value, setValue] = React.useState(0);
   const [selectCategory, setSelectCategory] = React.useState('recommended'); // recommended | hamburger | desert | drink | event
-  const [orderList, setOrderList] = useState([]); // 주문 내역
   const [selectedMenu, setSelectedMenu] = useState({}); // 선택한 메뉴
   const [choiceMenuType, setChoiceMenuType] = useState(''); // 버거 단품, 셋트 타입
   const [openMenuType, setOpenMenuType] = useState(false); // 단품,세트 모달

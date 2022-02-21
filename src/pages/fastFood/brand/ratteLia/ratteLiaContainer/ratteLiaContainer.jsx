@@ -10,6 +10,7 @@ const RatteLiaContainer = () => {
   const history = useHistory();
   const {pathname} = history.location;
   const [step, setStep] = useState(1);
+  const [orderList, setOrderList] = useState([]); // 주문 내역
   const onClickNextStep = useCallback((step) => {
     history.push(`${pathname}?step=${step}`);
     playAudio().then(() => setStep(step))
@@ -23,10 +24,10 @@ const RatteLiaContainer = () => {
       return <SelectPayWayView onClickNextStep={onClickNextStep} />
 
     case 3:
-      return <SelectMenu onClickNextStep={onClickNextStep} />
+      return <SelectMenu onClickNextStep={onClickNextStep} orderList={orderList} setOrderList={setOrderList} />
 
     case 4:
-      return <OrderPayment onClickNextStep={onClickNextStep} />
+      return <OrderPayment onClickNextStep={onClickNextStep} orderList={orderList} setOrderList={setOrderList} />
 
     default:
       break;
