@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Slider from "react-slick";
 import React from "react";
 
 export const Wrap = styled.div`
@@ -22,16 +21,17 @@ export const AdWrap = styled.div`
 `;
 
 export const OrderList = styled.div`
-  width: 50%;
+  flex-basis: 50%;
   height: 100%;
   background: #fff;
+  padding: 0 5px;
 `;
 
 export const PaymentOption = styled.div`
   width: 50%;
   height: 100%;
   box-shadow: 0 0 3px 1px rgb(255 0 0);
-  background: rebeccapurple;
+  background: #fff;
 `;
 
 export const Table = styled.table`
@@ -49,81 +49,60 @@ export const Th = styled.th`
 `;
 
 export const Td = styled.td`
+  height: 21.84px;
   font-size: 12px;
   font-weight: bold;
 `;
 
-export const CustomSlider = styled(Slider)`
-  .slick-dots {
-      bottom: 180px;
-  }
-  .slick-dots li button:before {
-    font-size: 12px;
-  }
-  .slick-dots li.slick-active button:before {
-    color: #e22137;
-  }
-  .slick-prev {
-    left: 0;
-    top: 25%;
-    z-index: 1;
-    display: flex;
-    background: #aaa;
-    font-size: 16px;
-    width: 25px;
-    height: 100px;
-    align-items: center;
-    text-align: center;
-    border-radius: 0 15px 15px 0;
-  }
-  .slick-next {
-    right: 0;
-    top: 25%;
-    display: flex;
-    background: #aaa;
-    font-size: 16px;
-    width: 25px;
-    height: 100px;
-    align-items: center;
-    text-align: center;
-    border-radius: 15px 0 0 15px;
-  }
-  .slick-prev:before {
-    content: '이전';
-    font-size: 16px; 
-  }
-  .slick-next:before {
-    content: '다음';
-    font-size: 16px; 
-  }
+export const InfoWrap = styled.div`
+  margin-top: 3.15rem;  
 `;
 
-function SampleNextArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div
-      className={className}
-      onClick={onClick}
-    />
-  );
-}
+export const InfoRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #d9d5d5;
+  padding: 0 5px;
+`;
 
-function SamplePrevArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div
-      className={className}
-      onClick={onClick}
-    />
-  );
-}
+export const InfoData  = styled.div`
+  height: 21.84px;
+  font-weight: bold;  
+`;
 
-export const settings = {
-  dots: true,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />
-};
+export const Pay = styled.td`
+  font-size: 1.25rem;
+  font-weight: bold;
+  height: 21.84px;
+`;
+
+export const TotalPay = styled.td`
+  font-size: 1.25rem;
+  font-weight: bold;
+  height: 21.84px;
+  color: #e22137;
+`;
+
+export const OptionWrap = styled.div`
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const StepWrap = styled.div`
+  width: 100%;
+`;
+
+export const StepTitle = styled.div`
+  background-color: #9c1919;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-align: center;
+  height: 42.72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
