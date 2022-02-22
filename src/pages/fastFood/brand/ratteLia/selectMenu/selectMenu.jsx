@@ -13,7 +13,6 @@ import {initSideMenuState} from "../menuInfo";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
-import BannerAdSense from "../../../../../components/adSense/adSense";
 
 
 const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
