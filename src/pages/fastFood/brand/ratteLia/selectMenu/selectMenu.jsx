@@ -281,7 +281,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
       <Styled.ContentLayout>
         <Styled.AdWrap>
           <img src={adSense} alt="배너광고"/>
-          <BannerAdSense />
+          {/*<BannerAdSense />*/}
         </Styled.AdWrap>
         {/* 메뉴 카테고리 */}
         <MenuCategory
