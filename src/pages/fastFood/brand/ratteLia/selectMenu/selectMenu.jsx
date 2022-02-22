@@ -1,9 +1,6 @@
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import adSense from "../../../../../assets/images/adSense.png";
 import FooterNav from "../../../../../components/footer/footerNav";
-import Box from '@mui/material/Box';
-import Tabs, {tabsClasses} from '@mui/material/Tabs';
-import Tab, {tabClasses} from '@mui/material/Tab';
 import SelectMenuList from "../selectMenuList/selectMenuList";
 import TotalOrderHistory from "../totalOrderHistory/totalOrderHistory";
 import SingleOrSetMenu from "../modal/singleOrSetMenu/singleOrSetMenu";
@@ -16,6 +13,7 @@ import {initSideMenuState} from "../menuInfo";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
+import BannerAdSense from "../../../../../components/adSense/adSense";
 
 
 const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
@@ -283,6 +281,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
       <Styled.ContentLayout>
         <Styled.AdWrap>
           <img src={adSense} alt="배너광고"/>
+          <BannerAdSense />
         </Styled.AdWrap>
         {/* 메뉴 카테고리 */}
         <MenuCategory

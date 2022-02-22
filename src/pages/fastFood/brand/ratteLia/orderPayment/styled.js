@@ -72,15 +72,13 @@ export const InfoData  = styled.div`
 `;
 
 export const Pay = styled.td`
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: bold;
-  height: 21.84px;
 `;
 
 export const TotalPay = styled.td`
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: bold;
-  height: 21.84px;
   color: #e22137;
 `;
 
