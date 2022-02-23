@@ -94,13 +94,64 @@ export const StepWrap = styled.div`
 `;
 
 export const StepTitle = styled.div`
-  background-color: #9c1919;
-  color: #fff;
+  background-color: #e5e5e5;
+  color: #bbb;
   font-weight: bold;
   font-size: 0.85rem;
   text-align: center;
   height: 42.72px;
   display: flex;
   align-items: center;
+  justify-content: center;  
+  &.active {
+    background-color: #9c1919;
+    color: #fff;
+  }
+`;
+
+export const Ul = styled.ul`
+  display: flex;
+  align-items: center;
+  list-style: none;
   justify-content: center;
+  margin: 0;
+  padding: 0;
+  opacity: 0.3;
+  user-select: none;
+  &.active {
+    opacity: 1;
+    user-select: unset;
+  }
+`;
+
+export const ImageWrap = styled.div`
+  width: 25px;
+  margin: 0 auto 7px;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const ListItem = styled.li`
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  height: 6.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  padding: 0 5px;
+  &:last-child {
+    border-right: 0;
+  }
+  @media screen and (min-width: 380px) {
+    height: 8rem;
+  }
+`;
+
+export const WordWrap = styled.div`
+  text-align: center;
+  font-weight: bold;
 `;
