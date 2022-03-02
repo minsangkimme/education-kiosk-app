@@ -126,11 +126,19 @@ export const Ul = styled.ul`
 
 export const ImageWrap = styled.div`
   width: 25px;
+  height: 25px;
   margin: 0 auto 7px;
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  
+  & img.checked {
+    position: relative;
+    right: 10px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
