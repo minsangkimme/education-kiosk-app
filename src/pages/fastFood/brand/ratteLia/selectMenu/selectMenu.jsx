@@ -196,6 +196,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
 
   const handleCancel = () => {
     setOrderCancelAlarm(false);
+    setOrderList([]);
     onClickNextStep(1);
   }
 

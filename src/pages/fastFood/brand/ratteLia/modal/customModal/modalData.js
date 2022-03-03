@@ -10,5 +10,9 @@ export const modalData = {
   alarmInfo: {
     title: '알림',
     tBgColor: '#d3f3bd',
+  },
+  receiptInfo: {
+    title: '영수증을 발행 하시겠습니까?',
+    tBgColor: '#bae7ff',
   }
 }
