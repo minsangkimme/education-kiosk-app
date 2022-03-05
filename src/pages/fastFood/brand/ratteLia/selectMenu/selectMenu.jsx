@@ -13,6 +13,7 @@ import {initSideMenuState} from "../menuInfo";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
+import CustomModal from "../modal/customModal/customModal";
 
 
 const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
@@ -27,6 +28,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
   const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
   const [openSelectAlarm, setOpenSelectAlarm] = useState(false); // 사이드 메뉴 선택 안하고 추가하기 누른 경우
   const [orderCancelAlarm, setOrderCancelAlarm] = useState(false); // 주문 취소하기
+  const [selectMenuAlarm, setSelectMenuAlarm] = useState(false); // 메뉴 선택 알림
   const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
   const menuCategory = ["추천메뉴", "햄버거", "디저트/치킨", "음료/커피", "행사메뉴"];
   const sliderRef = useRef(null);
@@ -244,7 +246,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
     ...modalData.alarmInfo,
     open: openSelectAlarm,
     setOpen: setOpenSelectAlarm,
-    bodyData: <SelectSideMenuAlarm setOpenSelectAlarm={setOpenSelectAlarm} />,
+    bodyData: <SelectSideMenuAlarm setOpenSelectAlarm={setOpenSelectAlarm}/>,
     backDrop: openSelectAlarm,
   }
 
@@ -260,13 +262,13 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
     backDrop: orderCancelAlarm,
   }
 
-  const modalContainerProps = {
-    menuTypeChoiceProps,
-    sideMenuChoiceProps,
-    alreadySelectedTypeAlarmProps,
-    selectSideMenuAlarmProps,
-    orderCancelAlarmProps,
-  };
+  const selectMenuAlarmProps = {
+    ...modalData.alarmInfo,
+    open: selectMenuAlarm,
+    setOpen: setSelectMenuAlarm,
+    bodyData: <h2 style={{padding: 50, fontWeight: 'bold'}}>메뉴를 선택해주세요.</h2>,
+    backDrop: selectMenuAlarm,
+  }
 
   const initSelectMenu = () => {
     setChoiceMenuType('');
@@ -274,6 +276,12 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
     initSideMenuState();
     setSelectedMenu({});
     setOpenDesert(false);
+  }
+
+  const onClickPay = () => {
+    orderList.length > 0
+      ? onClickNextStep(4)
+      : setSelectMenuAlarm(true);
   }
 
   return (
@@ -307,9 +315,62 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList}) => {
         showInfo="order"
         goBackFunc={() => onClickNextStep(2)}
         onClickCancle={() => setOrderCancelAlarm(true)}
-        goToNext={() => onClickNextStep(4)}
+        goToNext={onClickPay}
       />
-      <ModalContainer {...modalContainerProps} />
+      {/* 메뉴 타입 모달 */}
+      <CustomModal
+        title={menuTypeChoiceProps.title}
+        tBgColor={menuTypeChoiceProps.tBgColor}
+        open={menuTypeChoiceProps.open}
+        backDrop={menuTypeChoiceProps.backDrop}
+        bodyData={menuTypeChoiceProps.bodyData}
+        setOpen={menuTypeChoiceProps.setOpen}
+      />
+      {/* 디저트 선택 모달 */}
+      <CustomModal
+        title={sideMenuChoiceProps.title}
+        tBgColor={sideMenuChoiceProps.tBgColor}
+        open={sideMenuChoiceProps.open}
+        backDrop={sideMenuChoiceProps.backDrop}
+        bodyData={sideMenuChoiceProps.bodyData}
+        setOpen={sideMenuChoiceProps.setOpen}
+      />
+      {/* 이미 선택된 타입의 사이드 메뉴 경우 모달  */}
+      <CustomModal
+        title={alreadySelectedTypeAlarmProps.title}
+        tBgColor={alreadySelectedTypeAlarmProps.tBgColor}
+        open={alreadySelectedTypeAlarmProps.open}
+        backDrop={alreadySelectedTypeAlarmProps.backDrop}
+        bodyData={alreadySelectedTypeAlarmProps.bodyData}
+        setOpen={alreadySelectedTypeAlarmProps.setOpen}
+      />
+      {/* 사이드 메뉴의 잔량이 남아있을 때 추가하기 버튼을 누른 경우 */}
+      <CustomModal
+        title={selectSideMenuAlarmProps.title}
+        tBgColor={selectSideMenuAlarmProps.tBgColor}
+        open={selectSideMenuAlarmProps.open}
+        backDrop={selectSideMenuAlarmProps.backDrop}
+        bodyData={selectSideMenuAlarmProps.bodyData}
+        setOpen={selectSideMenuAlarmProps.setOpen}
+      />
+      {/* 주문 취소 경우 */}
+      <CustomModal
+        title={orderCancelAlarmProps.title}
+        tBgColor={orderCancelAlarmProps.tBgColor}
+        open={orderCancelAlarmProps.open}
+        backDrop={orderCancelAlarmProps.backDrop}
+        bodyData={orderCancelAlarmProps.bodyData}
+        setOpen={orderCancelAlarmProps.setOpen}
+      />
+      {/* 메뉴 선택 없이 결제하기 눌렀을 때 */}
+      <CustomModal
+        title={selectMenuAlarmProps.title}
+        tBgColor={selectMenuAlarmProps.tBgColor}
+        open={selectMenuAlarmProps.open}
+        backDrop={selectMenuAlarmProps.backDrop}
+        bodyData={selectMenuAlarmProps.bodyData}
+        setOpen={selectMenuAlarmProps.setOpen}
+      />
     </Styled.Wrap>
   );
 };

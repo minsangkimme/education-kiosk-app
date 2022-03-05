@@ -9,61 +9,65 @@ import {modalData} from "../modal/customModal/modalData";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import CustomModal from "../modal/customModal/customModal";
 import ReceiptModal from "../modal/receiptModal/receiptModal";
+import RecyclePaperModal from "../modal/recyclePaperModal/recyclePaperModal";
+import {playAudio} from "../../../../../utils/playAudio";
 
 const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
   const [currPayStep, setCurrPayStep] = useState("step1");
   const [orderCancelAlarm, setOrderCancelAlarm] = useState(false); // 주문 취소하기
-  const [receiptAlarm, setReceiptAlarm] = useState(true); // 영수증 알람
+  const [receiptAlarm, setReceiptAlarm] = useState(false); // 영수증 알람
+  const [recyclePaperAlarm, setRecyclePaperAlarm] = useState(false); // 종이백 알람
   const [payOption, setPayOption] = useState({
     step1: {
-      one: false,
-      two: false,
+      1: false,
+      2: false,
     },
     step2: {
-      one: false,
-      two: false,
-      three: false,
+      3: false,
+      4: false,
+      5: false,
     },
     step3: {
-      one: false,
-      two: false,
-      three: false,
+      6: false,
+      7: false,
+      8: false,
     },
   });
 
-  const onClickCheckOption = useCallback((step, option) => {
-    // 현재 스텝이 맞지 않을 때는 리턴.
-    if (currPayStep !== step) {
-      return null;
+  const onClickCheckOption = useCallback(async (step, option) => {
+    await playAudio();
+
+    if (step === 'step1' && option === 1) {
+      setRecyclePaperAlarm(() => true);
     }
 
-    // check remove option
+    // remove check
     setPayOption(payOption => ({
       ...payOption,
-      [currPayStep]: {
-        ...initOptionStatus(currPayStep)
+      [step]: {
+        ...initOptionStatus(step)
       }
     }));
 
-    // check option
+    // check
     setPayOption(payOption => ({
       ...payOption,
-      [currPayStep]: {
-        ...payOption[currPayStep],
-        [option]: !payOption[currPayStep][option]
+      [step]: {
+        ...payOption[step],
+        [option]: !payOption[step][option]
       }
     }));
 
     setCurrPayStep(prevStep => {
-      switch (prevStep) {
+      switch (step) {
         case 'step1':
           return 'step2';
         case 'step2':
           return 'step3';
         case 'step3':
-          return;
+          return setReceiptAlarm(true);
         default :
-          return new Error(`not supported step ${prevStep}`);
+          return new Error(`not supported step ${step}`);
       }
     });
   }, [currPayStep]);
@@ -115,8 +119,18 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
     ...modalData.receiptInfo,
     open: receiptAlarm,
     setOpen: setReceiptAlarm,
-    bodyData: <ReceiptModal />,
+    bodyData: <ReceiptModal/>,
     backDrop: receiptAlarm,
+  }
+
+  const recyclePaperAlarmProps = {
+    ...modalData.recyclePaperInfo,
+    open: recyclePaperAlarm,
+    setOpen: setRecyclePaperAlarm,
+    bodyData: <RecyclePaperModal
+      onClickButton={() => setRecyclePaperAlarm(false)}
+    />,
+    backDrop: recyclePaperAlarm,
   }
 
   return (
@@ -126,7 +140,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
       </Styled.AdWrap>
       <Styled.ContentWrap>
         {/* 주문 내역 */}
-        <OrderList orderList={orderList} />
+        <OrderList orderList={orderList}/>
 
         {/* 결제 옵션 */}
         <PayOption
@@ -141,6 +155,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
         onClickCancle={() => setOrderCancelAlarm(true)}
         goToNext={() => onClickNextStep(3)}
       />
+      {/* 취소 모달 */}
       <CustomModal
         title={orderCancelAlarmProps.title}
         tBgColor={orderCancelAlarmProps.tBgColor}
@@ -149,6 +164,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
         bodyData={orderCancelAlarmProps.bodyData}
         setOpen={orderCancelAlarmProps.setOpen}
       />
+      {/* 영수증 모달 */}
       <CustomModal
         title={receiptAlarmProps.title}
         tBgColor={receiptAlarmProps.tBgColor}
@@ -156,6 +172,15 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
         backDrop={receiptAlarmProps.backDrop}
         bodyData={receiptAlarmProps.bodyData}
         setOpen={receiptAlarmProps.setOpen}
+      />
+      {/* 종이백 모달 */}
+      <CustomModal
+        title={recyclePaperAlarmProps.title}
+        tBgColor={recyclePaperAlarmProps.tBgColor}
+        open={recyclePaperAlarmProps.open}
+        backDrop={recyclePaperAlarmProps.backDrop}
+        bodyData={recyclePaperAlarmProps.bodyData}
+        setOpen={recyclePaperAlarmProps.setOpen}
       />
     </Styled.Wrap>
   );

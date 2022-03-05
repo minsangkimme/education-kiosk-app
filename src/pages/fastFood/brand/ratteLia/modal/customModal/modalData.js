@@ -14,5 +14,9 @@ export const modalData = {
   receiptInfo: {
     title: '영수증을 발행 하시겠습니까?',
     tBgColor: '#bae7ff',
-  }
+  },
+  recyclePaperInfo: {
+    title:<div>종이쇼핑백을 구매하시겠습니까? <br/> (자원재활용법 개정에 따른 종이백 판매)</div>,
+    tBgColor: '#d3f3bd',
+  },
 }

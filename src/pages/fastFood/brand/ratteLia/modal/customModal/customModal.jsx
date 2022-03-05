@@ -12,7 +12,7 @@ const CustomModal = ({open, title, tBgColor, backDrop, bodyData, setOpen}) => {
         </Styled.TitleWrap>
         {bodyData}
       </Styled.Wrap>
-      <Styled.ModalBackDrop open={backDrop} />
+      <Styled.ModalBackDrop open={backDrop} onClick={() => setOpen(false)} />
     </>
   );
 };

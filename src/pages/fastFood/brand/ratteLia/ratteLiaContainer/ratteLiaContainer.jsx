@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import RatteLiaInit from "../ratteLiaInit/ratteLiaInit";
 import SelectPayWayView from "../selectPayWay/selectPayWayView";
 import {playAudio} from "../../../../../utils/playAudio";
@@ -12,9 +12,10 @@ const RatteLiaContainer = () => {
   const [step, setStep] = useState(1);
   const [orderList, setOrderList] = useState([]); // 주문 내역
   const onClickNextStep = useCallback((step) => {
+    setStep(step);
     history.push(`${pathname}?step=${step}`);
-    playAudio().then(() => setStep(step))
   }, [step]);
+  useEffect( async () =>  await playAudio());
 
   switch (step) {
     case 1:
