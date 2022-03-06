@@ -5,6 +5,7 @@ import {playAudio} from "../../../../../utils/playAudio";
 import {useHistory} from "react-router";
 import SelectMenu from "../selectMenu/selectMenu";
 import OrderPayment from "../orderPayment/orderPayment";
+import PaymentSuccess from "../paymentSuccess/paymentSuccess";
 
 const RatteLiaContainer = () => {
   const history = useHistory();
@@ -29,6 +30,9 @@ const RatteLiaContainer = () => {
 
     case 4:
       return <OrderPayment onClickNextStep={onClickNextStep} orderList={orderList} setOrderList={setOrderList} />
+
+    case 5:
+      return <PaymentSuccess setOrderList={setOrderList} />
 
     default:
       break;

@@ -119,7 +119,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
     ...modalData.receiptInfo,
     open: receiptAlarm,
     setOpen: setReceiptAlarm,
-    bodyData: <ReceiptModal/>,
+    bodyData: <ReceiptModal onClickNextStep={() => onClickNextStep(5)} />,
     backDrop: receiptAlarm,
   }
 

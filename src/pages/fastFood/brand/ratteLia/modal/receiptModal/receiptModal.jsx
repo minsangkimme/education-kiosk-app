@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './receipt.module.css';
 import receipt from '../../../../../../assets/images/receipt.png';
 
-const ReceiptModal = () => {
+const ReceiptModal = ({onClickNextStep}) => {
   return (
     <section className={styles.receipt}>
       <div className={styles.infoWrap}>
@@ -17,8 +17,8 @@ const ReceiptModal = () => {
       </div>
       <span className={styles.text}>미발행 선택 시 대기번호만 출력</span>
       <div className={styles.buttonWrap}>
-        <button className={styles.receiptPrint}>영수증 발행</button>
-        <button className={styles.receiptPrint}>대기번호 발행<br/> (영수증 미발행)</button>
+        <button onClick={onClickNextStep} className={styles.receiptPrint}>영수증 발행</button>
+        <button onClick={onClickNextStep} className={styles.receiptPrint}>대기번호 발행<br/> (영수증 미발행)</button>
       </div>
     </section>
   );
