@@ -1,13 +1,40 @@
-import React from 'react';
+import React, {forwardRef, useCallback} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-const MenuCategory = ({value, handleChange, menuCategory}) => {
+const tabLabels = [
+  {
+    value: 'recommended',
+    label: '추천메뉴'
+  },
+  {
+    value: 'hamburger',
+    label: '햄버거'
+  },
+  {
+    value: 'desert',
+    label: '디저트/치킨'
+  },
+  {
+    value: 'drink',
+    label: '음료/커피'
+  },
+  {
+    value: 'event',
+    label: '행사메뉴'
+  },
+];
+
+const MenuCategory = ({menuService, setSelectCategory}) => {
+  const handleChange = useCallback((event, newValue) => {
+    menuService.setCategory(newValue, setSelectCategory);
+  }, [setSelectCategory, menuService]);
+
   return (
     <Box sx={{flexGrow: 1, background: '#ffecdb'}}>
       <Tabs
-        value={value}
+        value={menuService.category}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons
@@ -22,11 +49,11 @@ const MenuCategory = ({value, handleChange, menuCategory}) => {
           }
         }}
       >
-        {menuCategory.map((v, i) => (
+        {tabLabels.map((tab, i) => (
           <Tab
             key={i}
-            label={v}
-            value={i}
+            label={tab.label}
+            value={tab.value}
             sx={{
               [`&.${tabClasses.selected}`]: {
                 background: '#fff',

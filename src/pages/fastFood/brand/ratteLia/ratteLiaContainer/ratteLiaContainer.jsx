@@ -6,7 +6,9 @@ import {useHistory} from "react-router";
 import SelectMenu from "../selectMenu/selectMenu";
 import OrderPayment from "../orderPayment/orderPayment";
 import PaymentSuccess from "../paymentSuccess/paymentSuccess";
+import MenuService from "../../../../../service/ratteLia/menuService";
 
+const menuService = new MenuService();
 const RatteLiaContainer = () => {
   const history = useHistory();
   const {pathname} = history.location;
@@ -26,7 +28,14 @@ const RatteLiaContainer = () => {
       return <SelectPayWayView onClickNextStep={onClickNextStep} />
 
     case 3:
-      return <SelectMenu onClickNextStep={onClickNextStep} orderList={orderList} setOrderList={setOrderList} />
+      return (
+        <SelectMenu
+          onClickNextStep={onClickNextStep}
+          orderList={orderList}
+          setOrderList={setOrderList}
+          menuService={menuService}
+        />
+      )
 
     case 4:
       return <OrderPayment onClickNextStep={onClickNextStep} orderList={orderList} setOrderList={setOrderList} />

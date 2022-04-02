@@ -4,7 +4,7 @@ import {convertCommaNumber} from "../../../../../utils/comma";
 import * as Styled from './styled';
 
 
-const SelectMenuList = forwardRef(({selectCategory, onClickInspectMenuType}, ref) => {
+const SelectMenuList = forwardRef(({selectCategory, onClickSelectMenu}, ref) => {
   const pageSize = 8;
   const selectedCategory = categoryInformation[selectCategory].flat();
   const totalCount = selectedCategory.length;
@@ -19,7 +19,7 @@ const SelectMenuList = forwardRef(({selectCategory, onClickInspectMenuType}, ref
             const price = order.type === 'single' ? order.price : order.setPrice;
             return (
               <Styled.MenuWrap key={order.id}>
-                <Styled.ItemWrap onClick={() => onClickInspectMenuType(order)}>
+                <Styled.ItemWrap onClick={() => onClickSelectMenu(order)}>
                   <img src={order.src} alt={order.name}/>
                   <Styled.MenuInfoWrap>
                     <strong>{order.name}</strong>

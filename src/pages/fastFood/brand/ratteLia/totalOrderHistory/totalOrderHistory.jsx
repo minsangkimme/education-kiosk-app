@@ -5,7 +5,7 @@ import DownButton from '@mui/icons-material/RemoveCircleOutline';
 import * as Styled from './styled';
 
 
-const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
+const TotalOrderHistory = ({orderList, handleAddOrder, onClickDecreaseOrder, onClickRemoveOrder}) => {
   const totalCount = orderList.reduce((acc, curr) => {
     const orderQuantity = curr.type === 'set' ? curr.setOrderCount : curr.orderCount;
     return acc + orderQuantity;
@@ -41,7 +41,7 @@ const TotalOrderHistory = ({orderList, onClickAddOrder, onClickDecreaseOrder, on
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <DownButton onClick={() => onClickDecreaseOrder(order)}/>
                 <strong style={{margin: '0 5px'}}>{orderQuantity}</strong>
-                <UpButton onClick={() => onClickAddOrder(order)}/>
+                <UpButton onClick={() => handleAddOrder(order)}/>
               </div>
               <strong>{convertCommaNumber(price)} </strong>
               <Styled.RemoveButton onClick={() => onClickRemoveOrder(order)}>삭제</Styled.RemoveButton>
