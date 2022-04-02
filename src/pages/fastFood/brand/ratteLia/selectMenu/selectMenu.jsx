@@ -54,7 +54,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 	}, [menuService, orderList]);
 
 	// 오더 삭제
-	const onClickRemoveOrder = useCallback((menu) => {
+	const onClickDeleteOrder = useCallback((menu) => {
 		menuService.deleteOrder(menu, orderList, setOrderList);
 	}, [menuService, orderList]);
 
@@ -237,7 +237,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 					orderList={orderList}
 					handleAddOrder={handleAddOrder}
 					onClickSubtractOrder={onClickSubtractOrder}
-					onClickRemoveOrder={onClickRemoveOrder}
+					onClickDeleteOrder={onClickDeleteOrder}
 				/>
 			</Styled.ContentLayout>
 			<FooterNav
