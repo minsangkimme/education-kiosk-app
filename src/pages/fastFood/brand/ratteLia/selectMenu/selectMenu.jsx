@@ -46,31 +46,17 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 	// 오더 추가
 	const handleAddOrder = useCallback((menu) => {
 		menuService.addOrder(menu, orderList, setOrderList);
-	}, [orderList]);
+	}, [menuService, orderList]);
+
+	// 오더 감소
+	const onClickSubtractOrder = useCallback((menu) => {
+		menuService.subtractOrder(menu, orderList, setOrderList);
+	}, [menuService, orderList]);
 
 	// 오더 삭제
 	const onClickRemoveOrder = useCallback((menu) => {
 		menuService.deleteOrder(menu, orderList, setOrderList);
-	}, [orderList]);
-
-	// 카운트 감소
-	const onClickDecreaseOrder = useCallback((menu) => {
-		const orders = orderList.filter((v) => {
-			if (v.id === menu.id && v.type === menu.type && (menu.orderCount > 1 || menu.setOrderCount > 1)) {
-				if (menu.type === 'single') {
-					v.orderCount -= 1;
-				}
-
-				if (menu.type === 'set') {
-					v.setOrderCount -= 1;
-				}
-			}
-
-			return v;
-		});
-
-		setOrderList(orders);
-	}, [orderList]);
+	}, [menuService, orderList]);
 
 	// 버거류 단품 셋트 선택
 	const onClickMenuType = useCallback((type) => {
@@ -250,7 +236,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 				<TotalOrderHistory
 					orderList={orderList}
 					handleAddOrder={handleAddOrder}
-					onClickDecreaseOrder={onClickDecreaseOrder}
+					onClickSubtractOrder={onClickSubtractOrder}
 					onClickRemoveOrder={onClickRemoveOrder}
 				/>
 			</Styled.ContentLayout>

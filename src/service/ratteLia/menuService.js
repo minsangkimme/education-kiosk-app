@@ -58,6 +58,28 @@ class MenuService {
 		setOrderList(orders);
 	}
 
+	// 오더 감소
+	subtractOrder(menu, orderList, setOrderList) {
+		const orders = orderList.filter((item) => {
+			if (item.id === menu.id && item.type === menu.type) {
+				// 타입이 single 경우
+				if (item.type === 'single' && item.orderCount > 1) {
+					const orderCount = item.orderCount - 1;
+					return {...item, orderCount};
+				}
+				// 타입이 set 경우
+				if (item.type === 'set' && item.setOrderCount > 1) {
+					const setOrderCount = item.setOrderCount - 1;
+					return {...item, setOrderCount};
+				}
+			}
+
+			return item;
+		});
+
+		setOrderList(orders);
+	}
+
 	// 오더 삭제
 	deleteOrder(menu, orderList, setOrderList) {
 		const changeOrderList = orderList.filter((item) => !(item.id === menu.id && item.type === menu.type));
