@@ -1,12 +1,12 @@
 import React from 'react';
 
-const SelectSideMenuAlarm = ({setOpenSelectAlarm}) => {
+const SelectSideMenuAlarm = ({setNonSelectAlarm}) => {
   return (
     <div>
       <p>
         세트구성품을 선택해주세요.<br/>
       </p>
-      <div onClick={() => setOpenSelectAlarm(false)}>
+      <div onClick={() => setNonSelectAlarm(false)}>
         <button>확인</button>
       </div>
     </div>

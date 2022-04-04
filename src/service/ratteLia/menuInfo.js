@@ -1,19 +1,19 @@
-import beefBurger from '../../../../assets/images/beef-burger.jpg';
-import frenchFry from '../../../../assets/images/french-fries.svg';
-import cheezeball from '../../../../assets/images/cheezeball.jpg';
-import cheezestick from '../../../../assets/images/cheezestick.jpg';
-import chickennuget from '../../../../assets/images/chickennugeets.png';
-import ring from '../../../../assets/images/ring.jpg';
-import strawberryIceCream from '../../../../assets/images/strawberryIceCream.jpg';
-import chocoIceCream from '../../../../assets/images/choco-ice-cream.jpg';
-import chickenPie from '../../../../assets/images/chicken-pie.jpg';
-import friedChecken from '../../../../assets/images/fried-chicken.jpg';
-import coke from '../../../../assets/images/coke.png';
-import cider from '../../../../assets/images/cider.jpg';
-import hotchoco from '../../../../assets/images/hotchoco.jpg';
-import milk from '../../../../assets/images/milk.jpg';
-import lemonade from '../../../../assets/images/lemonade.jpg';
-import orangeJuice from '../../../../assets/images/orange-juice-67556_640.jpg';
+import beefBurger from '../../assets/images/beef-burger.jpg';
+import frenchFry from '../../assets/images/french-fries.svg';
+import cheezeball from '../../assets/images/cheezeball.jpg';
+import cheezestick from '../../assets/images/cheezestick.jpg';
+import chickennuget from '../../assets/images/chickennugeets.png';
+import ring from '../../assets/images/ring.jpg';
+import strawberryIceCream from '../../assets/images/strawberryIceCream.jpg';
+import chocoIceCream from '../../assets/images/choco-ice-cream.jpg';
+import chickenPie from '../../assets/images/chicken-pie.jpg';
+import friedChecken from '../../assets/images/fried-chicken.jpg';
+import coke from '../../assets/images/coke.png';
+import cider from '../../assets/images/cider.jpg';
+import hotchoco from '../../assets/images/hotchoco.jpg';
+import milk from '../../assets/images/milk.jpg';
+import lemonade from '../../assets/images/lemonade.jpg';
+import orangeJuice from '../../assets/images/orange-juice-67556_640.jpg';
 
 
 export const categoryInformation = {

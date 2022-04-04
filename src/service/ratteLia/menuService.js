@@ -1,4 +1,4 @@
-import {categoryInformation} from "../../pages/fastFood/brand/ratteLia/menuInfo";
+import {categoryInformation} from "./menuInfo";
 
 class MenuService {
 	constructor() {

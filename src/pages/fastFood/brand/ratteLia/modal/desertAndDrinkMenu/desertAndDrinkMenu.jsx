@@ -2,14 +2,14 @@ import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import {sideMenuInformation} from "../../menuInfo";
+import {sideMenuInformation} from "../../../../../../service/ratteLia/menuInfo";
 import {convertCommaNumber} from "../../../../../../utils/comma";
 import * as Styled from './styled';
 
 
 const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMenu, onClickRemoveSideMenu,
                               renderSideMenu, setRenderSideMenu, onClickSubmitMenu, onClickCancleMenu,
-                            openDesert}) => {
+                            sideMenuAlarm}) => {
   const [value, setValue] = React.useState(0);
   const sliderRef = useRef(null);
   const wrapRef = useRef(null);
@@ -35,10 +35,10 @@ const DesertAndDrinkMenu = ({menu, setSideMenuTab, sideMenuTab, onClickAddSideMe
   const getSideMenuIdx = useCallback((type) => (menu.sideMenuList?.findIndex((v) => v.type === type)), [menu]);
 
   useEffect(() => {
-    if (!openDesert) {
+    if (!sideMenuAlarm) {
       setValue(0);
     }
-  }, [openDesert]);
+  }, [sideMenuAlarm]);
   useEffect(() => {
     if (sideMenuTab === 'desert') {
       setRenderSideMenu(sideMenuInformation.desert);

@@ -1,5 +1,5 @@
 import React, {forwardRef} from 'react';
-import {categoryInformation} from "../menuInfo";
+import {categoryInformation} from "../../../../../service/ratteLia/menuInfo";
 import {convertCommaNumber} from "../../../../../utils/comma";
 import * as Styled from './styled';
 
