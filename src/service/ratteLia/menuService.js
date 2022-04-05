@@ -85,6 +85,26 @@ class MenuService {
 		const changeOrderList = orderList.filter((item) => !(item.id === menu.id && item.type === menu.type));
 		setOrderList(changeOrderList);
 	}
+
+	// 이미 선택한 사이드 메뉴 타입인지 검사
+	isInspectAlreadySelectSideMenuType(sideMenu, selectedMenu) {
+		// 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
+		return selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
+	}
+
+	// 버거셋트 선택시 & 사이드메뉴 선택
+	addSideMenu(sideMenu, setSelectedMenu) {
+		const selectedSideMenu = {
+			...sideMenu,
+			isSelected: true
+		};
+
+		// 선택한 메뉴의 사이드메뉴 리스트 업데이트
+		setSelectedMenu(prevState => ({
+			...prevState,
+			sideMenuList: [...prevState.sideMenuList, selectedSideMenu]
+		}));
+	}
 }
 
 export default MenuService;

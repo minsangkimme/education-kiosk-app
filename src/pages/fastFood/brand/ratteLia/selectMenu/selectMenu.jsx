@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useReducer, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useReducer, useRef, useState} from 'react';
 import adSense from "../../../../../assets/images/adSense.png";
 import FooterNav from "../../../../../components/footer/footerNav";
 import SelectMenuList from "../selectMenuList/selectMenuList";
@@ -21,7 +21,6 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 	const [selectedMenu, setSelectedMenu] = useState({}); // 선택한 메뉴
 	const [choiceMenuType, setChoiceMenuType] = useState(''); // 버거 단품, 셋트 타입
 	const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
-	const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
 	const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
 	const [alarm, dispatch] = useReducer(reducer, initialState);
 	const {
@@ -87,21 +86,16 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 
 	// 버거셋트 선택시 사이드메뉴 선택 리스너
 	const onClickAddSideMenu = useCallback((sideMenu) => {
-		// 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
-		const isAlreadySelectType = selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
+		const isAlreadySelectType = menuService.isInspectAlreadySelectSideMenuType(sideMenu, selectedMenu);
 
 		// 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
 		if (isAlreadySelectType) {
 			return handleAlarmToggle('alreadyTypeAlarm', true);
 		}
 
-		sideMenu.isSelected = true;
-		// 검사 결과 같은 타입이 없다면 sideMenuList에 추가 시킨다.
-		setSelectedMenu(prevState => ({
-			...prevState,
-			sideMenuList: [...prevState.sideMenuList, sideMenu]
-		}));
-	}, [orderList, selectedMenu, renderSideMenu]);
+		// 사이드 메뉴 추가
+		menuService.addSideMenu(sideMenu, setSelectedMenu);
+	}, [menuService, orderList, selectedMenu]);
 
 	// 버거셋트 선택시 사이드메뉴 삭제 리스너
 	const onClickRemoveSideMenu = useCallback((sideMenu) => {
@@ -157,12 +151,10 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 			<DesertAndDrinkMenu
 				setSideMenuTab={setSideMenuTab}
 				sideMenuTab={sideMenuTab}
-				menu={selectedMenu}
+				selectedMenu={selectedMenu}
 				sideMenuAlarm={sideMenuAlarm}
 				onClickAddSideMenu={onClickAddSideMenu}
 				onClickRemoveSideMenu={onClickRemoveSideMenu}
-				renderSideMenu={renderSideMenu}
-				setRenderSideMenu={setRenderSideMenu}
 				onClickSubmitMenu={onClickSubmitMenu}
 				onClickCancleMenu={onClickCancleMenu}
 			/>,
