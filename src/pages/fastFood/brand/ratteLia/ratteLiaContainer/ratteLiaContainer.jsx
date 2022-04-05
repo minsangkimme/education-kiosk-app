@@ -9,6 +9,7 @@ import PaymentSuccess from "../paymentSuccess/paymentSuccess";
 import MenuService from "../../../../../service/ratteLia/menuService";
 
 const menuService = new MenuService();
+
 const RatteLiaContainer = () => {
   const history = useHistory();
   const {pathname} = history.location;

@@ -1,5 +1,3 @@
-import {categoryInformation} from "./menuInfo";
-
 class MenuService {
 	constructor() {
 		this.category = 'recommended'; // 선택한 메뉴 카테고리

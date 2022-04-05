@@ -19,7 +19,6 @@ import {alarmToggleRequest, initialState, reducer} from "../../../../../reducers
 const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => {
 	const [selectCategory, setSelectCategory] = React.useState(menuService.category); // recommended | hamburger | desert | drink | event
 	const [selectedMenu, setSelectedMenu] = useState({}); // 선택한 메뉴
-	const [choiceMenuType, setChoiceMenuType] = useState(''); // 버거 단품, 셋트 타입
 	const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
 	const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
 	const [alarm, dispatch] = useReducer(reducer, initialState);
@@ -39,13 +38,13 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 
 	// 메뉴 선택 리스너
 	const onClickSelectMenu = useCallback((menu) => {
-		const inspectResult = menuService.inspectMenuType(menu);
+		const isHamburgerSingleType = menuService.inspectMenuType(menu);
 		menuService.setSelectedMenu(menu, setSelectedMenu);
 
 		return (
-			inspectResult
+			isHamburgerSingleType
 				? handleAlarmToggle('menuTypeAlarm', true)// 선택한 햄버거류 메뉴가  && 단품이면 팝업 오픈
-				: handleAddOrder(menu) // 셋트 || 디저트류는 오더에 바로 추가
+				: handleAddOrder(menu) // 셋트 || 사이드메뉴는 오더에 바로 추가
 		);
 	}, [menuService, orderList]);
 
@@ -64,7 +63,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		menuService.deleteOrder(menu, orderList, setOrderList);
 	}, [menuService, orderList]);
 
-	// 버거류 단품 셋트 선택
+	// 햄버거 (단품 || 셋트) 선택 리스너
 	const onClickMenuType = useCallback((type) => {
 		// 단품
 		if (type === 'single') {
@@ -75,14 +74,12 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 
 		// 셋트
 		if (type === 'set') {
-			// 디저트 모달 띄우기
 			setSelectedMenu(prevState => ({...prevState, type: 'set'}));
 			handleAlarmToggle('menuTypeAlarm', false);
+			// 사이드메뉴 오픈
 			handleAlarmToggle('sideMenuAlarm', true);
 		}
-
-		setChoiceMenuType(type);
-	}, [choiceMenuType, selectedMenu, orderList]);
+	}, [selectedMenu, orderList]);
 
 	// 버거셋트 선택시 사이드메뉴 선택 리스너
 	const onClickAddSideMenu = useCallback((sideMenu) => {
@@ -131,6 +128,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		onClickNextStep(1);
 	}
 
+	// 단품,세트 알림 props
 	const menuTypeChoiceProps = {
 		...modalData.menuTypeChoiceInfo,
 		open: menuTypeAlarm,
@@ -139,6 +137,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		backDrop: menuTypeAlarm,
 	};
 
+	// 사이드 메뉴 알림 props
 	const sideMenuChoiceProps = {
 		...modalData.sideMenuChoiceInfo,
 		title: `세트${sideMenuCategory} 1 개를 선택해 주세요`,
@@ -161,6 +160,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		backDrop: sideMenuAlarm,
 	};
 
+	// 이미 선택 된 메뉴 알림 props
 	const alreadySelectedTypeAlarmProps = {
 		...modalData.alarmInfo,
 		open: alreadyTypeAlarm,
@@ -172,6 +172,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		backDrop: alreadyTypeAlarm,
 	};
 
+	// 사이드 메뉴 선택하지 않고 추가하기 누른 경우 알림 props
 	const selectSideMenuAlarmProps = {
 		...modalData.alarmInfo,
 		open: nonSelectAlarm,
@@ -183,6 +184,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		backDrop: nonSelectAlarm,
 	}
 
+	// 주문 취소 알림 props
 	const orderCancelAlarmProps = {
 		...modalData.alarmInfo,
 		open: orderCancelAlarm,
@@ -195,6 +197,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		backDrop: orderCancelAlarm,
 	}
 
+	// 메뉴 선택 하라는 알림 props
 	const selectMenuAlarmProps = {
 		...modalData.alarmInfo,
 		open: selectMenuAlarm,
@@ -204,13 +207,13 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 	}
 
 	const initSelectMenu = () => {
-		setChoiceMenuType('');
 		setSideMenuTab('desert');
 		initSideMenuState();
 		setSelectedMenu({});
 		handleAlarmToggle('sideMenuAlarm', false);
 	}
 
+	// 결제 페이지 이동 리스너
 	const onClickPay = () => {
 		orderList.length > 0
 			? onClickNextStep(4)
