@@ -22,7 +22,7 @@ const MainMenuType = () => {
   const history = useHistory();
   const {pathname} = history.location;
   const onClickMenuType = (id) => playAudio().then(() => history.push(`/main/menuType/${id}`));
-  const onClickBrand = (brand) => playAudio().then(() => history.push(`${pathname}/${brand}`));
+  const onClickBrand = (brand) => history.push(`${pathname}/${brand}`);
   const menus = pathname === '/main/menuType' ? menuList : brandList;
   const onClickEvent = pathname === '/main/menuType' ? onClickMenuType : onClickBrand;
 

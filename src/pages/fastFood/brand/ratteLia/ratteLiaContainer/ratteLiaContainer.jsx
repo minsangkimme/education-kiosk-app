@@ -19,7 +19,12 @@ const RatteLiaContainer = () => {
     setStep(step);
     history.push(`${pathname}?step=${step}`);
   }, [step]);
-  useEffect( async () =>  await playAudio());
+
+  useEffect(() => {
+    (async () => {
+      await playAudio();
+    })();
+  })
 
   switch (step) {
     case 1:
