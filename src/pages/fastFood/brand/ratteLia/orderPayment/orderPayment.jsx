@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useReducer, useState} from 'react';
 import * as Styled from './styled';
 import adSense from "../../../../../assets/images/adSense.png";
 import FooterNav from "../../../../../components/footer/footerNav";
@@ -11,12 +11,18 @@ import CustomModal from "../modal/customModal/customModal";
 import ReceiptModal from "../modal/receiptModal/receiptModal";
 import RecyclePaperModal from "../modal/recyclePaperModal/recyclePaperModal";
 import {playAudio} from "../../../../../utils/playAudio";
+import {alarmToggleRequest, initialState, reducer} from "../../../../../reducers/alarm";
 
 const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
   const [currPayStep, setCurrPayStep] = useState("step1");
-  const [orderCancelAlarm, setOrderCancelAlarm] = useState(false); // 주문 취소하기
-  const [receiptAlarm, setReceiptAlarm] = useState(false); // 영수증 알람
-  const [recyclePaperAlarm, setRecyclePaperAlarm] = useState(false); // 종이백 알람
+  const [alarm, dispatch] = useReducer(reducer, initialState);
+  const {
+    orderCancelAlarm,
+    receiptAlarm,
+    recyclePaperAlarm
+  } = alarm.type;
+  // 알람 토글 리스너
+  const handleAlarmToggle = (label, toggle) => dispatch(alarmToggleRequest({data: toggle, label}));
   const [payOption, setPayOption] = useState({
     step1: {
       1: false,
@@ -38,7 +44,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
     await playAudio();
 
     if (step === 'step1' && option === 1) {
-      setRecyclePaperAlarm(() => true);
+      handleAlarmToggle('recyclePaperAlarm', true);
     }
 
     // remove check
@@ -65,7 +71,7 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
         case 'step2':
           return 'step3';
         case 'step3':
-          return setReceiptAlarm(true);
+          return handleAlarmToggle('receiptAlarm', true);
         default :
           return new Error(`not supported step ${step}`);
       }
@@ -98,37 +104,40 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
   }
 
   const handleCancel = () => {
-    setOrderCancelAlarm(false);
+    handleAlarmToggle('orderCancelAlarm', false);
     setOrderList([]);
     onClickNextStep(1);
   }
 
+  // 주문 취소 알림 props
   const orderCancelAlarmProps = {
     ...modalData.alarmInfo,
     open: orderCancelAlarm,
-    setOpen: setOrderCancelAlarm,
+    setOpen: () => handleAlarmToggle('orderCancelAlarm', false),
     bodyData:
       <OrderCancel
-        setOrderCancelAlarm={setOrderCancelAlarm}
+        setOrderCancelAlarm={() => handleAlarmToggle('orderCancelAlarm', false)}
         onClickCancle={handleCancel}
       />,
     backDrop: orderCancelAlarm,
   }
 
+  // 영수증 알림 props
   const receiptAlarmProps = {
     ...modalData.receiptInfo,
     open: receiptAlarm,
-    setOpen: setReceiptAlarm,
+    setOpen: () => handleAlarmToggle('receiptAlarm', false),
     bodyData: <ReceiptModal onClickNextStep={() => onClickNextStep(5)} />,
     backDrop: receiptAlarm,
   }
 
+  // 종이백 알림 props
   const recyclePaperAlarmProps = {
     ...modalData.recyclePaperInfo,
     open: recyclePaperAlarm,
-    setOpen: setRecyclePaperAlarm,
+    setOpen: () => handleAlarmToggle('recyclePaperAlarm', false),
     bodyData: <RecyclePaperModal
-      onClickButton={() => setRecyclePaperAlarm(false)}
+      onClickButton={() => handleAlarmToggle('recyclePaperAlarm', false)}
     />,
     backDrop: recyclePaperAlarm,
   }
@@ -152,36 +161,15 @@ const OrderPayment = ({onClickNextStep, orderList, setOrderList}) => {
       <FooterNav
         showInfo="payment"
         goBackFunc={() => onClickNextStep(3)}
-        onClickCancle={() => setOrderCancelAlarm(true)}
+        onClickCancle={() => handleAlarmToggle('orderCancelAlarm',true)}
         goToNext={() => onClickNextStep(3)}
       />
       {/* 취소 모달 */}
-      <CustomModal
-        title={orderCancelAlarmProps.title}
-        tBgColor={orderCancelAlarmProps.tBgColor}
-        open={orderCancelAlarmProps.open}
-        backDrop={orderCancelAlarmProps.backDrop}
-        bodyData={orderCancelAlarmProps.bodyData}
-        setOpen={orderCancelAlarmProps.setOpen}
-      />
+      <CustomModal {...orderCancelAlarmProps} />
       {/* 영수증 모달 */}
-      <CustomModal
-        title={receiptAlarmProps.title}
-        tBgColor={receiptAlarmProps.tBgColor}
-        open={receiptAlarmProps.open}
-        backDrop={receiptAlarmProps.backDrop}
-        bodyData={receiptAlarmProps.bodyData}
-        setOpen={receiptAlarmProps.setOpen}
-      />
+      <CustomModal {...receiptAlarmProps} />
       {/* 종이백 모달 */}
-      <CustomModal
-        title={recyclePaperAlarmProps.title}
-        tBgColor={recyclePaperAlarmProps.tBgColor}
-        open={recyclePaperAlarmProps.open}
-        backDrop={recyclePaperAlarmProps.backDrop}
-        bodyData={recyclePaperAlarmProps.bodyData}
-        setOpen={recyclePaperAlarmProps.setOpen}
-      />
+      <CustomModal {...recyclePaperAlarmProps} />
     </Styled.Wrap>
   );
 };

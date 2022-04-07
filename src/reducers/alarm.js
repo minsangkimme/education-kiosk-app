@@ -8,6 +8,8 @@ export const initialState = {
 		nonSelectAlarm: false, // 사이드 메뉴 선택 안하고 추가하기 누른 경우
 		orderCancelAlarm: false, // 주문 취소하기
 		selectMenuAlarm: false, // 메뉴 선택 알림
+		receiptAlarm: false, // 영수증 알림
+		recyclePaperAlarm: false // 종이백 알림
 	}
 }
 
