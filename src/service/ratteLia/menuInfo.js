@@ -893,17 +893,3 @@ export const sideMenuInformation = {
     ],
   ]
 }
-
-export const initSideMenuState = () => {
-  const {desert, drink} = sideMenuInformation;
-  desert.forEach((menus) => {
-    menus.forEach((menu) => {
-      menu.isSelected = false;
-    });
-  });
-  drink.forEach((menus) => {
-    menus.forEach((menu) => {
-      menu.isSelected = false;
-    });
-  });
-}

@@ -18,8 +18,8 @@ const sideMenuCategory = [
   },
 ];
 
-const DesertAndDrinkMenu = memo(({selectedMenu, setSideMenuTab, sideMenuTab, onClickAddSideMenu, onClickRemoveSideMenu,
-                              onClickSubmitMenu, onClickCancleMenu, sideMenuAlarm}) => {
+const DesertAndDrinkMenu = memo(({selectedMenu, setSideMenuTab, sideMenuTab, handleAddSideMenu, onClickDeleteSideMenu,
+                              onClickSubmitMenu, handleCloseSideMenu, sideMenuAlarm}) => {
   const [renderSideMenu, setRenderSideMenu] = React.useState([]); // 사이드 메뉴 리스트
   const wrapRef = useRef(null);
   const handleChange = useCallback((event, newValue) => {
@@ -108,13 +108,13 @@ const DesertAndDrinkMenu = memo(({selectedMenu, setSideMenuTab, sideMenuTab, onC
                 <div style={{position: 'relative'}}>
                   {selectedSideMenu &&
                     <>
-                      <Styled.RemoveButton onClick={() => onClickRemoveSideMenu(sideMenu)} />
+                      <Styled.RemoveButton onClick={() => onClickDeleteSideMenu(sideMenu)} />
                       <Styled.OrderNumber>{getSideMenuIdx(sideMenu.type) + 1}</Styled.OrderNumber>
                     </>
                   }
-                  <img src={sideMenu.src} alt={sideMenu.name} onClick={() => onClickAddSideMenu(sideMenu)} />
+                  <img src={sideMenu.src} alt={sideMenu.name} onClick={() => handleAddSideMenu(sideMenu)} />
                 </div>
-                <strong onClick={() => onClickAddSideMenu(sideMenu)}>{sideMenu.name}</strong>
+                <strong onClick={() => handleAddSideMenu(sideMenu)}>{sideMenu.name}</strong>
                 <strong style={{color: '#e22137'}}>
                   {convertCommaNumber(sideMenu.price)}
                 </strong>
@@ -128,7 +128,7 @@ const DesertAndDrinkMenu = memo(({selectedMenu, setSideMenuTab, sideMenuTab, onC
           <li>선택수량 : 2</li>
           <li>잔여수량 : {remainingQuantity}</li>
         </ul>
-        <Styled.CancleButton onClick={onClickCancleMenu}>취소하기</Styled.CancleButton>
+        <Styled.CancleButton onClick={handleCloseSideMenu}>취소하기</Styled.CancleButton>
         <Styled.CompleteButton onClick={onClickSubmitMenu}>선택완료</Styled.CompleteButton>
       </Styled.BottomWrap>
     </div>

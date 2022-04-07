@@ -8,7 +8,6 @@ import DesertAndDrinkMenu from "../modal/desertAndDrinkMenu/desertAndDrinkMenu";
 import AlreadySelectedTypeAlarm from "../modal/alreadySelectedTypeAlarm/alreadySelectedTypeAlarm";
 import {modalData} from "../modal/customModal/modalData";
 import SelectSideMenuAlarm from "../modal/selectSideMenuAlarm/selectSideMenuAlarm";
-import {initSideMenuState} from "../../../../../service/ratteLia/menuInfo";
 import OrderCancel from "../modal/orderCancel/orderCancel";
 import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
@@ -81,8 +80,15 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		}
 	}, [selectedMenu, orderList]);
 
-	// 버거셋트 선택시 사이드메뉴 선택 리스너
-	const onClickAddSideMenu = useCallback((sideMenu) => {
+	// 사이드메뉴 닫기
+	const handleCloseSideMenu = () => {
+		setSideMenuTab('desert');
+		setSelectedMenu({});
+		handleAlarmToggle('sideMenuAlarm', false);
+	}
+
+	// 사이드메뉴 추가 리스너
+	const handleAddSideMenu = useCallback((sideMenu) => {
 		const isAlreadySelectType = menuService.isInspectAlreadySelectSideMenuType(sideMenu, selectedMenu);
 
 		// 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
@@ -94,35 +100,25 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		menuService.addSideMenu(sideMenu, setSelectedMenu);
 	}, [menuService, orderList, selectedMenu]);
 
-	// 버거셋트 선택시 사이드메뉴 삭제 리스너
-	const onClickRemoveSideMenu = useCallback((sideMenu) => {
-		if (!sideMenu) return null;
-		sideMenu.isSelected = false;
-		// 선택한 메뉴의 sideMenuList에서 들어온 sideMenu를 찾아 삭제한다.
-		const copiedSideMenuList = selectedMenu.sideMenuList.slice();
-		const removeItemIdx = copiedSideMenuList.findIndex((v) => v.id === sideMenu.id);
-		copiedSideMenuList.splice(removeItemIdx, 1);
+	// 사이드메뉴 삭제 리스너
+	const onClickDeleteSideMenu = useCallback((sideMenu) => {
+		menuService.deleteSideMenu(sideMenu, setSelectedMenu);
+	}, [menuService, selectedMenu]);
 
-		setSelectedMenu(prevState => ({
-			...prevState,
-			sideMenuList: [...copiedSideMenuList]
-		}));
-	}, [selectedMenu]);
-
-	// 사이드 메뉴 선택 완료하기 리스너
+	// 사이드메뉴 선택 완료 리스너
 	const onClickSubmitMenu = useCallback(() => {
-		if (selectedMenu.sideMenuList.length < 2) {
-			handleAlarmToggle('nonSelectAlarm', true);
-			return;
+		const hasNotAllRequiredSideMenu = selectedMenu.sideMenuList.length < 2;
+
+		if (hasNotAllRequiredSideMenu) {
+			return handleAlarmToggle('nonSelectAlarm', true);
 		}
+
 		handleAddOrder(selectedMenu);
-		initSelectMenu();
+		handleCloseSideMenu();
 	}, [selectedMenu, orderList]);
 
-	// 사이드 메뉴 취소하기
-	const onClickCancleMenu = useCallback(() => initSelectMenu(), []);
-
-	const handleCancel = () => {
+	// 주문 취소 리스너
+	const handleOrderCancel = () => {
 		handleAlarmToggle('orderCancelAlarm', false);
 		setOrderList([]);
 		onClickNextStep(1);
@@ -143,7 +139,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		title: `세트${sideMenuCategory} 1 개를 선택해 주세요`,
 		open: sideMenuAlarm,
 		setOpen: () => {
-			initSelectMenu();
+			handleCloseSideMenu();
 			handleAlarmToggle('sideMenuAlarm', false);
 		},
 		bodyData:
@@ -152,10 +148,10 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 				sideMenuTab={sideMenuTab}
 				selectedMenu={selectedMenu}
 				sideMenuAlarm={sideMenuAlarm}
-				onClickAddSideMenu={onClickAddSideMenu}
-				onClickRemoveSideMenu={onClickRemoveSideMenu}
+				handleAddSideMenu={handleAddSideMenu}
+				onClickDeleteSideMenu={onClickDeleteSideMenu}
 				onClickSubmitMenu={onClickSubmitMenu}
-				onClickCancleMenu={onClickCancleMenu}
+				handleCloseSideMenu={handleCloseSideMenu}
 			/>,
 		backDrop: sideMenuAlarm,
 	};
@@ -192,7 +188,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		bodyData:
 			<OrderCancel
 				setOrderCancelAlarm={() => handleAlarmToggle('orderCancelAlarm', false)}
-				onClickCancle={handleCancel}
+				onClickCancle={handleOrderCancel}
 			/>,
 		backDrop: orderCancelAlarm,
 	}
@@ -204,13 +200,6 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 		setOpen: () => handleAlarmToggle('selectMenuAlarm', false),
 		bodyData: <h2 style={{padding: 50, fontWeight: 'bold'}}>메뉴를 선택해주세요.</h2>,
 		backDrop: selectMenuAlarm,
-	}
-
-	const initSelectMenu = () => {
-		setSideMenuTab('desert');
-		initSideMenuState();
-		setSelectedMenu({});
-		handleAlarmToggle('sideMenuAlarm', false);
 	}
 
 	// 결제 페이지 이동 리스너

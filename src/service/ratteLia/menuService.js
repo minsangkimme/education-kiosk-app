@@ -90,7 +90,7 @@ class MenuService {
 		return selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
 	}
 
-	// 버거셋트 선택시 & 사이드메뉴 선택
+	// 사이드메뉴 추가
 	addSideMenu(sideMenu, setSelectedMenu) {
 		const selectedSideMenu = {
 			...sideMenu,
@@ -102,6 +102,18 @@ class MenuService {
 			...prevState,
 			sideMenuList: [...prevState.sideMenuList, selectedSideMenu]
 		}));
+	}
+
+	// 사이드메뉴 삭제
+	deleteSideMenu(sideMenu, setSelectedMenu) {
+		if (!sideMenu) return null;
+		setSelectedMenu(selectedMenu => {
+			const deletedSideMenuList = selectedMenu.sideMenuList.filter(item => item.id !== sideMenu.id);
+			return ({
+				...selectedMenu,
+				sideMenuList: deletedSideMenuList
+			});
+		});
 	}
 }
 

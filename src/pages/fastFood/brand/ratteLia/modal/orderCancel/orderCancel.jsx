@@ -10,7 +10,7 @@ const OrderCancel = ({setOrderCancelAlarm, onClickCancle}) => {
       </p>
       <Styled.ButtonWrap>
         <button onClick={onClickCancle}>예</button>
-        <button onClick={() => setOrderCancelAlarm(false)}>아니오</button>
+        <button onClick={setOrderCancelAlarm}>아니오</button>
       </Styled.ButtonWrap>
     </Styled.Wrap>
   );
