@@ -27,8 +27,6 @@ const tabLabels = [
 ];
 
 const MenuCategory = forwardRef(({menuService, setSelectCategory}, ref) => {
-  useEffect(() => {
-  }, [])
   const handleChange = useCallback((event, newValue) => {
     setTimeout(() => ref.current.slickGoTo(0), 100);
     menuService.setCategory(newValue, setSelectCategory);
