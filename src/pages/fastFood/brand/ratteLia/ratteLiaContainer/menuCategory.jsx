@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback} from 'react';
+import React, {forwardRef, useCallback, useEffect} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -26,8 +26,11 @@ const tabLabels = [
   },
 ];
 
-const MenuCategory = ({menuService, setSelectCategory}) => {
+const MenuCategory = forwardRef(({menuService, setSelectCategory}, ref) => {
+  useEffect(() => {
+  }, [])
   const handleChange = useCallback((event, newValue) => {
+    setTimeout(() => ref.current.slickGoTo(0), 100);
     menuService.setCategory(newValue, setSelectCategory);
   }, [setSelectCategory, menuService]);
 
@@ -72,6 +75,6 @@ const MenuCategory = ({menuService, setSelectCategory}) => {
       </Tabs>
     </Box>
   );
-};
+});
 
 export default MenuCategory;

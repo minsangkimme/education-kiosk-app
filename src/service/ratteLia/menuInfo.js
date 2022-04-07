@@ -18,18 +18,19 @@ import orangeJuice from '../../assets/images/orange-juice-67556_640.jpg';
 
 export const categoryInformation = {
   recommended: [
-    [{
-      id: 0,
-      src: beefBurger,
-      name: '세트의정석 새우',
-      price: 5900,
-      setPrice: 5900,
-      type: 'set',
-      orderCount: 0,
-      setOrderCount: 0,
-      sideMenuList: [],
-      sideMenuPrice: 0,
-    },
+    [
+      {
+        id: 0,
+        src: beefBurger,
+        name: '세트의정석 새우',
+        price: 5900,
+        setPrice: 5900,
+        type: 'set',
+        orderCount: 0,
+        setOrderCount: 0,
+        sideMenuList: [],
+        sideMenuPrice: 0,
+      },
       {
         id: 1,
         src: beefBurger,
@@ -65,21 +66,23 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      }]
+      }
+    ]
   ],
   hamburger: [
-    [{
-      id: 4,
-      src: beefBurger,
-      name: '치즈NO1',
-      price: 4200,
-      setPrice: 6500,
-      type: 'single',
-      orderCount: 0,
-      setOrderCount: 0,
-      sideMenuList: [],
-      sideMenuPrice: 0,
-    },
+    [
+      {
+        id: 4,
+        src: beefBurger,
+        name: '치즈NO1',
+        price: 4200,
+        setPrice: 6500,
+        type: 'single',
+        orderCount: 0,
+        setOrderCount: 0,
+        sideMenuList: [],
+        sideMenuPrice: 0,
+      },
       {
         id: 5,
         src: beefBurger,
@@ -139,7 +142,9 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      },
+      }
+    ],
+    [
       {
         id: 10,
         src: beefBurger,
@@ -163,19 +168,19 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      }],
-    [{
-      id: 12,
-      src: beefBurger,
-      name: '모던치즈버거',
-      price: 4400,
-      setPrice: 5500,
-      type: 'single',
-      orderCount: 0,
-      setOrderCount: 0,
-      sideMenuList: [],
-      sideMenuPrice: 0,
-    },
+      },
+      {
+        id: 12,
+        src: beefBurger,
+        name: '모던치즈버거',
+        price: 4400,
+        setPrice: 5500,
+        type: 'single',
+        orderCount: 0,
+        setOrderCount: 0,
+        sideMenuList: [],
+        sideMenuPrice: 0,
+      },
       {
         id: 13,
         src: beefBurger,
@@ -211,7 +216,9 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      },
+      }
+    ],
+    [
       {
         id: 16,
         src: beefBurger,
@@ -259,19 +266,19 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      }],
-    [{
-      id: 20,
-      src: beefBurger,
-      name: '치즈NO 1',
-      price: 4900,
-      setPrice: 6500,
-      type: 'single',
-      orderCount: 0,
-      setOrderCount: 0,
-      sideMenuList: [],
-      sideMenuPrice: 0,
-    },
+      },
+      {
+        id: 20,
+        src: beefBurger,
+        name: '치즈NO 1',
+        price: 4900,
+        setPrice: 6500,
+        type: 'single',
+        orderCount: 0,
+        setOrderCount: 0,
+        sideMenuList: [],
+        sideMenuPrice: 0,
+      },
       {
         id: 21,
         src: beefBurger,
@@ -283,7 +290,9 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      },
+      }
+    ],
+    [
       {
         id: 22,
         src: beefBurger,
@@ -355,7 +364,8 @@ export const categoryInformation = {
         setOrderCount: 0,
         sideMenuList: [],
         sideMenuPrice: 0,
-      }],
+      }
+    ],
   ],
   desert: [
     [
@@ -412,7 +422,9 @@ export const categoryInformation = {
         setPrice: 0,
         type: 'single',
         orderCount: 0,
-      },
+      }
+    ],
+    [
       {
         id: 34,
         src: frenchFry,
@@ -431,8 +443,6 @@ export const categoryInformation = {
         type: 'single',
         orderCount: 0,
       },
-    ],
-    [
       {
         id: 36,
         src: strawberryIceCream,
@@ -526,7 +536,9 @@ export const categoryInformation = {
         setPrice: 0,
         type: 'single',
         orderCount: 0,
-      },
+      }
+    ],
+    [
       {
         id: 46,
         src: coke,
@@ -545,8 +557,6 @@ export const categoryInformation = {
         type: 'single',
         orderCount: 0,
       },
-    ],
-    [
       {
         id: 48,
         src: coke,
@@ -582,7 +592,9 @@ export const categoryInformation = {
         setPrice: 0,
         type: 'single',
         orderCount: 0,
-      },
+      }
+    ],
+    [
       {
         id: 52,
         src: lemonade,

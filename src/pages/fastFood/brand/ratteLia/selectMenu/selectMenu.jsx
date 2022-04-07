@@ -220,6 +220,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}) => 
 				<MenuCategory
 					setSelectCategory={setSelectCategory}
 					menuService={menuService}
+					ref={sliderRef}
 				/>
 				{/* 메뉴 리스트 */}
 				<SelectMenuList

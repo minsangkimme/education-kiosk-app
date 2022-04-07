@@ -35,7 +35,7 @@ export const MenuInfoWrap = styled.div`
 
 export const CustomSlider = styled(Slider)`
   .slick-dots {
-      bottom: 180px;
+      bottom: 265px;
   }
   .slick-dots li button:before {
     font-size: 12px;

@@ -1,11 +1,11 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, useEffect} from 'react';
 import {categoryInformation} from "../../../../../service/ratteLia/menuInfo";
 import {convertCommaNumber} from "../../../../../utils/comma";
 import * as Styled from './styled';
 
 
 const SelectMenuList = forwardRef(({selectCategory, onClickSelectMenu}, ref) => {
-  const pageSize = 8;
+  const pageSize = 6;
   const selectedCategory = categoryInformation[selectCategory].flat();
   const totalCount = selectedCategory.length;
   const totalPage = Math.ceil(totalCount / pageSize);
