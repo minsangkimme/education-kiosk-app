@@ -2,6 +2,7 @@ class MenuService {
 	constructor() {
 		this.category = 'recommended'; // 선택한 메뉴 카테고리
 		this.selectedMenu = null;
+		this.orderList = [];
 		this.burgerTypeCategory = ['recommended', 'hamburger', 'event'];
 	}
 
@@ -53,12 +54,13 @@ class MenuService {
 			orders = [...orderList, selectedItem];
 		}
 
+		this.orderList = orders;
 		setOrderList(orders);
 	}
 
 	// 오더 감소
 	subtractOrder(menu, orderList, setOrderList) {
-		const orders = orderList.filter((item) => {
+		const orders = orderList.map((item) => {
 			if (item.id === menu.id && item.type === menu.type) {
 				// 타입이 single 경우
 				if (item.type === 'single' && item.orderCount > 1) {
@@ -75,12 +77,14 @@ class MenuService {
 			return item;
 		});
 
+		this.orderList = orders;
 		setOrderList(orders);
 	}
 
 	// 오더 삭제
 	deleteOrder(menu, orderList, setOrderList) {
 		const changeOrderList = orderList.filter((item) => !(item.id === menu.id && item.type === menu.type));
+		this.orderList = changeOrderList;
 		setOrderList(changeOrderList);
 	}
 
