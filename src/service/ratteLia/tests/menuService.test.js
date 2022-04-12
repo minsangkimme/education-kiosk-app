@@ -4,10 +4,13 @@ describe("MenuService 기능 테스트", () => {
 	let menuService;
 	let update;
 	let menu;
+	let sideMenu;
+	let setSelectedMenu;
 
 	beforeEach(() => {
 		menuService = new MenuService();
 		update = jest.fn();
+		setSelectedMenu = jest.fn();
 		menu = {
 			id: 3,
 			name: '더블새우',
@@ -19,6 +22,15 @@ describe("MenuService 기능 테스트", () => {
 			sideMenuList: [],
 			sideMenuPrice: 0,
 		}
+
+		sideMenu = {
+			id: 40,
+			name: '콜라',
+			price: 1200,
+			setPrice: 0,
+			type: 'single',
+			orderCount: 0,
+		};
 	});
 
 	it("초기 카테고리는 추천메뉴(recommended) 이길 기대한다.", () => {
@@ -80,6 +92,18 @@ describe("MenuService 기능 테스트", () => {
 
 			expect(menuService.orderList.length).toBe(0);
 			expect(setOrderList).toHaveBeenCalledTimes(2);
+		});
+
+		it("사이드메뉴를 추가한다.", () => {
+			menuService.setSelectedMenu(menu, update);
+			menuService.addSideMenu(sideMenu, setSelectedMenu);
+			expect(menuService.selectedMenu.sideMenuList.length).toBe(1);
+			expect(setSelectedMenu).toHaveBeenCalledTimes(1);
+		});
+
+		it("이미 선택한 사이드 메뉴 타입인지 검사한다.", () => {
+			menuService.setSelectedMenu(menu, update);
+			expect(menuService.isInspectAlreadySelectSideMenuType(sideMenu, menuService.selectedMenu)).toBeFalsy();
 		});
 
 	});

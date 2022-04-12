@@ -101,6 +101,11 @@ class MenuService {
 			isSelected: true
 		};
 
+		this.selectedMenu = {
+			...this.selectedMenu,
+			sideMenuList: [...this.selectedMenu.sideMenuList, selectedSideMenu]
+		};
+
 		// 선택한 메뉴의 사이드메뉴 리스트 업데이트
 		setSelectedMenu(prevState => ({
 			...prevState,
