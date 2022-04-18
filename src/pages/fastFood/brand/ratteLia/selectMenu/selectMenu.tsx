@@ -32,7 +32,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 	} = alarm.type;
 
 	// 알람 토글 리스너
-	const handleAlarmToggle = (label, toggle) => dispatch(alarmToggleRequest({data: toggle, label}));
+	const handleAlarmToggle = (label: string, toggle: boolean) => dispatch(alarmToggleRequest({data: toggle, label}));
 
 	const sliderRef = useRef(null);
 

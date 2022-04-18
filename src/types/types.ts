@@ -7,6 +7,25 @@ export type INextStep = {
 
 export type SelectedMenu = IOrderProps | null;
 
+export type AlarmActionProps = {
+    data: boolean;
+    label: string;
+    type?: string;
+}
+
+export type AlarmState = {
+    type: {
+		menuTypeAlarm: boolean;
+		sideMenuAlarm: boolean;
+		alreadyTypeAlarm: boolean;
+		nonSelectAlarm: boolean;
+		orderCancelAlarm: boolean;
+		selectMenuAlarm: boolean;
+		receiptAlarm: boolean;
+		recyclePaperAlarm: boolean;
+	}
+}
+
 export interface IOrderProps {
     id: number,
     src: string,

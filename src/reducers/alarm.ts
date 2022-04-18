@@ -1,3 +1,5 @@
+import { AlarmState, AlarmActionProps } from "types/types";
+
 export const ALARM_REQUEST = 'ALARM_REQUEST';
 
 export const initialState = {
@@ -13,13 +15,13 @@ export const initialState = {
 	}
 }
 
-export const alarmToggleRequest = ({data, label}) => ({
+export const alarmToggleRequest = ({data, label}: AlarmActionProps) => ({
 	type: ALARM_REQUEST,
 	label,
 	data,
 })
 
-export function reducer (state, action) {
+export function reducer (state: AlarmState, action: AlarmActionProps) {
 	switch (action.type) {
 		case ALARM_REQUEST:
 			return {
