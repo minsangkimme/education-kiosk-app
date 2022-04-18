@@ -1,11 +1,11 @@
-import React from 'react';
 import hand from '../../../../../assets/images/hand2.png';
 import hamburgerSet from '../../../../../assets/images/hamburgerSet.png';
 import FooterNav from "../../../../../components/footer/footerNav";
 import * as Styled from './styled';
+import { INextStep } from 'types/types';
 
 
-const RatteLiaInit = ({onClickNextStep}) => {
+const RatteLiaInit = ({onClickNextStep}: INextStep) => {
   return (
     <Styled.Wrap>
       <Styled.ScreenWrap onClick={() => onClickNextStep(2)}>

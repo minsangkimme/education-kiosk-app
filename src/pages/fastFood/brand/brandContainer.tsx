@@ -1,4 +1,3 @@
-import React from 'react';
 import RatteLiaContainer from "./ratteLia/ratteLiaContainer/ratteLiaContainer";
 
 const BrandContainer = () => {

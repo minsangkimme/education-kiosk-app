@@ -1,14 +1,14 @@
-import React from 'react';
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import * as Styled from './styled';
+import { IFooterNavProps } from 'types/types';
 
 const language = ['한국어', 'English', '日本語', '中國語'];
 
-const FooterNav = ({goBackFunc, showInfo, onClickCancle, goToNext}) => {
-  const getShowButton = (showInfo) => {
+const FooterNav = ({goBackFunc, showInfo, onClickCancle, goToNext}: IFooterNavProps) => {
+  const getShowButton = (showInfo?: string) => {
     switch (showInfo) {
       case 'language' :
         return (

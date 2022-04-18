@@ -1,4 +1,3 @@
-import React from 'react';
 import hamburger from '../../assets/images/hamburger.jpg';
 import {useHistory} from "react-router";
 import {playAudio} from "../../utils/playAudio";
@@ -18,13 +17,16 @@ const menuList = [{
   label: '패스트푸드',
 }];
 
-const MainMenuType = () => {
+
+
+const MainMenuType = (): React.ReactElement => {
   const history = useHistory();
   const {pathname} = history.location;
-  const onClickMenuType = (id) => playAudio().then(() => history.push(`/main/menuType/${id}`));
-  const onClickBrand = (brand) => history.push(`${pathname}/${brand}`);
-  const menus = pathname === '/main/menuType' ? menuList : brandList;
-  const onClickEvent = pathname === '/main/menuType' ? onClickMenuType : onClickBrand;
+  const onClickMenuType = (id: string) => playAudio().then(() => history.push(`/main/menuType/${id}`));
+  const onClickBrand = (brand: string) => history.push(`${pathname}/${brand}`);
+  const isIncludePathMenuType = pathname === '/main/menuType';
+  const menus = isIncludePathMenuType ? menuList : brandList;
+  const onClickEvent = isIncludePathMenuType ? onClickMenuType : onClickBrand;
 
   return (
     <>
@@ -33,8 +35,8 @@ const MainMenuType = () => {
         <Styled.MenuWrap>
           {menus.map(menu => (
             <Styled.ImgRoundWrapper key={menu.id} onClick={() => onClickEvent(menu.id)}>
-              <img src={menu.imageSrc} alt={menu.label} style={{width: '100%', borderRadius: '50%'}}/>
-              <b>{menu.label}</b>
+              <Styled.Img src={menu.imageSrc} alt={menu.label} />
+              <strong>{menu.label}</strong>
             </Styled.ImgRoundWrapper>
           ))}
         </Styled.MenuWrap>

@@ -1,12 +1,12 @@
-import React from 'react';
-import adSense from '../../../../../assets/images/adSense.png';
-import card from '../../../../../assets/images/card.png';
-import cash from '../../../../../assets/images/cash.png';
-import coupon from '../../../../../assets/images/coupon.png';
-import FooterNav from "../../../../../components/footer/footerNav";
+import { INextStep } from 'types/types';
+import adSense from 'assets/images/adSense.png';
+import card from 'assets/images/card.png';
+import cash from 'assets/images/cash.png';
+import coupon from 'assets/images/coupon.png';
+import FooterNav from "components/footer/footerNav";
 import * as Styled from './styled';
 
-const SelectPayWayView = ({onClickNextStep}) => {
+const SelectPayWayView = ({onClickNextStep}: INextStep) => {
   return (
     <Styled.Wrap>
       <Styled.ContentLayout onClick={() => onClickNextStep(3)}>
