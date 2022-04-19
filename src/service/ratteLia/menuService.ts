@@ -1,9 +1,9 @@
 import React from "react";
-import { ICategory, IOrderProps, ISelectedMenu, ISideMenuProps, SelectedMenu } from "types/types";
+import { ICategory, IOrderProps, ISideMenuProps, SelectedMenu } from "types/types";
 
 class MenuService {
 	category: string;
-	selectedMenu: SelectedMenu;
+	selectedMenu: IOrderProps | null;
 	orderList: IOrderProps[];
 	burgerTypeCategory: string[];
 
@@ -15,13 +15,13 @@ class MenuService {
 	}
 
 	// 탭 설정
-	setCategory({ category, update }: ICategory): void {
+	setCategory({ category, update }: ICategory) {
 		this.category = category;
 		update(this.category);
 	}
 
 	// 메뉴 선택
-	setSelectedMenu({ selectedMenu, update }: ISelectedMenu): void {
+	setSelectedMenu(selectedMenu: IOrderProps, update: React.Dispatch<React.SetStateAction<IOrderProps | object>>) {
 		this.selectedMenu = selectedMenu;
 		update(this.selectedMenu);
 	}
@@ -36,7 +36,7 @@ class MenuService {
 		menu: IOrderProps,
 		orderList: IOrderProps[],
 		setOrderList: React.Dispatch<React.SetStateAction<IOrderProps[]>>
-	): void {
+	) {
 		// orderList에 order 메뉴가 있는지 확인
 		const isOrderInclude: boolean = orderList.findIndex((v) => (v.id === menu.id && v.type === menu.type)) > -1;
 		let orders: IOrderProps[];
@@ -75,7 +75,7 @@ class MenuService {
 		menu: IOrderProps,
 		orderList: IOrderProps[],
 		setOrderList: React.Dispatch<React.SetStateAction<IOrderProps[]>>
-	): void {
+	) {
 		const orders: IOrderProps[] = orderList.map((item) => {
 			if (item.id === menu.id && item.type === menu.type) {
 				// 타입이 single 경우
@@ -102,16 +102,16 @@ class MenuService {
 		menu: IOrderProps,
 		orderList: IOrderProps[],
 		setOrderList: React.Dispatch<React.SetStateAction<IOrderProps[]>>
-	): void {
+	) {
 		const changeOrderList: IOrderProps[] = orderList.filter((item) => !(item.id === menu.id && item.type === menu.type));
 		this.orderList = changeOrderList;
 		setOrderList(this.orderList);
 	}
 
 	// 이미 선택한 사이드 메뉴 타입인지 검사
-	isInspectAlreadySelectSideMenuType(sideMenu: ISideMenuProps, selectedMenu: SelectedMenu){
+	isInspectAlreadySelectSideMenuType(sideMenu: ISideMenuProps, selectedMenu: IOrderProps | object){
 		// 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
-		return selectedMenu?.sideMenuList.some((v) => v.type === sideMenu.type);
+		return selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
 	}
 
 	// 사이드메뉴 추가

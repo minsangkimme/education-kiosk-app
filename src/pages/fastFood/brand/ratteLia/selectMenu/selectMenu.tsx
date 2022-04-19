@@ -13,12 +13,12 @@ import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
 import CustomModal from "../modal/customModal/customModal";
 import {alarmToggleRequest, initialState, reducer} from "../../../../../reducers/alarm";
-import { ISelectMenuProps } from 'types/types';
+import { IOrderProps, ISelectMenuProps, SelectedMenu } from 'types/types';
 
 
 const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISelectMenuProps) => {
 	const [selectCategory, setSelectCategory] = React.useState(menuService.category); // recommended | hamburger | desert | drink | event
-	const [selectedMenu, setSelectedMenu] = useState({}); // 선택한 메뉴
+	const [selectedMenu, setSelectedMenu] = useState<IOrderProps | object>({}); // 선택한 메뉴
 	const [sideMenuTab, setSideMenuTab] = useState('desert'); // 사이드 메뉴 선택된 탭
 	const sideMenuCategory = useMemo(() => sideMenuTab === 'desert' ? '디저트' : '드링크', [sideMenuTab]);
 	const [alarm, dispatch] = useReducer(reducer, initialState);
