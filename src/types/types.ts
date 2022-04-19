@@ -5,7 +5,7 @@ export type INextStep = {
     onClickNextStep: (step: number) => void;
 }
 
-export type SelectedMenu = IOrderProps | null;
+export type SelectedMenu = IOrderProps | object;
 
 export type AlarmActionProps = {
     data: boolean;
@@ -74,9 +74,4 @@ export interface IMenuService {
 export interface ICategory {
     category: string;
     update: React.Dispatch<React.SetStateAction<string>>
-}
-
-export interface ISelectedMenu {
-    selectedMenu: IOrderProps;
-    update: React.Dispatch<React.SetStateAction<IOrderProps>>;
 }
