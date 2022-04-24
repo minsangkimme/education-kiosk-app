@@ -20,12 +20,7 @@
 - **IDE : VS Code**
   
 # 앱 화면
-<img src="/public/images/t1.png" width="250" height="500"/>
-<img src="/public/images/t2.png" width="250" height="500"/>
-<img src="/public/images/t6.png" width="250" height="500"/>
-<img src="/public/images/t3.png" width="250" height="500"/>
-<img src="/public/images/t4.png" width="250" height="500"/>
-<img src="/public/images/t5.png" width="250" height="500"/>
+<img src="/public/images/t7.png" width="800px"/>
   
 
 # 주요 코드
@@ -546,6 +541,7 @@ describe("MenuService 기능 테스트", () => {
 });
 ```
 
-### 기타 오류 발생시 아래 메일을 클릭하여
-### 문의 남겨주세요
+
+
+### 기타 문의는 아래 메일을 클릭하여 남겨주세요
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:minsang.tech@gmail.com)](mailto:minsang.tech@gmail.com)
