@@ -14,9 +14,10 @@ import hotchoco from '../../assets/images/hotchoco.jpg';
 import milk from '../../assets/images/milk.jpg';
 import lemonade from '../../assets/images/lemonade.jpg';
 import orangeJuice from '../../assets/images/orange-juice-67556_640.jpg';
+import { ICategoryInfoProps, ISideMenuInfoProps } from 'types/types';
 
 
-export const categoryInformation = {
+export const categoryInformation: ICategoryInfoProps = {
   recommended: [
     [
       {
@@ -678,7 +679,7 @@ export const categoryInformation = {
     },
   ]],
 }
-export const sideMenuInformation = {
+export const sideMenuInformation: ISideMenuInfoProps = {
   desert: [
     [
       {

@@ -2,6 +2,7 @@ import React, {forwardRef, useCallback, useEffect} from 'react';
 import Tabs, {tabsClasses} from "@mui/material/Tabs";
 import Tab, {tabClasses} from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { MenuCategoryProps } from 'types/types';
 
 const tabLabels = [
   {
@@ -26,7 +27,7 @@ const tabLabels = [
   },
 ];
 
-const MenuCategory = forwardRef(({menuService, setSelectCategory}, ref) => {
+const MenuCategory = forwardRef(({menuService, setSelectCategory}: MenuCategoryProps, ref: any) => {
   const handleChange = useCallback((event, newValue) => {
     setTimeout(() => ref.current.slickGoTo(0), 100);
     menuService.setCategory(newValue, setSelectCategory);

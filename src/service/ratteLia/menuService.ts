@@ -1,5 +1,5 @@
 import React from "react";
-import { ICategory, IOrderProps, ISideMenuProps, SelectedMenu } from "types/types";
+import { ICategory, IOrderProps, ISideMenuProps, SelectedMenu, SetIOrderProps } from "types/types";
 
 class MenuService {
 	category: string;
@@ -15,13 +15,13 @@ class MenuService {
 	}
 
 	// 탭 설정
-	setCategory({ category, update }: ICategory) {
+	setCategory( category: string, update: React.Dispatch<React.SetStateAction<string>>) {
 		this.category = category;
 		update(this.category);
 	}
 
 	// 메뉴 선택
-	setSelectedMenu(selectedMenu: IOrderProps, update: React.Dispatch<React.SetStateAction<IOrderProps | object>>) {
+	setSelectedMenu(selectedMenu: IOrderProps, update: SetIOrderProps) {
 		this.selectedMenu = selectedMenu;
 		update(this.selectedMenu);
 	}
@@ -109,7 +109,7 @@ class MenuService {
 	}
 
 	// 이미 선택한 사이드 메뉴 타입인지 검사
-	isInspectAlreadySelectSideMenuType(sideMenu: ISideMenuProps, selectedMenu: IOrderProps | object){
+	isInspectAlreadySelectSideMenuType(sideMenu: ISideMenuProps, selectedMenu: IOrderProps): boolean{
 		// 선택한 메뉴의 sideMenuList에서 들어온 sideMenu의 type이 있는지 검사한다.
 		return selectedMenu.sideMenuList.some((v) => v.type === sideMenu.type);
 	}

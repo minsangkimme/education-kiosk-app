@@ -34,6 +34,7 @@ export const MenuInfoWrap = styled.div`
 `;
 
 export const CustomSlider = styled(Slider)`
+  overflow: hidden;
   .slick-dots {
       bottom: 265px;
   }

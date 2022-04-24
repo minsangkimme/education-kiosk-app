@@ -13,7 +13,7 @@ import * as Styled from './styled';
 import MenuCategory from "../ratteLiaContainer/menuCategory";
 import CustomModal from "../modal/customModal/customModal";
 import {alarmToggleRequest, initialState, reducer} from "../../../../../reducers/alarm";
-import { IOrderProps, ISelectMenuProps, SelectedMenu } from 'types/types';
+import { IOrderProps, ISelectMenuProps, ISideMenuProps, SelectedMenu, SetIOrderProps } from 'types/types';
 
 
 const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISelectMenuProps) => {
@@ -37,9 +37,9 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 	const sliderRef = useRef(null);
 
 	// 메뉴 선택 리스너
-	const onClickSelectMenu = useCallback((menu) => {
-		const isHamburgerSingleType = menuService.inspectMenuType(menu);
-		menuService.setSelectedMenu(menu, setSelectedMenu);
+	const onClickSelectMenu = useCallback((menu: IOrderProps) => {
+		const isHamburgerSingleType: boolean = menuService.inspectMenuType(menu);
+		menuService.setSelectedMenu(menu, setSelectedMenu as SetIOrderProps);
 
 		return (
 			isHamburgerSingleType
@@ -67,7 +67,7 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 	const onClickMenuType = useCallback((type) => {
 		// 단품
 		if (type === 'single') {
-			setSelectedMenu(prevState => ({...prevState, type: 'single'}));
+			setSelectedMenu((prevState: IOrderProps) => ({...prevState, type: 'single'}));
 			handleAlarmToggle('menuTypeAlarm', false);
 			handleAddOrder(selectedMenu);
 		}
@@ -89,8 +89,8 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 	}
 
 	// 사이드메뉴 추가 리스너
-	const handleAddSideMenu = useCallback((sideMenu) => {
-		const isAlreadySelectType = menuService.isInspectAlreadySelectSideMenuType(sideMenu, selectedMenu);
+	const handleAddSideMenu = useCallback((sideMenu: ISideMenuProps) => {
+		const isAlreadySelectType: boolean = menuService.isInspectAlreadySelectSideMenuType(sideMenu, selectedMenu as IOrderProps);
 
 		// 검사 결과 있다면 같은 타입을 더 추가할 수 없다는 알림을 띄우고 return 한다.
 		if (isAlreadySelectType) {
@@ -102,13 +102,13 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 	}, [menuService, orderList, selectedMenu]);
 
 	// 사이드메뉴 삭제 리스너
-	const onClickDeleteSideMenu = useCallback((sideMenu) => {
+	const onClickDeleteSideMenu = useCallback((sideMenu: ISideMenuProps) => {
 		menuService.deleteSideMenu(sideMenu, setSelectedMenu);
 	}, [menuService, selectedMenu]);
 
 	// 사이드메뉴 선택 완료 리스너
 	const onClickSubmitMenu = useCallback(() => {
-		const hasNotAllRequiredSideMenu = selectedMenu.sideMenuList.length < 2;
+		const hasNotAllRequiredSideMenu = (selectedMenu as IOrderProps).sideMenuList.length < 2;
 
 		if (hasNotAllRequiredSideMenu) {
 			return handleAlarmToggle('nonSelectAlarm', true);
@@ -228,7 +228,6 @@ const SelectMenu = ({onClickNextStep, orderList, setOrderList, menuService}: ISe
 					ref={sliderRef}
 					selectCategory={selectCategory}
 					onClickSelectMenu={onClickSelectMenu}
-					menuService={menuService}
 				/>
 				{/* 총 주문내역 */}
 				<TotalOrderHistory
