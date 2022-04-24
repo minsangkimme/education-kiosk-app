@@ -30,7 +30,7 @@ const MainMenuType = (): React.ReactElement => {
 
   return (
     <>
-      <Header title="키오스크 (교육용)"/>
+      <Header title="키오스크 (학습용)"/>
       <Styled.Wrap>
         <Styled.MenuWrap>
           {menus.map(menu => (
