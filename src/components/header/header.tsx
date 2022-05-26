@@ -4,7 +4,11 @@ import {useHistory} from "react-router";
 import {playAudio} from "../../utils/playAudio";
 import * as Styled from './styled';
 
-const Header = ({title}) => {
+type HeaderProps = {
+  title: string;
+}
+
+const Header = ({title}: HeaderProps) => {
   const history = useHistory();
   const {pathname} = history.location;
   const onClickHome = () => playAudio().then(() => history.replace('/main/menuType'));

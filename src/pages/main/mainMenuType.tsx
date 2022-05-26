@@ -4,6 +4,7 @@ import {playAudio} from "../../utils/playAudio";
 import * as Styled from './styled';
 import Header from "../../components/header/header";
 import ratteLiaLogo from "../../assets/images/ratteLia-logo.png";
+import {useEffect} from "react";
 
 const brandList = [{
   id: 'ratteLia',
@@ -27,6 +28,10 @@ const MainMenuType = (): React.ReactElement => {
   const isIncludePathMenuType = pathname === '/main/menuType';
   const menus = isIncludePathMenuType ? menuList : brandList;
   const onClickEvent = isIncludePathMenuType ? onClickMenuType : onClickBrand;
+
+  useEffect(() => {
+    window.ReactNativeWebView?.postMessage(JSON.stringify({url: `/main/menuType`}));
+  }, []);
 
   return (
     <>

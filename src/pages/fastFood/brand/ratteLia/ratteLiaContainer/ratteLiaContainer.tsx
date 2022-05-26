@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import RatteLiaInit from "../ratteLiaInit/ratteLiaInit";
 import SelectPayWayView from "../selectPayWay/selectPayWayView";
 import { playAudio } from "../../../../../utils/playAudio";
-import { useHistory } from "react-router";
+import {useHistory, useParams, useRouteMatch} from "react-router";
 import SelectMenu from "../selectMenu/selectMenu";
 import OrderPayment from "../orderPayment/orderPayment";
 import PaymentSuccess from "../paymentSuccess/paymentSuccess";
@@ -23,6 +23,7 @@ const RatteLiaContainer = () => {
 
   useEffect(() => {
     (async () => {
+      window.ReactNativeWebView?.postMessage(JSON.stringify({url: `${pathname}?step=${step}`}));
       await playAudio();
     })();
   });
